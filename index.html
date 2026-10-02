@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="zh-CN" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Karpathy AI Artifacts - 认知跃迁与深度知识工坊</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff',
+              500: '#6366f1',
+              600: '#4f46e5',
+              700: '#4338ca',
+              900: '#1e1b4b',
+            },
+            accent: {
+              cyan: '#06b6d4',
+              emerald: '#10b981',
+              amber: '#f59e0b',
+              rose: '#f43f5e',
+              purple: '#a855f7'
+            }
+          },
+          fontFamily: {
+            mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+    
+    body {
+      background-color: #0b0f19;
+      color: #e2e8f0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    
+    .glow-card {
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .glow-card:hover {
+      border-color: rgba(99, 102, 241, 0.4);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 40px -15px rgba(99, 102, 241, 0.2);
+    }
+
+    .topic-badge {
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 0.25rem 0.65rem;
+      border-radius: 9999px;
+    }
+
+    .hero-mesh {
+      background-image: radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.15) 0px, transparent 50%),
+                        radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.12) 0px, transparent 50%),
+                        radial-gradient(at 50% 50%, rgba(168, 85, 247, 0.08) 0px, transparent 50%);
+    }
+
+    .code-pill {
+      font-family: 'JetBrains Mono', monospace;
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  </style>
+</head>
+<body class="min-h-screen flex flex-col selection:bg-indigo-500 selection:text-white">
+
+  <!-- Top Navigation -->
+  <header class="sticky top-0 z-50 border-b border-slate-800/80 bg-[#0b0f19]/80 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-500 to-cyan-400 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+          <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+          </svg>
+        </div>
+        <div>
+          <span class="font-bold text-lg tracking-tight text-white">Karpathy AI Artifacts</span>
+          <span class="text-xs text-indigo-400 block -mt-1 font-mono">Cognitive Artifacts & Research Hub</span>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center space-x-1 text-sm font-medium text-slate-300">
+        <a href="#quote" class="px-3 py-1.5 rounded-lg hover:text-white hover:bg-slate-800/60 transition">理念推演</a>
+        <a href="#topics" class="px-3 py-1.5 rounded-lg hover:text-white hover:bg-slate-800/60 transition">5 大深度专题</a>
+        <a href="#interactive-preview" class="px-3 py-1.5 rounded-lg hover:text-white hover:bg-slate-800/60 transition">输出形态演进</a>
+        <a href="https://github.com/holynova" target="_blank" class="ml-4 px-3.5 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-semibold transition flex items-center gap-1.5 shadow-sm">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative pt-16 pb-20 overflow-hidden hero-mesh">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-4xl mx-auto">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-indigo-500/30 bg-indigo-500/10 text-indigo-300 text-xs font-mono uppercase tracking-wider mb-6">
+          <span class="w-2 h-2 rounded-full bg-indigo-400 animate-pulse"></span>
+          Andrej Karpathy 启发式知识工程体系
+        </div>
+        <h1 class="text-4xl sm:text-6xl font-extrabold tracking-tight text-white mb-6 leading-tight">
+          从文本输出到<br class="hidden sm:inline"/>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-cyan-400 to-purple-400">
+            定制化可交互软件工件 (Software Artifacts)
+          </span>
+        </h1>
+        <p class="text-lg sm:text-xl text-slate-300 mb-10 leading-relaxed font-light">
+          当机器智能与代码生成变得唾手可得，人类工作正从低维搬砖全面跃迁至<span class="text-indigo-400 font-medium">高维监督 (Oversight)、审美裁量与架构理解</span>。
+          我们为每个前沿领域构建了深度超过 10+ 核心技术点的交互式 Web 知识空间。
+        </p>
+
+        <!-- Stats Bar -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 rounded-2xl bg-slate-900/60 border border-slate-800 text-left">
+          <div class="p-3">
+            <div class="text-xs text-slate-400 uppercase font-mono tracking-wider">专题领域</div>
+            <div class="text-2xl font-bold text-white mt-1">5 大前沿空间</div>
+            <div class="text-xs text-indigo-400 mt-0.5">覆盖前端/后端/提示词/人物哲学</div>
+          </div>
+          <div class="p-3">
+            <div class="text-xs text-slate-400 uppercase font-mono tracking-wider">知识深度</div>
+            <div class="text-2xl font-bold text-cyan-400 mt-1">52+ 核心知识点</div>
+            <div class="text-xs text-cyan-500 mt-0.5">单页面 10+ 点深入解剖</div>
+          </div>
+          <div class="p-3">
+            <div class="text-xs text-slate-400 uppercase font-mono tracking-wider">交互工件</div>
+            <div class="text-2xl font-bold text-emerald-400 mt-1">20+ 仿真沙箱</div>
+            <div class="text-xs text-emerald-500 mt-0.5">算法演算、状态流转、可配置参数</div>
+          </div>
+          <div class="p-3">
+            <div class="text-xs text-slate-400 uppercase font-mono tracking-wider">受众定位</div>
+            <div class="text-2xl font-bold text-amber-400 mt-1">进阶求索者</div>
+            <div class="text-xs text-amber-500 mt-0.5">拒绝入门泛泛谈，深度打穿</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Karpathy Quote In-Depth Section -->
+  <section id="quote" class="py-16 border-t border-slate-800/80 bg-slate-950/40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="p-8 sm:p-10 rounded-2xl border border-indigo-500/20 bg-gradient-to-br from-indigo-950/30 via-slate-900/40 to-slate-900/80 relative overflow-hidden">
+        <div class="absolute -top-12 -right-12 w-48 h-48 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-indigo-400 font-bold">
+            AK
+          </div>
+          <div>
+            <div class="text-white font-semibold flex items-center gap-2">
+              Andrej Karpathy
+              <span class="text-xs px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-mono">Founding Member OpenAI / Ex-Tesla AI Director</span>
+            </div>
+            <div class="text-xs text-slate-400">推文核心洞察：“如何高质量消费与理解大模型输出”</div>
+          </div>
+        </div>
+
+        <blockquote class="text-base sm:text-lg text-slate-200 leading-relaxed border-l-2 border-indigo-500 pl-4 mb-6 font-serif italic">
+          “We'll be spending a lot more time trying to understand the outputs of language models...<br>
+          <strong>Writing:</strong> Ask your LLM in ASD-STE100 (a controlled aerospace language spec with heavy constraints on clean writing style).<br>
+          <strong>Diagrams / images:</strong> Instead of writing, ask your LLM to create a diagram.<br>
+          <strong>Web pages:</strong> Ask for output 'in HTML' to get a beautiful, interactive webpage. LLMs are getting really good at frontend and can create beautiful experiences, animations.<br>
+          <strong>Explainer videos:</strong> Custom 3b1b-style explainer videos generated on any arbitrary topic.<br><br>
+          <span class="text-indigo-300 font-sans not-italic font-medium">
+            As LLMs get better, they will do more legwork autonomously, and a lot more of our work will rise up the abstractions into oversight and understanding. You can ask for large, custom, discardable software artifacts that would have never made sense to create before. Push the boundaries here!
+          </span>”
+        </blockquote>
+
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mt-8 pt-6 border-t border-slate-800 text-sm">
+          <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800">
+            <span class="text-xs font-mono text-cyan-400 block mb-1">形式 01 · 严密受控文本</span>
+            <div class="font-bold text-white mb-1">ASD-STE100 标准</div>
+            <p class="text-xs text-slate-400">借用航空工业受控自然语言，禁止歧义从句与多义词，将幻觉与误读降至极低。</p>
+          </div>
+          <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800">
+            <span class="text-xs font-mono text-emerald-400 block mb-1">形式 02 · 空间化拓扑</span>
+            <div class="font-bold text-white mb-1">图表与架构映射</div>
+            <p class="text-xs text-slate-400">人类大脑处理视觉拓扑与并行关系的速度比处理线性文字快上百倍。</p>
+          </div>
+          <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800 ring-1 ring-indigo-500/40">
+            <span class="text-xs font-mono text-indigo-400 block mb-1">形式 03 · 本站实践</span>
+            <div class="font-bold text-white mb-1">可交互 Web 工件</div>
+            <p class="text-xs text-slate-400">用 HTML/JS 打造可调节参数、可回溯状态的动态软件，让学习变成“可操作的实验”。</p>
+          </div>
+          <div class="bg-slate-900/80 p-4 rounded-xl border border-slate-800">
+            <span class="text-xs font-mono text-rose-400 block mb-1">形式 04 · 未来的终局</span>
+            <div class="font-bold text-white mb-1">动态解说视频</div>
+            <p class="text-xs text-slate-400">3b1b 几何动画 + ElevenLabs 拟真讲解，由模型按需即时渲染生成的专属视频流。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 Big Topics Showcase -->
+  <section id="topics" class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+      <div>
+        <div class="text-xs font-mono text-indigo-400 uppercase tracking-wider mb-2">Knowledge Domains</div>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">5 大深度主题交互工件</h2>
+      </div>
+      <p class="text-sm text-slate-400 max-w-md mt-3 md:mt-0">
+        每一个页面均包含 10 个以上进阶知识点、详尽架构推演、ASD-STE100 受控清晰总结以及可调节参数的互动沙箱。
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+
+      <!-- Card 1: Frontend System Design -->
+      <a href="frontend-system-design.html" class="glow-card rounded-2xl p-8 flex flex-col justify-between group">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="topic-badge bg-cyan-500/10 text-cyan-400 border border-cyan-500/30">Architecture · 前端架构</span>
+            <span class="text-xs font-mono text-slate-500 group-hover:text-cyan-400 transition">11 核心知识点 &rarr;</span>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-cyan-300 transition">
+            01. 前端系统设计 (Frontend System Design)
+          </h3>
+          <p class="text-sm text-slate-300 mb-6 leading-relaxed">
+            告别单页面“写组件”的初级视角，迈向百万行代码与超大组织规模的架构工程：从微前端沙箱隔离、RSC 与 Islands 现代渲染范式，到 Local-First CRDT 离线同步与全链路可观测性 RUM。
+          </p>
+          
+          <div class="space-y-2 mb-6 text-xs text-slate-400">
+            <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>微前端与 Module Federation 依赖去重与沙箱</div>
+            <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>SSR/SSG/ISR/RSC/Islands 渲染时序与主线程负载</div>
+            <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>细粒度响应式 (Signals) vs 状态机 (XState)</div>
+            <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>Local-First 本地优先与 CRDT 协同冲突解决</div>
+            <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>INP/LCP 诊断、主线程任务切片与调度器架构</div>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="text-slate-500">包含：微前端沙箱模拟器 · 渲染范式瀑布流 · CRDT实时协同体验</span>
+          <span class="text-cyan-400 font-semibold group-hover:translate-x-1 transition inline-flex items-center gap-1">探索网页工件 &rarr;</span>
+        </div>
+      </a>
+
+      <!-- Card 2: Distributed System Design -->
+      <a href="backend-system-design.html" class="glow-card rounded-2xl p-8 flex flex-col justify-between group">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="topic-badge bg-indigo-500/10 text-indigo-400 border border-indigo-500/30">Distributed · 后端架构</span>
+            <span class="text-xs font-mono text-slate-500 group-hover:text-indigo-400 transition">11 核心知识点 &rarr;</span>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-indigo-300 transition">
+            02. 系统设计与分布式体系 (System Design)
+          </h3>
+          <p class="text-sm text-slate-300 mb-6 leading-relaxed">
+            面向资深工程师的分布式高可用核心图景：从 Raft 共识脑裂恢复、PACELC 权衡与线性一致性，到 LSM-Tree 存储分层压缩、Transactional Outbox 与一致性哈希动态分片。
+          </p>
+          
+          <div class="space-y-2 mb-6 text-xs text-slate-400">
+            <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>Raft 分布式共识协议与状态机复制日志安全</div>
+            <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>分布式一致性光谱 (Linearizable 到 Eventual)</div>
+            <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>Saga 补偿事务与 Transactional Outbox + CDC</div>
+            <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>LSM-Tree vs B+ Tree 读写放大与分层压实机制</div>
+            <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-indigo-400"></span>令牌桶限流、自适应过载保护与雪崩熔断</div>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="text-slate-500">包含：Raft 领导者选举模拟器 · 一致性哈希环 · 令牌桶流量发生器</span>
+          <span class="text-indigo-400 font-semibold group-hover:translate-x-1 transition inline-flex items-center gap-1">探索网页工件 &rarr;</span>
+        </div>
+      </a>
+
+      <!-- Card 3: Prompt Engineering -->
+      <a href="prompt-engineering.html" class="glow-card rounded-2xl p-8 flex flex-col justify-between group">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="topic-badge bg-purple-500/10 text-purple-400 border border-purple-500/30">AI Engineering · 提示词认知</span>
+            <span class="text-xs font-mono text-slate-500 group-hover:text-purple-400 transition">11 核心知识点 &rarr;</span>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-purple-300 transition">
+            03. 提示词工程与认知架构 (Prompt Engineering)
+          </h3>
+          <p class="text-sm text-slate-300 mb-6 leading-relaxed">
+            超越“你是一个专家”的浅层套路，进入大模型计算本质：动态 KNN 示例检索、Tree of Thoughts 剪枝回溯、语法约束解码 (Grammars)、注意力 U 型动力学与 ASD-STE100 航空语言在提示词系统中的实战。
+          </p>
+          
+          <div class="space-y-2 mb-6 text-xs text-slate-400">
+            <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>动态示例检索 (Dynamic In-Context Exemplar Selection)</div>
+            <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>思维树 (ToT) 与 MCTS 搜索式提示词策略</div>
+            <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>FSM 约束解码与 100% 结构化输出保证</div>
+            <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>ASD-STE100 受控英语系统提示词重构法</div>
+            <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-purple-400"></span>间接提示词注入 (Indirect Injection) 与双模型沙箱</div>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="text-slate-500">包含：ASD-STE100 转换器 · ToT思维树剪枝演示 · 注入攻击沙箱</span>
+          <span class="text-purple-400 font-semibold group-hover:translate-x-1 transition inline-flex items-center gap-1">探索网页工件 &rarr;</span>
+        </div>
+      </a>
+
+      <!-- Card 4: Zara Zhang -->
+      <a href="zara-zhang-insights.html" class="glow-card rounded-2xl p-8 flex flex-col justify-between group">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="topic-badge bg-rose-500/10 text-rose-400 border border-rose-500/30">Humanities & AI · 人文主义思考</span>
+            <span class="text-xs font-mono text-slate-500 group-hover:text-rose-400 transition">10 核心思想模型 &rarr;</span>
+          </div>
+          <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-rose-300 transition">
+            04. Zara Zhang 的思想与认知模型 (Zara Zhang Insights)
+          </h3>
+          <p class="text-sm text-slate-300 mb-6 leading-relaxed">
+            哈佛毕业、前 GGV 投资人与硬核科技写作先锋 Zara Zhang 的认知全景：为何反对盲目追求规模的“Build for One”？为什么在 VUCA 时代做一盆“会自适应生长的盆栽”？文科生如何在 AI 时代把代码当作画笔进行自我表达？
+          </p>
+          
+          <div class="space-y-2 mb-6 text-xs text-slate-400">
+            <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>“Build for One”：个人杠杆对抗虚妄的规模化崇拜</div>
+            <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>盆栽心态 (Potted Plant)：反规划与不确定性复利</div>
+            <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>反向学习 (Unlearning School)：摆脱好学生心态</div>
+            <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>“如果不实用，那就不是真正的精神追求”实操论</div>
+            <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-rose-400"></span>谦逊 AI (Humble AI) 与个人高信噪比护城河</div>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="text-slate-500">包含：个人杠杆 vs 规模陷阱漏斗 · 盆栽自适应演进树 · 能动性肌肉计算器</span>
+          <span class="text-rose-400 font-semibold group-hover:translate-x-1 transition inline-flex items-center gap-1">探索网页工件 &rarr;</span>
+        </div>
+      </a>
+
+      <!-- Card 5: Matt Pocock (Span 2 on lg if desired or full width) -->
+      <a href="matt-pocock-insights.html" class="glow-card rounded-2xl p-8 flex flex-col justify-between group lg:col-span-2">
+        <div>
+          <div class="flex items-center justify-between mb-4">
+            <span class="topic-badge bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">Engineering Philosophy · 软件工程哲学</span>
+            <span class="text-xs font-mono text-slate-500 group-hover:text-emerald-400 transition">10 核心工程体系 &rarr;</span>
+          </div>
+          <div class="lg:flex lg:items-start lg:justify-between gap-8">
+            <div class="lg:max-w-2xl">
+              <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-emerald-300 transition">
+                05. Matt Pocock 的技术哲学与工程体系 (Engineering, Not Vibe Coding)
+              </h3>
+              <p class="text-sm text-slate-300 mb-6 leading-relaxed">
+                Total TypeScript 创始人、AI 工程师教育开拓者 Matt Pocock 的核心断言：AI 时代代码生成越快，严密工程化判断力的价值越高！深度解析“Grill Me”需求审问技术、垂直切片与严格 TDD 导轨、白班规划与夜班执行模型、以及 TypeScript 作为人类意图与 AI 生成之间不可破契约的护栏作用。
+              </p>
+            </div>
+            <div class="space-y-2 mb-6 text-xs text-slate-400 lg:w-96 flex-shrink-0">
+              <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>“Engineering, Not Vibe Coding”：拒绝泥球债务雪崩</div>
+              <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>“Grill Me”反向质询技术：第一行代码前的隐性约束</div>
+              <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>垂直切片 (Vertical Slices) 与 TDD 防偏航物理导轨</div>
+              <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>人类白班 (Day Shift) 与 AI 夜班 (Night Shift) 范式</div>
+              <div class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>类型护栏 (Type Guardrails)：将 Prompt 提升为确定性类型约束</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-slate-800/80 flex items-center justify-between text-xs">
+          <span class="text-slate-500">包含：交互式 “Grill Me” 审问模拟器 · 白班/夜班看板 · 宽松JS vs 严格TS AI纠错试验台</span>
+          <span class="text-emerald-400 font-semibold group-hover:translate-x-1 transition inline-flex items-center gap-1">探索网页工件 &rarr;</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- Interactive Output Formats Simulator (Karpathy's Vision) -->
+  <section id="interactive-preview" class="py-16 bg-slate-900/40 border-t border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-10">
+        <span class="text-xs font-mono text-cyan-400 uppercase tracking-wider">Paradigm Demonstration</span>
+        <h2 class="text-3xl font-extrabold text-white mt-1">Karpathy 输出演进互动体验器</h2>
+        <p class="text-sm text-slate-400 mt-2">
+          亲身体验同一个概念（例如“分布式令牌桶限流算法”）在不同输出抽象层级下的认知效率差异。
+        </p>
+      </div>
+
+      <div class="bg-slate-950 rounded-2xl border border-slate-800 p-6 max-w-4xl mx-auto shadow-2xl">
+        <!-- Tabs -->
+        <div class="flex flex-wrap gap-2 border-b border-slate-800 pb-4 mb-6">
+          <button onclick="setSimTab('text')" id="tab-btn-text" class="px-4 py-2 rounded-lg text-xs font-mono font-medium transition bg-slate-800 text-slate-400 hover:text-white">
+            1. 原始自然语言 (Raw Text)
+          </button>
+          <button onclick="setSimTab('ste100')" id="tab-btn-ste100" class="px-4 py-2 rounded-lg text-xs font-mono font-medium transition bg-slate-800 text-slate-400 hover:text-white">
+            2. ASD-STE100 航空受控语言
+          </button>
+          <button onclick="setSimTab('diagram')" id="tab-btn-diagram" class="px-4 py-2 rounded-lg text-xs font-mono font-medium transition bg-slate-800 text-slate-400 hover:text-white">
+            3. 结构拓扑图 (Diagram)
+          </button>
+          <button onclick="setSimTab('html')" id="tab-btn-html" class="px-4 py-2 rounded-lg text-xs font-mono font-medium transition bg-indigo-600 text-white font-semibold">
+            4. 可交互 Web 工件 (Interactive HTML)
+          </button>
+        </div>
+
+        <!-- Tab 1: Raw Text -->
+        <div id="sim-content-text" class="hidden text-sm text-slate-300 leading-relaxed font-sans space-y-3">
+          <div class="p-4 bg-slate-900/60 rounded-xl border border-slate-800">
+            <span class="text-xs text-slate-500 font-mono block mb-1">常规 LLM 冗长回答：</span>
+            令牌桶算法是一个非常经典的流量控制算法。它的基本思想是系统会以一个恒定的速度往桶里面放令牌，当桶满了的时候多出来的令牌就会被丢弃掉。当有请求来的时候，请求必须要从桶里面拿走一个或者多个令牌才能继续被处理，如果桶里面没有足够的令牌了，那么这个请求可能就会被拒绝或者进入等待队列。这个算法的优点是可以允许一定程度的突发流量，因为如果一段时间没有请求，桶里的令牌会积攒到最大容量，后续瞬间来的一批请求可以一次性消费这些令牌快速通过，之后再按照恒定速率处理……
+          </div>
+          <div class="text-xs text-rose-400 font-mono flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+            认知负荷：高。文字冗长，读者需要在脑中建立心理模型并推演数学边界。
+          </div>
+        </div>
+
+        <!-- Tab 2: ASD-STE100 -->
+        <div id="sim-content-ste100" class="hidden text-sm text-slate-300 leading-relaxed font-mono space-y-3">
+          <div class="p-4 bg-slate-900/60 rounded-xl border border-slate-800 space-y-2 text-xs sm:text-sm">
+            <span class="text-xs text-indigo-400 font-mono block mb-1">受控规范文本 (ASD-STE100 Specification):</span>
+            <div class="text-emerald-400 font-semibold">// RULE: Maximum 20 words per sentence. Use only approved verbs.</div>
+            <p>1. The system puts tokens into the bucket at a constant rate \(r\).</p>
+            <p>2. The bucket holds a maximum number of tokens \(C\).</p>
+            <p>3. Each incoming request takes 1 token.</p>
+            <p>4. If tokens are available: Accept the request and decrement token count.</p>
+            <p>5. If no tokens are available: Reject the request immediately (HTTP 429).</p>
+            <p>6. Result: Allows bursts up to capacity \(C\). Limits average throughput to rate \(r\).</p>
+          </div>
+          <div class="text-xs text-cyan-400 font-mono flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            认知负荷：极低。零废话、零修饰，逻辑状态转换毫无歧义。
+          </div>
+        </div>
+
+        <!-- Tab 3: Diagram -->
+        <div id="sim-content-diagram" class="hidden text-sm text-slate-300 space-y-3">
+          <div class="p-6 bg-slate-900/60 rounded-xl border border-slate-800 font-mono text-xs flex flex-col items-center">
+            <div class="text-slate-400 mb-2">架构拓扑流程图：</div>
+            <div class="w-full max-w-lg p-4 bg-slate-950 rounded-lg border border-slate-800 text-indigo-300 leading-6 text-center">
+              [Token Generator: r tokens/sec] &darr;<br>
+              +-----------------------------------------+<br>
+              | Bucket Storage (Max Capacity = C)       |<br>
+              | Current Tokens: [ ● ● ● ○ ○ ] (3 / 5)   |<br>
+              +-----------------------------------------+<br>
+                  | (Has Token? Yes: Consume)      | (No Token: Drop)<br>
+                  v                                v<br>
+              [ &check; 200 OK &rarr; Upstream API ]        [ &cross; 429 Too Many Requests ]
+            </div>
+          </div>
+          <div class="text-xs text-amber-400 font-mono flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            认知负荷：极低。空间关系一目了然，分支判定结构化。
+          </div>
+        </div>
+
+        <!-- Tab 4: Interactive HTML Sandbox -->
+        <div id="sim-content-html" class="space-y-4">
+          <div class="p-5 bg-slate-900/90 rounded-xl border border-indigo-500/30">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <span class="text-xs font-mono text-indigo-400 font-bold uppercase">Live Interactive Artifact</span>
+                <h4 class="text-sm font-semibold text-white">可调节参数令牌桶模拟器 (Token Bucket Simulator)</h4>
+              </div>
+              <button onclick="burstTraffic()" class="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-xs font-semibold text-white transition shadow-sm">
+                ⚡ 模拟突发打入 10 个请求
+              </button>
+            </div>
+
+            <!-- Simulator UI -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-4 text-xs font-mono">
+              <div class="p-3 bg-slate-950 rounded-lg border border-slate-800">
+                <span class="text-slate-400">桶容量 (Capacity C):</span>
+                <span id="bucket-cap-val" class="text-white font-bold ml-1">10</span>
+                <input type="range" min="5" max="20" value="10" oninput="updateCap(this.value)" class="w-full mt-2 accent-indigo-500">
+              </div>
+              <div class="p-3 bg-slate-950 rounded-lg border border-slate-800">
+                <span class="text-slate-400">填充速率 (r tokens/s):</span>
+                <span id="bucket-rate-val" class="text-white font-bold ml-1">2</span>
+                <input type="range" min="1" max="10" value="2" oninput="updateRate(this.value)" class="w-full mt-2 accent-indigo-500">
+              </div>
+              <div class="p-3 bg-slate-950 rounded-lg border border-slate-800 flex flex-col justify-center">
+                <div class="text-slate-400">当前可用令牌:</div>
+                <div class="text-2xl font-bold text-indigo-400" id="current-tokens-count">10</div>
+              </div>
+            </div>
+
+            <!-- Visual Bucket Meter -->
+            <div class="mb-4">
+              <div class="flex justify-between text-xs text-slate-400 mb-1">
+                <span>桶实时水位：</span>
+                <span id="bucket-percentage">100%</span>
+              </div>
+              <div class="w-full h-4 bg-slate-950 rounded-full overflow-hidden border border-slate-800 p-0.5">
+                <div id="bucket-fill-bar" class="h-full bg-gradient-to-r from-indigo-500 to-cyan-400 rounded-full transition-all duration-300" style="width: 100%"></div>
+              </div>
+            </div>
+
+            <!-- Log console -->
+            <div class="bg-black/80 rounded-lg p-3 font-mono text-xs h-24 overflow-y-auto text-slate-400 border border-slate-800" id="sim-log-box">
+              <div class="text-slate-500">[系统就绪] 令牌桶以 2 令牌/秒速率自动补充...</div>
+            </div>
+          </div>
+          <div class="text-xs text-emerald-400 font-mono flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            Karpathy 论断实践：通过操纵参数与动态反馈，抽象概念在几秒内被深度理解与直觉化吸收。
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Global Footer -->
+  <footer class="mt-auto border-t border-slate-800/80 bg-slate-950 py-12 text-slate-500 text-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <p class="text-slate-400 font-medium">Karpathy AI Artifacts · 深度知识工坊</p>
+        <p class="mt-1">基于 Andrej Karpathy 新一代大模型输出方法论 · 打造定制化、高信噪比可交互软件工件</p>
+      </div>
+      <div class="flex items-center space-x-6">
+        <a href="frontend-system-design.html" class="hover:text-slate-300 transition">前端系统设计</a>
+        <a href="backend-system-design.html" class="hover:text-slate-300 transition">系统设计</a>
+        <a href="prompt-engineering.html" class="hover:text-slate-300 transition">提示词工程</a>
+        <a href="zara-zhang-insights.html" class="hover:text-slate-300 transition">Zara Zhang</a>
+        <a href="matt-pocock-insights.html" class="hover:text-slate-300 transition">Matt Pocock</a>
+        <a href="https://github.com/holynova" target="_blank" class="text-indigo-400 hover:text-indigo-300 transition font-mono">@holynova</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Simulator Script
+    let capacity = 10;
+    let rate = 2;
+    let currentTokens = 10;
+
+    function setSimTab(tab) {
+      ['text', 'ste100', 'diagram', 'html'].forEach(t => {
+        document.getElementById(`sim-content-${t}`).classList.add('hidden');
+        const btn = document.getElementById(`tab-btn-${t}`);
+        btn.className = "px-4 py-2 rounded-lg text-xs font-mono font-medium transition bg-slate-800 text-slate-400 hover:text-white";
+      });
+      document.getElementById(`sim-content-${tab}`).classList.remove('hidden');
+      const activeBtn = document.getElementById(`tab-btn-${tab}`);
+      activeBtn.className = "px-4 py-2 rounded-lg text-xs font-mono font-semibold transition bg-indigo-600 text-white";
+    }
+
+    function updateCap(val) {
+      capacity = parseInt(val);
+      document.getElementById('bucket-cap-val').innerText = capacity;
+      if (currentTokens > capacity) currentTokens = capacity;
+      updateUI();
+    }
+
+    function updateRate(val) {
+      rate = parseInt(val);
+      document.getElementById('bucket-rate-val').innerText = rate;
+    }
+
+    function updateUI() {
+      document.getElementById('current-tokens-count').innerText = Math.floor(currentTokens);
+      const pct = Math.min(100, Math.round((currentTokens / capacity) * 100));
+      document.getElementById('bucket-percentage').innerText = pct + '%';
+      document.getElementById('bucket-fill-bar').style.width = pct + '%';
+    }
+
+    function logSim(msg, colorClass = "text-slate-400") {
+      const box = document.getElementById('sim-log-box');
+      const time = new Date().toLocaleTimeString();
+      const div = document.createElement('div');
+      div.className = `${colorClass} leading-5`;
+      div.innerHTML = `<span class="text-slate-600">[${time}]</span> ${msg}`;
+      box.appendChild(div);
+      box.scrollTop = box.scrollHeight;
+    }
+
+    function burstTraffic() {
+      logSim(`⚡ 突发流量打入 10 个请求...`, "text-yellow-400");
+      let passed = 0;
+      let rejected = 0;
+      for (let i = 0; i < 10; i++) {
+        if (currentTokens >= 1) {
+          currentTokens -= 1;
+          passed++;
+        } else {
+          rejected++;
+        }
+      }
+      updateUI();
+      if (passed > 0) logSim(`&check; 成功放行 ${passed} 个请求 (消耗 ${passed} 令牌)`, "text-emerald-400");
+      if (rejected > 0) logSim(`&cross; 拒绝 ${rejected} 个请求 (HTTP 429 令牌不足)`, "text-rose-400");
+    }
+
+    // Interval to refill tokens
+    setInterval(() => {
+      if (currentTokens < capacity) {
+        currentTokens = Math.min(capacity, currentTokens + (rate * 0.2));
+        updateUI();
+      }
+    }, 200);
+  </script>
+</body>
+</html>
