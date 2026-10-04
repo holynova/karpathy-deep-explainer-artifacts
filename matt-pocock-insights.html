@@ -11,57 +11,74 @@
       theme: {
         extend: {
           colors: {
-            brand: { 500: '#10b981', 600: '#059669' },
+            zinc: {
+              850: '#1f1f23',
+              900: '#18181b',
+              950: '#09090b',
+            }
           },
           fontFamily: {
-            mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
-            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'monospace'],
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
           }
         }
       }
     }
   </script>
   <style>
-    body { background-color: #0b0f19; color: #e2e8f0; }
-    .glass-card {
-      background: rgba(15, 23, 42, 0.7);
+    :root {
+      --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+      --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    }
+    body {
+      background-color: #09090b;
+      color: #f4f4f5;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+    .craft-card {
+      background: #111114;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(12px);
+      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.04), 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+      border-radius: 14px;
     }
     .code-block {
-      background: #050811;
+      background: #08080a;
       border: 1px solid rgba(255, 255, 255, 0.08);
       font-family: 'JetBrains Mono', monospace;
     }
-    .badge-kp {
-      background: rgba(16, 185, 129, 0.15);
-      border: 1px solid rgba(16, 185, 129, 0.4);
-      color: #34d399;
+    button, .btn-tactile {
+      transition: transform 160ms var(--ease-out), background-color 150ms ease-out, border-color 150ms ease-out, color 150ms ease-out;
+      will-change: transform;
+    }
+    button:active, .btn-tactile:active {
+      transform: scale(0.97);
     }
     .toc-link.active {
-      color: #34d399;
-      border-left-color: #34d399;
-      background: rgba(16, 185, 129, 0.08);
+      color: #ffffff;
+      border-left-color: #ffffff;
+      background: rgba(255, 255, 255, 0.06);
     }
   </style>
 </head>
-<body class="selection:bg-emerald-500 selection:text-black">
+<body class="selection:bg-zinc-800 selection:text-white pb-20">
 
   <!-- Header -->
-  <header class="sticky top-0 z-50 border-b border-slate-800 bg-[#0b0f19]/90 backdrop-blur-md">
-    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+  <header class="sticky top-0 z-40 border-b border-zinc-800/80 bg-[#09090b]/90 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <a href="index.html" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition" title="返回首页">
+        <a href="index.html" class="px-2.5 py-1 rounded border border-zinc-700 bg-zinc-800/70 hover:bg-zinc-700 text-zinc-300 hover:text-white text-xs font-mono btn-tactile">
           &larr; 主页
         </a>
-        <div>
-          <span class="font-bold text-base sm:text-lg text-white">Matt Pocock: Engineering, Not Vibe Coding</span>
-          <span class="text-xs text-emerald-400 block -mt-1 font-mono">10 大核心工程原则与 AI 智能体工程化体系</span>
+        <div class="flex items-center gap-2">
+          <span class="font-semibold text-sm text-zinc-100">Matt Pocock: Engineering, Not Vibe Coding</span>
+          <span class="text-xs text-zinc-500 font-mono hidden md:inline">/ 10 大核心工程原则与 AI 智能体工程化体系</span>
         </div>
       </div>
       <div class="flex items-center space-x-3 text-xs font-mono">
-        <span class="hidden md:inline px-2.5 py-1 rounded bg-emerald-950 text-emerald-300 border border-emerald-800">Total TypeScript / AI Hero 创始人</span>
-        <a href="index.html" class="text-slate-400 hover:text-white transition">返回全景总览 &rarr;</a>
+        <span class="hidden md:inline px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">Total TypeScript 哲学</span>
+        <a href="index.html" class="text-zinc-400 hover:text-zinc-100 btn-tactile">返回全景总览 &rarr;</a>
       </div>
     </div>
   </header>
@@ -70,49 +87,49 @@
     
     <!-- Sidebar TOC -->
     <aside class="lg:w-72 flex-shrink-0">
-      <div class="sticky top-24 space-y-1 glass-card p-4 rounded-xl max-h-[85vh] overflow-y-auto text-xs font-mono">
-        <div class="text-slate-400 font-bold uppercase tracking-wider pb-2 border-b border-slate-800">工程体系图谱</div>
-        <a href="#kp-1" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-emerald-400">01. "Engineering, Not Vibe Coding"</a>
-        <a href="#kp-2" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-emerald-400">02. "Grill Me" 需求反向质询技术</a>
-        <a href="#kp-3" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-emerald-400">03. 垂直切片与严格 TDD 导轨</a>
-        <a href="#kp-4" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-emerald-400">04. "白班规划 vs 夜班执行" 模型</a>
-        <a href="#kp-5" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-emerald-400">05. 类型系统作为 AI 的确定性护栏</a>
-        <a href="#kp-6" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-emerald-400">06. 知识民主化与直觉心智模型</a>
-        <a href="#kp-7" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-emerald-400">07. 定制化智能体技能 (Agent Skills)</a>
-        <a href="#kp-8" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-emerald-400">08. 执行前的共享设计共识机制</a>
-        <a href="#kp-9" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-emerald-400">09. 防御性类型设计与零开销契约</a>
-        <a href="#kp-10" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-emerald-400">10. 从打字员到编排架构师的终极跃迁</a>
+      <div class="sticky top-20 space-y-1 craft-card p-4 max-h-[85vh] overflow-y-auto text-xs font-mono">
+        <div class="text-zinc-400 font-semibold uppercase tracking-wider pb-2 border-b border-zinc-800">工程体系图谱</div>
+        <a href="#kp-1" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">01. "Engineering, Not Vibe Coding"</a>
+        <a href="#kp-2" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">02. "Grill Me" 需求反向质询技术</a>
+        <a href="#kp-3" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">03. 垂直切片与严格 TDD 导轨</a>
+        <a href="#kp-4" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">04. "白班规划 vs 夜班执行" 模型</a>
+        <a href="#kp-5" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">05. 类型系统作为 AI 的确定性护栏</a>
+        <a href="#kp-6" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">06. 知识民主化与直觉心智模型</a>
+        <a href="#kp-7" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">07. 定制化智能体技能 (Agent Skills)</a>
+        <a href="#kp-8" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">08. 执行前的共享设计共识机制</a>
+        <a href="#kp-9" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">09. 防御性类型设计与零开销契约</a>
+        <a href="#kp-10" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">10. 从打字员到编排架构师的终极跃迁</a>
       </div>
     </aside>
 
     <!-- Main Content Stream -->
-    <main class="flex-1 space-y-12 min-w-0">
+    <main class="flex-1 space-y-10 min-w-0">
 
-      <!-- Intro Card -->
-      <section class="glass-card p-6 rounded-2xl border-emerald-500/20 relative">
-        <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-emerald-500/10 text-emerald-300 text-xs font-mono mb-3">
+      <!-- Editorial Intro Card -->
+      <section class="craft-card p-6 rounded-2xl relative">
+        <div class="inline-flex items-center gap-2 px-2 py-0.5 rounded border border-zinc-700 bg-zinc-900 text-zinc-300 text-[11px] font-mono mb-3">
           AI 时代软件工程范式重构 · Matt Pocock 思想体系
         </div>
-        <h1 class="text-3xl font-extrabold text-white tracking-tight mb-3">
+        <h1 class="text-2xl sm:text-3xl font-semibold text-zinc-100 tracking-tight mb-3">
           “代码生成越快，严密工程化判断力越稀缺”
         </h1>
-        <p class="text-sm text-slate-300 leading-relaxed font-light">
-          面对 AI 催生的 "Vibe Coding" 狂热，Total TypeScript 创始人 Matt Pocock 坚定举起工程主义大旗：盲目依赖 AI 快速生成代码必然产生灾难性的“大泥球 (Big Ball of Mud)”债务。我们必须用严格的类型系统、TDD 测试导轨、反向审问 ("Grill Me") 与垂直切片，驾驭大模型成为可靠的生产力巨兽。
+        <p class="text-sm text-zinc-400 leading-relaxed font-normal">
+          面对 AI 催生的 "Vibe Coding" 狂热，Total TypeScript 创始人 Matt Pocock 坚定举起工程主义大旗：盲目依赖 AI 快速生成代码必然产生灾难性的“大泥球 (Big Ball of Mud)”债务。我们必须用严格的类型系统、TDD 测试导轨、反向审问 ("Grill Me") 与垂直切片，驾驭大模型成为可靠的生产力系统。
         </p>
       </section>
 
       <!-- Knowledge Point 1 -->
-      <section id="kp-1" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-1" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 01</span>
-            <h2 class="text-2xl font-bold text-white mt-2">“工程化，而非氛围编程” ("Engineering, Not Vibe Coding")</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 01</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">“工程化，而非氛围编程” ("Engineering, Not Vibe Coding")</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">拒绝泥球债务 · 坚守严谨边界</span>
+          <span class="text-xs font-mono text-zinc-500">拒绝泥球债务 · 坚守严谨边界</span>
         </div>
 
-        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-xs font-mono text-emerald-300 space-y-1">
-          <div class="text-slate-400 uppercase font-bold">// ASD-STE100 精炼思想规约：</div>
+        <div class="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 space-y-1">
+          <div class="text-zinc-500 font-bold">// ASD-STE100 精炼思想规约：</div>
           <p>1. "Vibe coding" relies on AI without engineering discipline.</p>
           <p>2. Unchecked AI code creates a "Big Ball of Mud" that becomes unmaintainable within weeks.</p>
           <p>3. Faster code generation makes architecture, boundary design, and testing MORE valuable, not less.</p>
@@ -120,91 +137,86 @@
         </div>
 
         <!-- Interactive Debt Snowball Sandbox -->
-        <div class="p-5 rounded-xl bg-slate-950 border border-emerald-500/30">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-mono text-emerald-400 font-bold uppercase">⚡ 交互仿真沙箱：Vibe Coding 债务雪崩模拟器</span>
-            <button onclick="addFeatureVibe()" class="px-3 py-1 rounded bg-rose-600 hover:bg-rose-500 text-white text-xs font-mono transition">
-              +1 盲目让 AI 叠加新功能
+        <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-zinc-800">
+            <span class="text-xs font-mono text-zinc-300 font-semibold uppercase">[PROTOTYPE] Vibe Coding 债务累积模拟器</span>
+            <button onclick="addFeatureVibe()" class="px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 text-xs font-mono btn-tactile">
+              +1 盲目叠加新功能
             </button>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono mb-3">
-            <div class="p-3 bg-slate-900 rounded border border-slate-800">
-              <span class="text-slate-400">功能累积数量：</span>
-              <span class="text-white font-bold ml-1" id="vibe-feat-count">1</span>
+            <div class="p-3 bg-zinc-900 rounded border border-zinc-800">
+              <span class="text-zinc-500">功能累积数量：</span>
+              <span class="text-zinc-200 font-bold ml-1" id="vibe-feat-count">1</span>
             </div>
-            <div class="p-3 bg-slate-900 rounded border border-slate-800">
-              <span class="text-slate-400">代码库混乱熵增：</span>
-              <span class="text-rose-400 font-bold ml-1" id="vibe-entropy">15%</span>
+            <div class="p-3 bg-zinc-900 rounded border border-zinc-800">
+              <span class="text-zinc-500">代码库混乱熵增：</span>
+              <span class="text-zinc-200 font-bold ml-1" id="vibe-entropy">15%</span>
             </div>
-            <div class="p-3 bg-slate-900 rounded border border-slate-800">
-              <span class="text-slate-400">重构修改预期耗时：</span>
-              <span class="text-amber-400 font-bold ml-1" id="vibe-debug-time">10 分钟</span>
+            <div class="p-3 bg-zinc-900 rounded border border-zinc-800">
+              <span class="text-zinc-500">排查修改预期耗时：</span>
+              <span class="text-zinc-200 font-bold ml-1" id="vibe-debug-time">10 分钟</span>
             </div>
           </div>
 
-          <div class="p-3 bg-slate-900/90 rounded border border-slate-800 text-xs font-mono text-slate-300" id="vibe-log">
-            初始状态良好。点击按钮体验在缺乏契约与测试下，代码库如何迅速退化为不可挽救的泥球！
+          <div class="p-3 bg-zinc-900 rounded border border-zinc-800 text-xs font-mono text-zinc-400" id="vibe-log">
+            初始状态良好。点击按钮体验在缺乏契约与测试约束下，代码库如何退化为不可挽救的泥球状态。
           </div>
         </div>
       </section>
 
       <!-- Knowledge Point 2 -->
-      <section id="kp-2" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-2" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 02</span>
-            <h2 class="text-2xl font-bold text-white mt-2">“审问我”技术 (The "Grill Me" Technique: 需求反向质询闭环)</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 02</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">“审问我”技术 (The "Grill Me" Technique: 需求反向质询闭环)</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">第一行代码前消灭 90% 返工</span>
+          <span class="text-xs font-mono text-zinc-500">第一行代码前消灭 90% 返工</span>
         </div>
 
-        <div class="text-sm text-slate-300 space-y-3 leading-relaxed">
-          <p>
-            Matt Pocock 提出的最著名指令：<strong>不要让 AI 立刻输出代码！必须让 AI 反向“审问 (Grill)”开发者！</strong>
+        <div class="p-4 rounded-xl bg-zinc-900 border border-zinc-800 text-xs font-mono text-zinc-300 space-y-2">
+          <div class="text-zinc-400 font-bold">// Matt Pocock's "Grill Me" 核心提示规约：</div>
+          <p class="text-zinc-400 leading-relaxed">
+            "Do not generate the solution yet. Interrogate me relentlessly. Ask me 4 tough architectural questions about edge cases, state lifecycles, error states, and storage constraints before planning implementation."
           </p>
-          <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300 space-y-2">
-            <div class="text-emerald-400 font-bold">// Matt Pocock's "Grill Me" 核心提示规约：</div>
-            <p class="text-slate-400">
-              "Do not generate the solution yet. Interrogate me relentlessly. Ask me 4 tough architectural questions about edge cases, state lifecycles, error states, and storage constraints before planning implementation."
-            </p>
-          </div>
         </div>
 
         <!-- Interactive Grill Me Sandbox -->
-        <div class="p-5 rounded-xl bg-slate-950 border border-emerald-500/30">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-mono text-emerald-400 font-bold uppercase">⚡ 交互体验沙箱：体验 "Grill Me" 深度需求反向审问</span>
+        <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-zinc-800">
+            <span class="text-xs font-mono text-zinc-300 font-semibold uppercase">[PROTOTYPE] 体验 "Grill Me" 架构审问沙箱</span>
           </div>
 
           <div class="space-y-3 font-mono text-xs">
-            <div class="p-3 bg-slate-900 rounded border border-slate-800">
-              <span class="text-slate-400">你的模糊功能想法：</span>
-              <input type="text" id="grill-idea-input" value="我需要一个支持拖拽排序的看板组件" class="w-full mt-1.5 bg-black border border-slate-700 rounded px-2.5 py-1.5 text-white">
-              <button onclick="triggerGrillMe()" class="mt-2 px-3 py-1 bg-emerald-600 hover:bg-emerald-500 text-white rounded transition">
-                🔥 启动 Agent "Grill Me" 架构审问
+            <div class="p-3 bg-zinc-900 rounded border border-zinc-800">
+              <span class="text-zinc-400">你的模糊功能想法：</span>
+              <input type="text" id="grill-idea-input" value="我需要一个支持拖拽排序的看板组件" class="w-full mt-1.5 bg-black border border-zinc-700 rounded px-2.5 py-1.5 text-white">
+              <button onclick="triggerGrillMe()" class="mt-2 px-3 py-1 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 rounded btn-tactile">
+                启动 "Grill Me" 架构审问
               </button>
             </div>
 
-            <div class="p-3 bg-slate-900/90 rounded border border-slate-800 text-slate-300 space-y-2" id="grill-response-box">
-              <div class="text-slate-500">点击按钮查看 Agent 会提出哪些一针见血的隐性边界问题...</div>
+            <div class="p-3 bg-zinc-900 rounded border border-zinc-800 text-zinc-300 space-y-2" id="grill-response-box">
+              <div class="text-zinc-500">点击按钮查看 Agent 会提出哪些隐性边界问题...</div>
             </div>
           </div>
         </div>
       </section>
 
       <!-- Knowledge Point 3 -->
-      <section id="kp-3" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-3" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 03</span>
-            <h2 class="text-2xl font-bold text-white mt-2">垂直切片与严格测试驱动 (Vertical Slices & TDD in the Agentic Era)</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 03</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">垂直切片与严格测试驱动 (Vertical Slices & TDD in Agentic Era)</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">端到端贯穿 · 测试作为物理导轨</span>
+          <span class="text-xs font-mono text-zinc-500">端到端贯穿 · 测试作为物理导轨</span>
         </div>
 
-        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-xs font-mono text-emerald-300 space-y-1">
-          <div class="text-slate-400 uppercase font-bold">// ASD-STE100 精炼思想规约：</div>
+        <div class="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 space-y-1">
+          <div class="text-zinc-500 font-bold">// ASD-STE100 精炼思想规约：</div>
           <p>1. Do not ask AI to build broad horizontal layers (e.g. "build the whole database schema").</p>
           <p>2. Cut thin "Vertical Slices" spanning Database &rarr; Service &rarr; API &rarr; UI for a single user journey.</p>
           <p>3. Write failing unit and integration tests first.</p>
@@ -213,78 +225,69 @@
       </section>
 
       <!-- Knowledge Point 4 -->
-      <section id="kp-4" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-4" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 04</span>
-            <h2 class="text-2xl font-bold text-white mt-2">“白班规划 vs 夜班执行”工作心智模型 (The "Day Shift vs. Night Shift" Mental Model)</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 04</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">“白班规划 vs 夜班执行”工作心智模型 (Day Shift vs. Night Shift)</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">人类高阶架构 · AI 自主交付</span>
+          <span class="text-xs font-mono text-zinc-500">人类高阶架构 · AI 自主交付</span>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
-          <div class="p-4 bg-slate-900 rounded-xl border border-indigo-500/40">
-            <div class="text-indigo-400 font-bold mb-2 flex items-center gap-1.5">
-              <span>☀️ 人类的“白班”职责 (Day Shift - Human)</span>
-            </div>
-            <ul class="space-y-1.5 text-slate-300">
+          <div class="p-4 bg-zinc-900 rounded-xl border border-zinc-800">
+            <div class="text-zinc-200 font-bold mb-2">人类的“白班”职责 (Day Shift - Human)</div>
+            <ul class="space-y-1.5 text-zinc-400">
               <li>• 定义系统边界与业务领域模型 (DDD)</li>
               <li>• 制定严格的类型契约与接口规范</li>
-              <li>• 编写精准的验收标准与失败的集成测试用例</li>
+              <li>• 编写精准的验收标准与失败测试用例</li>
               <li>• 裁决架构权衡与技术栈选型</li>
             </ul>
           </div>
 
-          <div class="p-4 bg-slate-900 rounded-xl border border-emerald-500/40">
-            <div class="text-emerald-400 font-bold mb-2 flex items-center gap-1.5">
-              <span>🌙 AI 智能体的“夜班”职责 (Night Shift - AI Agent)</span>
-            </div>
-            <ul class="space-y-1.5 text-slate-300">
+          <div class="p-4 bg-zinc-900 rounded-xl border border-zinc-700">
+            <div class="text-zinc-100 font-bold mb-2">AI 智能体的“夜班”职责 (Night Shift - AI Agent)</div>
+            <ul class="space-y-1.5 text-zinc-400">
               <li>• 实现样板代码与 CRUD 业务逻辑</li>
               <li>• 持续运行测试套件，直到全部红灯变绿灯</li>
               <li>• 消除重复代码并重构实现细节</li>
-              <li>• 编写全面的边缘边界测试用例覆盖</li>
+              <li>• 编写边缘边界测试用例覆盖</li>
             </ul>
           </div>
         </div>
       </section>
 
       <!-- Knowledge Point 5 -->
-      <section id="kp-5" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-5" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 05</span>
-            <h2 class="text-2xl font-bold text-white mt-2">类型系统作为 AI 的安全护栏 (TypeScript as Runtime & Architectural Guardrails)</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 05</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">类型系统作为 AI 的安全护栏 (TypeScript as Guardrails)</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">类型即最强约束 Prompt · 零成本纠错裁判</span>
+          <span class="text-xs font-mono text-zinc-500">类型即最强约束 · 零成本纠错裁判</span>
         </div>
 
-        <div class="text-sm text-slate-300 space-y-3 leading-relaxed">
-          <p>
-            Matt Pocock 深刻指出：在 AI 时代，<strong>TypeScript 的核心使命不是炫耀复杂的类型体操，而是作为人类与 AI 之间的不可违背契约！</strong>
-          </p>
-          <div class="code-block p-4 rounded-xl text-xs space-y-2">
-            <div class="text-emerald-400 font-mono">// 为什么严格 TS 能彻底降伏 AI 幻觉？</div>
-            <div class="text-slate-300">
-              在纯 JavaScript 环境下，AI 可能会捏造一个不存在的属性 <code>user.address.postalCode</code>，运行时悄悄产生 <code>undefined</code> 导致静默崩溃；<br>
-              而在严格 TypeScript 环境下，编译器会在 10 毫秒内抛出 <code>Property 'postalCode' does not exist on type 'Address'</code>。AI Agent 接收到此报错后，无需人类干预，便能<strong>100% 自动修正代码！</strong>
-            </div>
+        <div class="code-block p-4 rounded-xl text-xs space-y-2">
+          <div class="text-zinc-400 font-mono">// 为什么严格 TS 能降伏 AI 幻觉？</div>
+          <div class="text-zinc-300 leading-relaxed">
+            在纯 JavaScript 环境下，AI 可能会捏造一个不存在的属性 <code>user.address.postalCode</code>，运行时静默返回 <code>undefined</code>；<br>
+            而在严格 TypeScript 环境下，编译器会在 10 毫秒内抛出类型错误。AI Agent 接收到此报错后，无需人类介入，即可<strong>自动重构修正代码</strong>。
           </div>
         </div>
       </section>
 
       <!-- Knowledge Point 6 -->
-      <section id="kp-6" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-6" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 06</span>
-            <h2 class="text-2xl font-bold text-white mt-2">知识民主化与直觉心智模型 (The Total TypeScript Educational Revolution)</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 06</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">知识民主化与直觉心智模型 (Total TypeScript Educational Revolution)</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">消灭学术黑话 · 即时反馈实验</span>
+          <span class="text-xs font-mono text-zinc-500">消灭学术黑话 · 即时反馈实验</span>
         </div>
 
-        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-xs font-mono text-emerald-300 space-y-1">
-          <div class="text-slate-400 uppercase font-bold">// ASD-STE100 精炼思想规约：</div>
+        <div class="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 space-y-1">
+          <div class="text-zinc-500 font-bold">// ASD-STE100 精炼思想规约：</div>
           <p>1. Traditional technical education uses obscure academic terminology to gatekeep knowledge.</p>
           <p>2. Total TypeScript replaces lectures with 5-second interactive feedback puzzles.</p>
           <p>3. Clear mental models allow beginner developers to gain expert intuition rapidly.</p>
@@ -292,80 +295,73 @@
       </section>
 
       <!-- Knowledge Point 7 -->
-      <section id="kp-7" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-7" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 07</span>
-            <h2 class="text-2xl font-bold text-white mt-2">定制化智能体技能体系 (Agent Skills as Executable Engineering Standards)</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 07</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">定制化智能体技能体系 (Agent Skills as Executable Standards)</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">结构化技能规范 · 统一团队标准</span>
+          <span class="text-xs font-mono text-zinc-500">结构化技能规范 · 统一团队标准</span>
         </div>
 
-        <div class="text-sm text-slate-300 space-y-3 leading-relaxed">
-          <p>
-            松散的自然语言 System Prompt 会随上下文衰减。Matt Pocock 倡导将团队的最佳实践编写为<strong>结构化的 Agent Skills</strong>（如 <code>.cursor/rules</code> 或开源技能标准）：
-          </p>
-          <ul class="list-disc list-inside space-y-1 text-slate-400 text-xs">
-            <li>强制禁止使用 <code>any</code> 或不安全的类型断言 <code>as unknown as T</code></li>
-            <li>强制要求每个导出的公共函数显式声明返回值类型</li>
-            <li>强制要求使用 Zod 校验外部 I/O 边界</li>
-          </ul>
-        </div>
+        <ul class="list-disc list-inside space-y-1 text-zinc-400 text-xs font-mono">
+          <li>强制禁止使用 <code>any</code> 或不安全的类型断言 <code>as unknown as T</code></li>
+          <li>强制要求每个导出的公共函数显式声明返回值类型</li>
+          <li>强制要求使用 Zod 校验外部 I/O 边界</li>
+        </ul>
       </section>
 
       <!-- Knowledge Point 8 -->
-      <section id="kp-8" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-8" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 08</span>
-            <h2 class="text-2xl font-bold text-white mt-2">执行前的共享设计共识机制 (Establishing Shared Understanding Before Execution)</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 08</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">执行前的共享设计共识机制 (Establishing Shared Understanding)</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">轻量级规格对齐 · 拒绝盲目编码</span>
+          <span class="text-xs font-mono text-zinc-500">轻量级规格对齐 · 拒绝盲目编码</span>
         </div>
 
-        <div class="text-sm text-slate-300 space-y-3 leading-relaxed">
-          <p>
-            AI 无法读懂开发者脑海中的隐性假设。在敲定任何代码之前，必须强制 AI 产出一份<strong>单页轻量设计草案 (One-page RFC)</strong>：包括数据流向图、核心函数签名、以及它拒绝采用的备选方案及其原因。唯有人类在设计草案上签字，AI 方可启动实现。
-          </p>
-        </div>
+        <p class="text-xs text-zinc-400 leading-relaxed font-normal">
+          AI 无法读懂开发者脑海中的隐性假设。在敲定任何代码之前，必须强制 AI 产出一份<strong>单页轻量设计草案 (One-page RFC)</strong>：包括数据流向图、核心函数签名、以及它拒绝采用的备选方案及其原因。
+        </p>
       </section>
 
       <!-- Knowledge Point 9 -->
-      <section id="kp-9" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-9" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 09</span>
-            <h2 class="text-2xl font-bold text-white mt-2">防御性类型设计与零运行时开销契约 (Defensive Types & Branded Types)</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 09</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">防御性类型设计与零运行时开销契约 (Defensive Types & Branded Types)</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">品牌类型 · 编译期杜绝业务越权</span>
+          <span class="text-xs font-mono text-zinc-500">品牌类型 · 编译期杜绝业务越权</span>
         </div>
 
         <div class="code-block p-4 rounded-xl text-xs space-y-2">
-          <div class="text-emerald-400 font-mono">// Matt Pocock 倡导的 Branded Types 工业级实战：</div>
-          <div class="text-slate-300">
+          <div class="text-zinc-400 font-mono">// Matt Pocock 倡导的 Branded Types 工业级实战：</div>
+          <div class="text-zinc-300">
             type UserId = string & { readonly __brand: unique symbol };<br>
             type OrderId = string & { readonly __brand: unique symbol };<br><br>
             function cancelOrder(userId: UserId, orderId: OrderId) { /* ... */ }<br><br>
             const uId = "usr_102" as UserId;<br>
             const oId = "ord_884" as OrderId;<br><br>
-            // ❌ 编译期直接拦截！防止粗心传反参数导致的毁灭性越权漏洞：<br>
-            // cancelOrder(oId, uId); // Type 'OrderId' is not assignable to type 'UserId'
+            // 编译期直接拦截！防止传反参数导致的越权：<br>
+            // cancelOrder(oId, uId); // Error: Type 'OrderId' is not assignable to type 'UserId'
           </div>
         </div>
       </section>
 
       <!-- Knowledge Point 10 -->
-      <section id="kp-10" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-10" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 10</span>
-            <h2 class="text-2xl font-bold text-white mt-2">从打字员到编排架构师的终极跃迁 (The Shift from Typist to Orchestrator)</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 10</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">从打字员到编排架构师的终极跃迁 (The Shift from Typist to Orchestrator)</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">品味、系统思维与编排力</span>
+          <span class="text-xs font-mono text-zinc-500">品味、系统思维与编排力</span>
         </div>
 
-        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-xs font-mono text-emerald-300 space-y-1">
-          <div class="text-slate-400 uppercase font-bold">// ASD-STE100 精炼思想规约：</div>
+        <div class="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 space-y-1">
+          <div class="text-zinc-500 font-bold">// ASD-STE100 精炼思想规约：</div>
           <p>1. Remembering syntax and typing boilerplate no longer creates competitive advantage.</p>
           <p>2. Future senior engineers win on Taste, Systems Thinking, and Agent Orchestration.</p>
           <p>3. Humans define the problem and evaluate aesthetic quality.</p>
@@ -373,26 +369,26 @@
         </div>
 
         <!-- Interactive Evolution Radar -->
-        <div class="p-5 rounded-xl bg-slate-950 border border-emerald-500/30">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-mono text-emerald-400 font-bold uppercase">⚡ 工程师能力权重跃迁图谱 (Matt Pocock 视野)</span>
+        <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-zinc-800">
+            <span class="text-xs font-mono text-zinc-300 font-semibold uppercase">[PROTOTYPE] 工程师能力权重跃迁图谱</span>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
-            <div class="p-3 bg-slate-900 rounded border border-slate-800">
-              <span class="text-slate-400 font-bold">传统初级工程师 (Past / Typist):</span>
-              <div class="space-y-1.5 mt-2 text-slate-400">
-                <div>• 手写样板语法记忆: <span class="text-white font-bold">70%</span></div>
-                <div>• 查阅 API 文档细节: <span class="text-white font-bold">20%</span></div>
-                <div>• 架构契约与品味审视: <span class="text-rose-400 font-bold">10% (严重被忽略)</span></div>
+            <div class="p-3 bg-zinc-900 rounded border border-zinc-800">
+              <span class="text-zinc-400 font-bold">传统初级工程师 (Past / Typist):</span>
+              <div class="space-y-1.5 mt-2 text-zinc-500">
+                <div>• 手写样板语法记忆: <span class="text-zinc-300 font-bold">70%</span></div>
+                <div>• 查阅 API 文档细节: <span class="text-zinc-300 font-bold">20%</span></div>
+                <div>• 架构契约与品味审视: <span class="text-zinc-400 font-bold">10%</span></div>
               </div>
             </div>
-            <div class="p-3 bg-slate-900 rounded border border-emerald-500/40">
-              <span class="text-emerald-400 font-bold">AI 时代顶级编排者 (Future / Orchestrator):</span>
-              <div class="space-y-1.5 mt-2 text-slate-300">
-                <div>• 手写样板语法记忆: <span class="text-slate-500 font-bold">5% (由 AI 全自动生成)</span></div>
-                <div>• TDD 测试设计与导轨验证: <span class="text-emerald-400 font-bold">35%</span></div>
-                <div>• 架构契约、审美品味与需求审问: <span class="text-cyan-400 font-bold">60% (核心壁垒)</span></div>
+            <div class="p-3 bg-zinc-900 rounded border border-zinc-700">
+              <span class="text-zinc-100 font-bold">AI 时代顶级编排者 (Future / Orchestrator):</span>
+              <div class="space-y-1.5 mt-2 text-zinc-400">
+                <div>• 手写样板语法记忆: <span class="text-zinc-500">5% (由 AI 自动生成)</span></div>
+                <div>• TDD 测试设计与导轨验证: <span class="text-zinc-200 font-bold">35%</span></div>
+                <div>• 架构契约、审美品味与需求审问: <span class="text-zinc-100 font-bold">60% (核心壁垒)</span></div>
               </div>
             </div>
           </div>
@@ -400,9 +396,9 @@
       </section>
 
       <!-- Bottom Navigation Footer -->
-      <div class="flex justify-between items-center pt-8 border-t border-slate-800 text-sm font-mono">
-        <a href="zara-zhang-insights.html" class="text-slate-400 hover:text-white transition">&larr; 上一个：Zara Zhang 的思想</a>
-        <a href="index.html" class="px-4 py-2 rounded bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition">
+      <div class="flex justify-between items-center pt-8 border-t border-zinc-800 text-xs font-mono">
+        <a href="zara-zhang-insights.html" class="text-zinc-400 hover:text-white btn-tactile">&larr; 上一个：Zara Zhang 的思想</a>
+        <a href="index.html" class="px-3 py-1.5 rounded bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-100 font-medium btn-tactile">
           返回主工坊门户 &rarr;
         </a>
       </div>
@@ -418,14 +414,14 @@
       document.getElementById('vibe-feat-count').innerText = featCount;
       const entropy = Math.min(100, featCount * 12);
       document.getElementById('vibe-entropy').innerText = `${entropy}%`;
-      const time = featCount < 4 ? `${featCount * 10} 分钟` : featCount < 7 ? `${featCount * 2} 小时` : '整个项目彻底报废，只能重写！';
+      const time = featCount < 4 ? `${featCount * 10} 分钟` : featCount < 7 ? `${featCount * 2} 小时` : '整个项目报废，需重写';
       document.getElementById('vibe-debug-time').innerText = time;
       
       const log = document.getElementById('vibe-log');
       if (featCount >= 7) {
-        log.innerHTML = '<span class="text-rose-400 font-bold">💥 泥球架构发生灾难性雪崩：</span>各个 AI 生成的模块之间存在无法解释的隐性偶合，修改 A 导致 B 崩溃，重构代价远超从零重写！这就是 Matt Pocock 痛击 Vibe Coding 的根源！';
+        log.innerHTML = '<span class="text-zinc-200 font-bold">[架构退化] 泥球架构出现级联故障：</span>各 AI 生成模块间存在未声明隐性耦合，修改 A 导致 B 崩溃，重构代价超过从零重写。这就是 Matt Pocock 抵制 Vibe Coding 的根源。';
       } else {
-        log.innerHTML = `<span class="text-amber-400">⚠️ 新增功能 ${featCount}：</span>AI 插入了 200 行未测试的孤立代码，代码重复率上升，隐性状态泄露风险增加。`;
+        log.innerHTML = `[警告] 新增功能 ${featCount}：AI 插入了 200 行未测试代码，代码重复率上升，隐性状态泄漏风险增加。`;
       }
     }
 
@@ -434,16 +430,16 @@
       const idea = document.getElementById('grill-idea-input').value;
       const box = document.getElementById('grill-response-box');
       box.innerHTML = `
-        <div class="text-emerald-400 font-bold">🔥 Matt Pocock 风格 "Grill Me" 架构审问已启动：</div>
-        <div class="text-slate-300 space-y-2 mt-2">
-          <p>针对你的想法<strong>「${idea}」</strong>，在动笔写任何代码前，请明确以下 4 个关键契约：</p>
-          <div class="p-2 bg-black/60 rounded border border-slate-800 space-y-1 text-slate-300">
-            <div>1. <strong>[状态持久化与乐观更新]:</strong> 拖拽松手瞬间，是立即更新 UI 并向后端异步发请求（失败时回滚），还是等后端 200 返回后再渲染动画？</div>
-            <div>2. <strong>[数据结构排序拓扑]:</strong> 列表项的位置是用浮点数 LexoRank (如 0.5, 0.75) 存储，还是用连续整数序号？并发拖拽时如何防止序号冲突？</div>
-            <div>3. <strong>[无障碍与键盘导航]:</strong> 盲人用户或纯键盘用户如何通过 Space / Arrow 键完成相同的排序移动？ARIA 实时区域 (Live Region) 如何播报？</div>
+        <div class="text-zinc-200 font-bold">Matt Pocock "Grill Me" 架构审问就绪：</div>
+        <div class="text-zinc-300 space-y-2 mt-2">
+          <p>针对你的想法<strong>「${idea}」</strong>，在编写任何实现代码前，请明确以下 4 个关键契约：</p>
+          <div class="p-2.5 bg-black rounded border border-zinc-800 space-y-1.5 text-zinc-400">
+            <div>1. <strong>[状态持久化与乐观更新]:</strong> 拖拽松手瞬间，是立即更新 UI 并向后端异步发请求（失败时回滚），还是等待后端 200 返回后再渲染动画？</div>
+            <div>2. <strong>[数据结构排序拓扑]:</strong> 列表项的位置是用浮点数 LexoRank (如 0.5, 0.75) 存储，还是连续整数？并发拖拽时如何防止序号冲突？</div>
+            <div>3. <strong>[无障碍与键盘导航]:</strong> 纯键盘用户如何通过 Space / Arrow 键完成相同的排序移动？ARIA 实时区域 (Live Region) 如何播报？</div>
             <div>4. <strong>[极端数据容量与虚拟化]:</strong> 如果看板某一列有 2,000 个卡片，当前 DOM 树是否需要接入虚拟列表？DOM 节点复用时拖拽阴影如何挂载？</div>
           </div>
-          <div class="text-cyan-400 text-[11px] font-bold">看到了吗？在第一行代码前把隐性约束钉死，AI 后续生成代码便不会出现任何方向性返工！</div>
+          <div class="text-zinc-300 text-[11px] font-semibold">在第一行代码前把隐性约束钉死，AI 生成代码便不会出现任何方向性返工。</div>
         </div>
       `;
     }

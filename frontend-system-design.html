@@ -11,57 +11,74 @@
       theme: {
         extend: {
           colors: {
-            brand: { 500: '#06b6d4', 600: '#0891b2' },
+            zinc: {
+              850: '#1f1f23',
+              900: '#18181b',
+              950: '#09090b',
+            }
           },
           fontFamily: {
-            mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
-            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'monospace'],
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
           }
         }
       }
     }
   </script>
   <style>
-    body { background-color: #0b0f19; color: #e2e8f0; }
-    .glass-card {
-      background: rgba(15, 23, 42, 0.7);
+    :root {
+      --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+      --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    }
+    body {
+      background-color: #09090b;
+      color: #f4f4f5;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+    .craft-card {
+      background: #111114;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(12px);
+      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.04), 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+      border-radius: 14px;
     }
     .code-block {
-      background: #050811;
+      background: #08080a;
       border: 1px solid rgba(255, 255, 255, 0.08);
       font-family: 'JetBrains Mono', monospace;
     }
-    .badge-kp {
-      background: rgba(6, 182, 212, 0.15);
-      border: 1px solid rgba(6, 182, 212, 0.4);
-      color: #38bdf8;
+    button, .btn-tactile {
+      transition: transform 160ms var(--ease-out), background-color 150ms ease-out, border-color 150ms ease-out, color 150ms ease-out;
+      will-change: transform;
+    }
+    button:active, .btn-tactile:active {
+      transform: scale(0.97);
     }
     .toc-link.active {
-      color: #38bdf8;
-      border-left-color: #38bdf8;
-      background: rgba(6, 182, 212, 0.08);
+      color: #ffffff;
+      border-left-color: #ffffff;
+      background: rgba(255, 255, 255, 0.06);
     }
   </style>
 </head>
-<body class="selection:bg-cyan-500 selection:text-black">
+<body class="selection:bg-zinc-800 selection:text-white pb-20">
 
-  <!-- Header -->
-  <header class="sticky top-0 z-50 border-b border-slate-800 bg-[#0b0f19]/90 backdrop-blur-md">
-    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+  <!-- Minimal Header -->
+  <header class="sticky top-0 z-40 border-b border-zinc-800/80 bg-[#09090b]/90 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <a href="index.html" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition" title="返回首页">
+        <a href="index.html" class="px-2.5 py-1 rounded border border-zinc-700 bg-zinc-800/70 hover:bg-zinc-700 text-zinc-300 hover:text-white text-xs font-mono btn-tactile">
           &larr; 主页
         </a>
-        <div>
-          <span class="font-bold text-base sm:text-lg text-white">前端系统设计 (Frontend System Design)</span>
-          <span class="text-xs text-cyan-400 block -mt-1 font-mono">11 核心高级知识点与架构模拟工件</span>
+        <div class="flex items-center gap-2">
+          <span class="font-semibold text-sm text-zinc-100">前端系统设计 (Frontend System Design)</span>
+          <span class="text-xs text-zinc-500 font-mono hidden md:inline">/ 11 核心高级知识点与架构模拟工件</span>
         </div>
       </div>
       <div class="flex items-center space-x-3 text-xs font-mono">
-        <span class="hidden md:inline px-2.5 py-1 rounded bg-cyan-950 text-cyan-300 border border-cyan-800">面向高级前端 / Staff 架构师</span>
-        <a href="backend-system-design.html" class="text-slate-400 hover:text-white transition">下一个：系统设计 &rarr;</a>
+        <span class="hidden md:inline px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">Staff 架构师规约</span>
+        <a href="backend-system-design.html" class="text-zinc-400 hover:text-zinc-100 btn-tactile">下一个：系统设计 &rarr;</a>
       </div>
     </div>
   </header>
@@ -70,104 +87,104 @@
     
     <!-- Sidebar TOC -->
     <aside class="lg:w-72 flex-shrink-0">
-      <div class="sticky top-24 space-y-1 glass-card p-4 rounded-xl max-h-[85vh] overflow-y-auto text-xs font-mono">
-        <div class="text-slate-400 font-bold uppercase tracking-wider pb-2 border-b border-slate-800">架构知识图谱</div>
-        <a href="#kp-1" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-cyan-400">01. 微前端与运行时编排</a>
-        <a href="#kp-2" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-cyan-400">02. 现代渲染范式全景对比</a>
-        <a href="#kp-3" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-cyan-400">03. 响应式模型：Signals vs 状态机</a>
-        <a href="#kp-4" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-cyan-400">04. 资源拓扑与细粒度分包</a>
-        <a href="#kp-5" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-cyan-400">05. 本地优先与 CRDT 离线协同</a>
-        <a href="#kp-6" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-cyan-400">06. 弹性自愈与防御性渲染</a>
-        <a href="#kp-7" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-cyan-400">07. 全链路 RUM 与 LoAF 监控</a>
-        <a href="#kp-8" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-cyan-400">08. 设计系统 Tokenization & Headless</a>
-        <a href="#kp-9" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-cyan-400">09. 大数据量虚拟化与 DOM 损耗</a>
-        <a href="#kp-10" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-cyan-400">10. 深度安全：Trusted Types & CSPv3</a>
-        <a href="#kp-11" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-cyan-400">11. INP 调优与主线程任务调度</a>
+      <div class="sticky top-20 space-y-1 craft-card p-4 max-h-[85vh] overflow-y-auto text-xs font-mono">
+        <div class="text-zinc-400 font-semibold uppercase tracking-wider pb-2 border-b border-zinc-800">架构图谱目录</div>
+        <a href="#kp-1" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">01. 微前端与运行时编排</a>
+        <a href="#kp-2" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">02. 现代渲染范式全景对比</a>
+        <a href="#kp-3" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">03. 响应式模型：Signals vs 状态机</a>
+        <a href="#kp-4" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">04. 资源拓扑与细粒度分包</a>
+        <a href="#kp-5" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">05. 本地优先与 CRDT 离线协同</a>
+        <a href="#kp-6" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">06. 弹性自愈与防御性渲染</a>
+        <a href="#kp-7" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">07. 全链路 RUM 与 LoAF 监控</a>
+        <a href="#kp-8" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">08. 设计系统 Tokenization & Headless</a>
+        <a href="#kp-9" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">09. 大数据量虚拟化与 DOM 损耗</a>
+        <a href="#kp-10" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">10. 深度安全：Trusted Types & CSPv3</a>
+        <a href="#kp-11" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">11. INP 调优与主线程任务调度</a>
       </div>
     </aside>
 
     <!-- Main Content Stream -->
-    <main class="flex-1 space-y-12 min-w-0">
+    <main class="flex-1 space-y-10 min-w-0">
 
-      <!-- Intro Card with Karpathy Methodology -->
-      <section class="glass-card p-6 rounded-2xl border-cyan-500/20 relative">
-        <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-cyan-500/10 text-cyan-300 text-xs font-mono mb-3">
-          ASD-STE100 架构精炼 + 交互模拟器
+      <!-- Editorial Intro Card -->
+      <section class="craft-card p-6 rounded-2xl relative">
+        <div class="inline-flex items-center gap-2 px-2 py-0.5 rounded border border-zinc-700 bg-zinc-900 text-zinc-300 text-[11px] font-mono mb-3">
+          ASD-STE100 架构规约 · Emil Kowalski 交互标准
         </div>
-        <h1 class="text-3xl font-extrabold text-white tracking-tight mb-3">
+        <h1 class="text-2xl sm:text-3xl font-semibold text-zinc-100 tracking-tight mb-3">
           前端系统设计的本质：复杂性隔离、主线程治理与状态一致性
         </h1>
-        <p class="text-sm text-slate-300 leading-relaxed font-light">
-          现代前端不再是“UI切图与API调用”，而是在不可信终端环境、网络抖动、多团队协作与高交互压力下运行的分布式客户端系统。本专题严格拆解 11 个架构级难题，提供工业级代码方案、拓扑权衡与动态沙箱。
+        <p class="text-sm text-zinc-400 leading-relaxed font-normal">
+          现代前端不再是“UI 切图与 API 联调”，而是在不可信终端环境、网络抖动、多团队协作与高交互压力下运行的分布式客户端系统。本专题严格拆解 11 个架构级难题，提供工业级代码方案、拓扑权衡与动态沙箱。
         </p>
       </section>
 
       <!-- Knowledge Point 1 -->
-      <section id="kp-1" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-1" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 01</span>
-            <h2 class="text-2xl font-bold text-white mt-2">微前端架构与运行时编排 (Micro-Frontends & Module Federation)</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 01</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">微前端架构与运行时编排 (Micro-Frontends & Module Federation)</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">模块解耦 · 团队自治</span>
+          <span class="text-xs font-mono text-zinc-500">模块解耦 · 团队自治</span>
         </div>
 
-        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-xs font-mono text-cyan-300 space-y-1">
-          <div class="text-slate-400 uppercase font-bold">// ASD-STE100 架构规约：</div>
+        <div class="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 space-y-1">
+          <div class="text-zinc-500 font-bold">// ASD-STE100 架构规约：</div>
           <p>1. Micro-frontends separate large web apps into independent sub-applications.</p>
           <p>2. Each sub-app builds, tests, and deploys without blocking others.</p>
           <p>3. The host shell controls routing, mounts/unmounts sub-apps, and isolates JavaScript globals with Proxy sandboxes.</p>
           <p>4. Webpack/Vite Module Federation dynamically shares runtime dependencies (e.g., React, Lodash) to prevent duplicate downloads.</p>
         </div>
 
-        <div class="text-sm text-slate-300 space-y-3 leading-relaxed">
-          <h3 class="text-base font-semibold text-white">深度技术剖析：</h3>
-          <p>
+        <div class="text-sm text-zinc-300 space-y-3 leading-relaxed font-normal">
+          <h3 class="text-xs font-mono text-zinc-400 uppercase tracking-wider">深度技术剖析：</h3>
+          <p class="text-zinc-400 text-xs leading-relaxed">
             传统的 Monolith 前端应用在达到数十万行代码与多个业务团队协作时，面临 CI/CD 瓶颈、版本锁死与破坏性回归。微前端的本质是<strong>以少量的运行时开销换取组织架构与部署的水平扩展性</strong>。
           </p>
-          <ul class="list-disc list-inside space-y-1 text-slate-400 text-xs">
+          <ul class="list-disc list-inside space-y-1 text-zinc-400 text-xs font-mono">
             <li><strong>沙箱隔离 (JavaScript Sandbox):</strong> 使用 <code>Proxy(window)</code> 捕获子应用的全局变量读写，在应用卸载时清空修改，避免全局变量污染。</li>
-            <li><strong>样式隔离 (CSS Scoping):</strong> Shadow DOM 隔离最彻底，但会导致弹窗 (Modals/Popovers) 脱离顶层挂载；工程上常用 BEM 前缀、CSS Modules 或 <code>postcss</code> 命名空间自动重写。</li>
-            <li><strong>Module Federation 依赖拓扑:</strong> 声明 <code>shared: { react: { singleton: true, requiredVersion: '^18.0.0' } }</code>。运行时协调器比对版本语义化 SemVer，若兼容则复用宿主单例，不兼容则回退下载独立版本。</li>
+            <li><strong>样式隔离 (CSS Scoping):</strong> Shadow DOM 隔离彻底，但会导致弹窗脱离顶层挂载；工程上推荐 BEM 前缀、CSS Modules 或命名空间自动重写。</li>
+            <li><strong>Module Federation 依赖拓扑:</strong> 声明 <code>shared: { react: { singleton: true, requiredVersion: '^18.0.0' } }</code>。运行时协调器比对 SemVer，若兼容则复用宿主单例。</li>
           </ul>
         </div>
 
         <!-- Interactive Sandbox 1 -->
-        <div class="p-5 rounded-xl bg-slate-950 border border-cyan-500/30">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-mono text-cyan-400 font-bold uppercase">⚡ 交互仿真沙箱：微前端沙箱与依赖去重试验台</span>
-            <span class="text-xs text-slate-500 font-mono">Module Federation Sim</span>
+        <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-zinc-800">
+            <span class="text-xs font-mono text-zinc-300 font-semibold uppercase">[PROTOTYPE] 微前端沙箱与依赖去重试验台</span>
+            <span class="text-[11px] text-zinc-500 font-mono">Module Federation Sim</span>
           </div>
 
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
-            <div class="p-3 bg-slate-900 rounded-lg border border-slate-800 space-y-3">
-              <span class="text-slate-300 font-bold">1. 挂载子应用试验</span>
+            <div class="p-3 bg-zinc-900 rounded-lg border border-zinc-800 space-y-3">
+              <span class="text-zinc-300 font-bold">1. 挂载子应用试验</span>
               <div class="flex gap-2">
-                <button onclick="mountSubApp('appA')" class="px-3 py-1.5 rounded bg-cyan-600 hover:bg-cyan-500 text-white transition">挂载子应用 A (订单域)</button>
-                <button onclick="mountSubApp('appB')" class="px-3 py-1.5 rounded bg-indigo-600 hover:bg-indigo-500 text-white transition">挂载子应用 B (用户域)</button>
-                <button onclick="unmountSubApps()" class="px-3 py-1.5 rounded bg-slate-700 hover:bg-slate-600 text-slate-300 transition">全部卸载</button>
+                <button onclick="mountSubApp('appA')" class="px-2.5 py-1.5 rounded bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 btn-tactile">挂载子应用 A (订单域)</button>
+                <button onclick="mountSubApp('appB')" class="px-2.5 py-1.5 rounded bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 btn-tactile">挂载子应用 B (用户域)</button>
+                <button onclick="unmountSubApps()" class="px-2.5 py-1.5 rounded bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-400 btn-tactile">卸载</button>
               </div>
-              <div class="text-slate-400">
-                全局污染尝试：<code class="text-yellow-400">window.currentCart = "AppA_Data"</code>
+              <div class="text-zinc-500">
+                全局污染尝试：<code class="text-zinc-300">window.currentCart = "AppA_Data"</code>
               </div>
-              <div id="sandbox-state" class="p-2 bg-black/60 rounded text-slate-300 border border-slate-800">
-                宿主 window.currentCart: <span class="text-emerald-400">undefined (沙箱受保护)</span>
+              <div id="sandbox-state" class="p-2 bg-black rounded text-zinc-300 border border-zinc-800 text-[11px]">
+                宿主 window.currentCart: <span class="text-zinc-300 font-semibold">undefined (沙箱受保护)</span>
               </div>
             </div>
 
-            <div class="p-3 bg-slate-900 rounded-lg border border-slate-800 space-y-2">
-              <span class="text-slate-300 font-bold">2. Module Federation 依赖复用分析</span>
-              <div class="flex justify-between text-slate-400">
-                <span>宿主 React 版本:</span><span class="text-white">v18.2.0 (Singleton)</span>
+            <div class="p-3 bg-zinc-900 rounded-lg border border-zinc-800 space-y-2">
+              <span class="text-zinc-300 font-bold">2. Module Federation 依赖复用分析</span>
+              <div class="flex justify-between text-zinc-400">
+                <span>宿主 React 版本:</span><span class="text-zinc-200">v18.2.0 (Singleton)</span>
               </div>
-              <div class="flex justify-between text-slate-400">
-                <span>子应用 A 请求版本:</span><span class="text-white">^18.0.0 (命中共享 &check;)</span>
+              <div class="flex justify-between text-zinc-400">
+                <span>子应用 A 请求版本:</span><span class="text-zinc-200">^18.0.0 (命中共享 ✓)</span>
               </div>
-              <div class="flex justify-between text-slate-400">
-                <span>节省带宽体积:</span><span class="text-emerald-400 font-bold">~134 KB gzipped</span>
+              <div class="flex justify-between text-zinc-400">
+                <span>节省带宽体积:</span><span class="text-zinc-200 font-bold">~134 KB gzipped</span>
               </div>
-              <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden mt-2">
-                <div class="bg-cyan-400 h-full w-4/5"></div>
+              <div class="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden mt-2">
+                <div class="bg-zinc-300 h-full w-4/5"></div>
               </div>
             </div>
           </div>
@@ -175,17 +192,17 @@
       </section>
 
       <!-- Knowledge Point 2 -->
-      <section id="kp-2" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-2" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 02</span>
-            <h2 class="text-2xl font-bold text-white mt-2">现代前端渲染范式全景对比 (SSR / SSG / ISR / RSC / Islands / Resumability)</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 02</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">现代前端渲染范式全景对比 (SSR / SSG / ISR / RSC / Islands)</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">渲染时序 · 性能折衷</span>
+          <span class="text-xs font-mono text-zinc-500">渲染时序 · 性能折衷</span>
         </div>
 
-        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-xs font-mono text-cyan-300 space-y-1">
-          <div class="text-slate-400 uppercase font-bold">// ASD-STE100 架构规约：</div>
+        <div class="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 space-y-1">
+          <div class="text-zinc-500 font-bold">// ASD-STE100 架构规约：</div>
           <p>1. Client-Side Rendering (CSR) downloads empty HTML and generates all DOM in the browser.</p>
           <p>2. Server-Side Rendering (SSR) delivers pre-rendered HTML for fast First Contentful Paint (FCP) but requires Hydration before interaction.</p>
           <p>3. React Server Components (RSC) run only on the server, send zero JavaScript to the client, and stream component trees.</p>
@@ -193,56 +210,56 @@
         </div>
 
         <!-- Interactive Waterfall Simulator -->
-        <div class="p-5 rounded-xl bg-slate-950 border border-cyan-500/30">
-          <div class="flex items-center justify-between mb-4">
-            <span class="text-xs font-mono text-cyan-400 font-bold uppercase">⚡ 交互仿真沙箱：渲染范式性能瀑布流对比</span>
-            <div class="flex gap-2 text-xs font-mono">
-              <button onclick="renderParadigm('csr')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 active-para" id="btn-p-csr">CSR</button>
-              <button onclick="renderParadigm('ssr')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300" id="btn-p-ssr">SSR + Hydrate</button>
-              <button onclick="renderParadigm('rsc')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300" id="btn-p-rsc">RSC Streaming</button>
-              <button onclick="renderParadigm('islands')" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300" id="btn-p-islands">Astro Islands</button>
+        <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800">
+          <div class="flex items-center justify-between mb-4 pb-2 border-b border-zinc-800">
+            <span class="text-xs font-mono text-zinc-300 font-semibold uppercase">[PROTOTYPE] 渲染范式性能瀑布流对比</span>
+            <div class="flex gap-1.5 text-xs font-mono">
+              <button onclick="renderParadigm('csr')" class="px-2 py-1 rounded bg-zinc-800 border border-zinc-700 text-zinc-200 btn-tactile" id="btn-p-csr">CSR</button>
+              <button onclick="renderParadigm('ssr')" class="px-2 py-1 rounded bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-zinc-200 btn-tactile" id="btn-p-ssr">SSR + Hydrate</button>
+              <button onclick="renderParadigm('rsc')" class="px-2 py-1 rounded bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-zinc-200 btn-tactile" id="btn-p-rsc">RSC Streaming</button>
+              <button onclick="renderParadigm('islands')" class="px-2 py-1 rounded bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-zinc-200 btn-tactile" id="btn-p-islands">Astro Islands</button>
             </div>
           </div>
 
           <div class="space-y-3 font-mono text-xs">
             <div>
-              <div class="flex justify-between text-slate-400 mb-1">
-                <span id="para-name">CSR (传统单页应用)</span>
-                <span id="para-stats" class="text-cyan-400">TTFB: 50ms | FCP: 850ms | TTI (可交互): 1400ms | JS 体积: 480KB</span>
+              <div class="flex justify-between text-zinc-400 mb-1.5">
+                <span id="para-name" class="text-zinc-200 font-medium">CSR (传统单页应用)</span>
+                <span id="para-stats" class="text-zinc-400">TTFB: 50ms | FCP: 850ms | TTI: 1400ms | JS 体积: 480KB</span>
               </div>
-              <div class="w-full bg-slate-900 h-6 rounded flex overflow-hidden border border-slate-800 p-0.5" id="para-waterfall-bar">
-                <div class="bg-blue-600 h-full" style="width: 10%" title="TTFB"></div>
-                <div class="bg-amber-600 h-full" style="width: 45%" title="JS Download"></div>
-                <div class="bg-purple-600 h-full" style="width: 25%" title="Parse/Execute"></div>
-                <div class="bg-emerald-600 h-full" style="width: 20%" title="Render Complete"></div>
+              <div class="w-full bg-zinc-900 h-4 rounded flex overflow-hidden border border-zinc-800" id="para-waterfall-bar">
+                <div class="bg-zinc-600 h-full" style="width: 10%" title="TTFB"></div>
+                <div class="bg-zinc-500 h-full" style="width: 45%" title="JS Download"></div>
+                <div class="bg-zinc-400 h-full" style="width: 25%" title="Parse/Execute"></div>
+                <div class="bg-zinc-200 h-full" style="width: 20%" title="Render Complete"></div>
               </div>
-              <div class="flex justify-between text-[11px] text-slate-500 mt-1">
+              <div class="flex justify-between text-[11px] text-zinc-500 mt-1">
                 <span>0ms (发起请求)</span>
-                <span>网络下载与脚本执行阻塞主线程</span>
+                <span>网络与脚本执行占用主线程</span>
                 <span>1500ms</span>
               </div>
             </div>
 
-            <div id="para-desc" class="p-3 bg-slate-900/80 rounded border border-slate-800 text-slate-300">
-              <strong>CSR 痛点：</strong> 首屏极易白屏，搜索引擎爬虫索引困难。客户端必须等待庞大的 Bundle 下载完毕并执行，才能渲染出真实 DOM。
+            <div id="para-desc" class="p-3 bg-zinc-900 rounded border border-zinc-800 text-zinc-300 leading-relaxed text-xs">
+              <strong>CSR 痛点：</strong> 首屏易白屏。客户端必须等待庞大的 Bundle 下载完毕并执行，才能渲染出真实 DOM。
             </div>
           </div>
         </div>
       </section>
 
       <!-- Knowledge Point 3 -->
-      <section id="kp-3" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-3" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 03</span>
-            <h2 class="text-2xl font-bold text-white mt-2">前端状态架构：细粒度响应 (Signals) vs 状态机 (XState) vs 集中式 Store</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 03</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">前端状态架构：细粒度响应 (Signals) vs 状态机 (XState) vs 集中式 Store</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">响应式图谱 · 渲染精准度</span>
+          <span class="text-xs font-mono text-zinc-500">响应式图谱 · 渲染精准度</span>
         </div>
 
-        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-xs font-mono text-cyan-300 space-y-1">
-          <div class="text-slate-400 uppercase font-bold">// ASD-STE100 架构规约：</div>
-          <p>1. Centralized stores (Redux, Zustand) notify subscriber components when state changes.</p>
+        <div class="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 space-y-1">
+          <div class="text-zinc-500 font-bold">// ASD-STE100 架构规约：</div>
+          <p>1. Centralized stores notify subscriber components when state changes.</p>
           <p>2. Virtual DOM diffs tree nodes to find changes, which creates CPU overhead during large state updates.</p>
           <p>3. Signals use automatic dependency tracking at the getter level.</p>
           <p>4. Signals update precise DOM text nodes directly without re-executing entire component functions.</p>
@@ -250,71 +267,71 @@
         </div>
 
         <!-- Interactive Signals vs VDOM probe -->
-        <div class="p-5 rounded-xl bg-slate-950 border border-cyan-500/30">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-mono text-cyan-400 font-bold uppercase">⚡ 交互仿真沙箱：DOM 更新性能探针 (Signals vs VDOM)</span>
-            <button onclick="triggerStateUpdate()" class="px-3 py-1 rounded bg-cyan-600 hover:bg-cyan-500 text-white text-xs font-mono transition">
+        <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-zinc-800">
+            <span class="text-xs font-mono text-zinc-300 font-semibold uppercase">[PROTOTYPE] DOM 更新性能探针 (Signals vs VDOM)</span>
+            <button onclick="triggerStateUpdate()" class="px-2.5 py-1 rounded bg-zinc-100 hover:bg-white text-zinc-950 text-xs font-mono font-medium btn-tactile">
               +1 触发计数状态更新
             </button>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
-            <div class="p-3 bg-slate-900 rounded-lg border border-slate-800">
-              <div class="text-amber-400 font-bold mb-1">传统 VDOM 机制 (React 模式)</div>
-              <div class="text-slate-400">当前组件重渲染次数: <span class="text-white font-bold text-base" id="vdom-renders">0</span></div>
-              <div class="text-slate-400">虚拟 DOM 节点 Diff 数量: <span class="text-rose-400 font-bold" id="vdom-diffs">0 nodes</span></div>
-              <p class="text-slate-500 mt-2 text-[11px]">父组件状态变化引发整个子树递归计算，即使通过 memo 也存在浅比较开销。</p>
+            <div class="p-3 bg-zinc-900 rounded border border-zinc-800">
+              <div class="text-zinc-300 font-bold mb-1">传统 VDOM 机制 (React 模式)</div>
+              <div class="text-zinc-400">组件重渲染次数: <span class="text-zinc-100 font-bold" id="vdom-renders">0</span></div>
+              <div class="text-zinc-400">虚拟 DOM 节点 Diff 数量: <span class="text-zinc-300 font-bold" id="vdom-diffs">0 nodes</span></div>
+              <p class="text-zinc-500 mt-2 text-[11px]">父组件状态变化引发整个子树递归计算，即便 memo 也存在浅比较开销。</p>
             </div>
 
-            <div class="p-3 bg-slate-900 rounded-lg border border-cyan-500/40">
-              <div class="text-cyan-400 font-bold mb-1">细粒度 Signals 机制 (Solid / Preact 模式)</div>
-              <div class="text-slate-400">组件函数重新执行次数: <span class="text-white font-bold text-base">0 (零重渲染)</span></div>
-              <div class="text-slate-400">DOM 文本节点直接写入: <span class="text-emerald-400 font-bold" id="signal-dom-updates">0 times</span></div>
-              <p class="text-slate-500 mt-2 text-[11px]">订阅者直接绑定在 DOM Text Node，绕过任何组件生命周期与 Diffing。</p>
+            <div class="p-3 bg-zinc-900 rounded border border-zinc-700">
+              <div class="text-zinc-200 font-bold mb-1">细粒度 Signals 机制 (Solid / Preact 模式)</div>
+              <div class="text-zinc-400">组件函数执行次数: <span class="text-zinc-100 font-bold">0 (零重渲染)</span></div>
+              <div class="text-zinc-400">DOM 文本节点直接写入: <span class="text-zinc-200 font-bold" id="signal-dom-updates">0 times</span></div>
+              <p class="text-zinc-500 mt-2 text-[11px]">订阅者直接绑定在 DOM Text Node，绕过任何组件生命周期与 Diffing。</p>
             </div>
           </div>
         </div>
       </section>
 
       <!-- Knowledge Point 4 -->
-      <section id="kp-4" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-4" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 04</span>
-            <h2 class="text-2xl font-bold text-white mt-2">资源加载拓扑与现代打包分包策略 (Asset Topology & Granular Chunking)</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 04</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">资源加载拓扑与现代打包分包策略 (Asset Topology & Granular Chunking)</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">HTTP/3 多路复用 · 缓存命中率</span>
+          <span class="text-xs font-mono text-zinc-500">HTTP/3 多路复用 · 缓存命中率</span>
         </div>
 
-        <div class="text-sm text-slate-300 space-y-3 leading-relaxed">
-          <p>
-            在 HTTP/1.1 时代，将所有 JS 打包成一个单一的 <code>app.min.js</code> 是最优解（减少 TCP 握手）。但在 HTTP/2 & HTTP/3 时代，多路复用消除了并发连接限制，<strong>Granular Chunking (细粒度分包)</strong> 成为主流标准：
+        <div class="text-sm text-zinc-300 space-y-3 leading-relaxed">
+          <p class="text-xs text-zinc-400">
+            HTTP/2 & HTTP/3 时代多路复用消除了并发连接限制，<strong>Granular Chunking (细粒度分包)</strong> 成为主流标准：
           </p>
-          <div class="code-block p-4 rounded-xl text-xs space-y-1 text-slate-300">
-            <div class="text-slate-500">// Modern SplitChunks Strategy in Next.js / Vite:</div>
-            <div>1. <span class="text-cyan-400">Framework Chunk:</span> react, react-dom (长期哈希缓存，极低变更频率)</div>
-            <div>2. <span class="text-indigo-400">Commons / Shared Chunk:</span> 被超过 2 个页面共享的业务模块 (阈值动态计算)</div>
-            <div>3. <span class="text-amber-400">Route Page Chunk:</span> 每个 URL 路由独占代码 (按需 dynamic import 懒加载)</div>
-            <div>4. <span class="text-emerald-400">Resource Hints:</span> &lt;link rel="modulepreload" href="..."&gt; 提前建立依赖图解析</div>
+          <div class="code-block p-4 rounded-xl text-xs space-y-1 text-zinc-300">
+            <div class="text-zinc-500">// Modern SplitChunks Strategy in Next.js / Vite:</div>
+            <div>1. <span class="text-zinc-200 font-semibold">Framework Chunk:</span> react, react-dom (长期哈希缓存)</div>
+            <div>2. <span class="text-zinc-300 font-semibold">Commons / Shared Chunk:</span> 被超过 2 个页面共享的业务模块</div>
+            <div>3. <span class="text-zinc-400 font-semibold">Route Page Chunk:</span> 每个 URL 路由独占代码 (按需 dynamic import)</div>
+            <div>4. <span class="text-zinc-500 font-semibold">Resource Hints:</span> &lt;link rel="modulepreload" href="..."&gt; 提前解析依赖图</div>
           </div>
-          <p class="text-xs text-slate-400">
-            <strong>缓存雪崩规避：</strong>如果改动一行业务代码导致整个 Vendor Hash 变更，数百万用户的客户端缓存全部失效，严重拖垮首屏加载与 CDN 带宽成本。
+          <p class="text-xs text-zinc-500 font-mono">
+            <strong>缓存雪崩规避：</strong>改动一行代码若导致整个 Vendor Hash 变更，数百万用户的客户端缓存全部失效。
           </p>
         </div>
       </section>
 
       <!-- Knowledge Point 5 -->
-      <section id="kp-5" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-5" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 05</span>
-            <h2 class="text-2xl font-bold text-white mt-2">本地优先与 CRDT 离线同步架构 (Local-First & Conflict-Free Replicated Data Types)</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 05</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">本地优先与 CRDT 离线同步架构 (Local-First & CRDTs)</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">离线可用 · 最终一致性</span>
+          <span class="text-xs font-mono text-zinc-500">离线可用 · 最终一致性</span>
         </div>
 
-        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-xs font-mono text-cyan-300 space-y-1">
-          <div class="text-slate-400 uppercase font-bold">// ASD-STE100 架构规约：</div>
+        <div class="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 space-y-1">
+          <div class="text-zinc-500 font-bold">// ASD-STE100 架构规约：</div>
           <p>1. Local-First applications read and write data to the local browser database first (IndexedDB / SQLite WASM).</p>
           <p>2. The application works completely without internet connectivity.</p>
           <p>3. CRDTs (e.g., Yjs, Automerge) mathematically guarantee that multiple clients merge offline edits into the exact same state without central server coordination.</p>
@@ -322,223 +339,196 @@
         </div>
 
         <!-- Interactive CRDT Sync Simulator -->
-        <div class="p-5 rounded-xl bg-slate-950 border border-cyan-500/30">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-mono text-cyan-400 font-bold uppercase">⚡ 交互仿真沙箱：两端离线编辑与 CRDT 协同合并体验</span>
-            <button onclick="mergeCRDTSim()" class="px-3 py-1 rounded bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-mono transition">
-              🔄 恢复网络并合并状态
+        <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-zinc-800">
+            <span class="text-xs font-mono text-zinc-300 font-semibold uppercase">[PROTOTYPE] 两端离线编辑与 CRDT 协同合并体验</span>
+            <button onclick="mergeCRDTSim()" class="px-2.5 py-1 rounded bg-zinc-800 border border-zinc-700 hover:bg-zinc-700 text-zinc-200 text-xs font-mono btn-tactile">
+              恢复网络并合并状态
             </button>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono mb-3">
-            <div class="p-3 bg-slate-900 rounded border border-slate-800">
-              <span class="text-cyan-400 font-bold">终端 A (离线本地编辑):</span>
-              <input type="text" id="crdt-input-a" value="System: Hello" class="w-full mt-2 bg-black border border-slate-700 rounded px-2 py-1 text-white">
-              <span class="text-[11px] text-slate-500 mt-1 block">Vector Clock: [A: 1, B: 0]</span>
+            <div class="p-3 bg-zinc-900 rounded border border-zinc-800">
+              <span class="text-zinc-300 font-bold">终端 A (离线本地编辑):</span>
+              <input type="text" id="crdt-input-a" value="System: Hello" class="w-full mt-2 bg-black border border-zinc-700 rounded px-2 py-1 text-white">
+              <span class="text-[11px] text-zinc-500 mt-1 block">Vector Clock: [A: 1, B: 0]</span>
             </div>
-            <div class="p-3 bg-slate-900 rounded border border-slate-800">
-              <span class="text-purple-400 font-bold">终端 B (离线本地编辑):</span>
-              <input type="text" id="crdt-input-b" value="System: World!" class="w-full mt-2 bg-black border border-slate-700 rounded px-2 py-1 text-white">
-              <span class="text-[11px] text-slate-500 mt-1 block">Vector Clock: [A: 0, B: 1]</span>
+            <div class="p-3 bg-zinc-900 rounded border border-zinc-800">
+              <span class="text-zinc-300 font-bold">终端 B (离线本地编辑):</span>
+              <input type="text" id="crdt-input-b" value="System: World!" class="w-full mt-2 bg-black border border-zinc-700 rounded px-2 py-1 text-white">
+              <span class="text-[11px] text-zinc-500 mt-1 block">Vector Clock: [A: 0, B: 1]</span>
             </div>
           </div>
 
-          <div class="p-3 bg-slate-900/90 rounded border border-emerald-500/30 text-xs font-mono">
-            <span class="text-emerald-400 font-bold">CRDT 合并收敛结果：</span>
-            <span id="crdt-merge-result" class="text-white font-bold ml-2">尚未触发合并</span>
+          <div class="p-3 bg-zinc-900 rounded border border-zinc-800 text-xs font-mono">
+            <span class="text-zinc-400 font-semibold">CRDT 合并收敛结果：</span>
+            <span id="crdt-merge-result" class="text-zinc-200 font-bold ml-2">尚未触发合并</span>
           </div>
         </div>
       </section>
 
       <!-- Knowledge Point 6 -->
-      <section id="kp-6" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-6" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 06</span>
-            <h2 class="text-2xl font-bold text-white mt-2">前端稳定性体系与自愈/弹性设计 (Resiliency, Circuit Breaker & Defensive UI)</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 06</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">前端稳定性体系与自愈/弹性设计 (Resiliency & Defensive UI)</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">故障隔离 · 优雅降级</span>
+          <span class="text-xs font-mono text-zinc-500">故障隔离 · 优雅降级</span>
         </div>
 
-        <div class="text-sm text-slate-300 space-y-3 leading-relaxed">
-          <p>
-            前端运行在不可控的宿主（用户网络、浏览器扩展干扰、CDN 节点故障）。高可用前端系统架构必须具备以下自愈机制：
-          </p>
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs font-mono">
-            <div class="p-3 bg-slate-900/80 rounded border border-slate-800">
-              <div class="text-cyan-400 font-bold mb-1">静态资源容灾兜底</div>
-              <p class="text-slate-400">当主 CDN 域名遭遇解析失败或 404 时，全局 <code>onerror</code> 捕获动态重写 URL 到备用 CDN 域名，无缝补发请求。</p>
-            </div>
-            <div class="p-3 bg-slate-900/80 rounded border border-slate-800">
-              <div class="text-amber-400 font-bold mb-1">前端 API 熔断机制</div>
-              <p class="text-slate-400">当某个非核心接口连续 5 次报错，短路熔断 30 秒，直接返回缓存兜底数据，避免雪崩压垮后端与卡死前端界面。</p>
-            </div>
-            <div class="p-3 bg-slate-900/80 rounded border border-slate-800">
-              <div class="text-emerald-400 font-bold mb-1">级联错误边界 (Boundary)</div>
-              <p class="text-slate-400">将 Error Boundary 下沉到组件细粒度（卡片、评论框），单一组件崩溃仅退化为重试占位图，核心页面流程完好。</p>
-            </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs font-mono">
+          <div class="p-3 bg-zinc-900 rounded border border-zinc-800">
+            <div class="text-zinc-200 font-bold mb-1">静态资源容灾兜底</div>
+            <p class="text-zinc-400">主 CDN 解析失败或 404 时，全局 <code>onerror</code> 捕获动态重写 URL 到备用 CDN 域名，无缝补发请求。</p>
+          </div>
+          <div class="p-3 bg-zinc-900 rounded border border-zinc-800">
+            <div class="text-zinc-200 font-bold mb-1">前端 API 熔断机制</div>
+            <p class="text-zinc-400">非核心接口连续 5 次报错，短路熔断 30 秒，直接返回缓存兜底数据，避免雪崩压垮后端。</p>
+          </div>
+          <div class="p-3 bg-zinc-900 rounded border border-zinc-800">
+            <div class="text-zinc-200 font-bold mb-1">级联错误边界 (Boundary)</div>
+            <p class="text-zinc-400">将 Error Boundary 下沉到组件细粒度，单一组件崩溃仅退化为重试占位图，核心页面流程完好。</p>
           </div>
         </div>
       </section>
 
       <!-- Knowledge Point 7 -->
-      <section id="kp-7" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-7" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 07</span>
-            <h2 class="text-2xl font-bold text-white mt-2">全链路真实用户监控与长任务剖析 (RUM & Long Animation Frames - LoAF)</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 07</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">全链路真实用户监控与长任务剖析 (RUM & LoAF)</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">可观测性 · OpenTelemetry</span>
+          <span class="text-xs font-mono text-zinc-500">可观测性 · OpenTelemetry</span>
         </div>
 
-        <div class="text-sm text-slate-300 space-y-3 leading-relaxed">
-          <p>
-            传统以 <code>window.onerror</code> 收集错误已经过时。现代架构建立在 <strong>Core Web Vitals</strong> 与 <strong>LoAF (Long Animation Frames API)</strong> 之上：
-          </p>
-          <div class="code-block p-4 rounded-xl text-xs space-y-2">
-            <div class="text-cyan-400 font-mono">// W3C LoAF 观测示例：精确定位阻塞超过 50ms 的脚本源与调用栈</div>
-            <div class="text-slate-400">
-              const observer = new PerformanceObserver((list) => {<br>
-              &nbsp;&nbsp;for (const entry of list.getEntries()) {<br>
-              &nbsp;&nbsp;&nbsp;&nbsp;console.warn(`[LoAF 检测] 主线程阻塞: ${entry.duration}ms, 阻塞源:`, entry.scripts);<br>
-              &nbsp;&nbsp;}<br>
-              });<br>
-              observer.observe({ type: 'long-animation-frame', buffered: true });
-            </div>
+        <div class="code-block p-4 rounded-xl text-xs space-y-2">
+          <div class="text-zinc-400 font-mono">// W3C LoAF 观测示例：精确定位阻塞超过 50ms 的脚本源与调用栈</div>
+          <div class="text-zinc-300">
+            const observer = new PerformanceObserver((list) => {<br>
+            &nbsp;&nbsp;for (const entry of list.getEntries()) {<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;console.warn(`[LoAF 检测] 主线程阻塞: ${entry.duration}ms, 阻塞源:`, entry.scripts);<br>
+            &nbsp;&nbsp;}<br>
+            });<br>
+            observer.observe({ type: 'long-animation-frame', buffered: true });
           </div>
-          <p class="text-xs text-slate-400">
-            <strong>全链路 Trace 串联：</strong>客户端发起 fetch 时自动注入 W3C <code>traceparent</code> 请求头，将前端用户点击、网络往返、微服务调用栈与 DB 查询串联成单一次调用链拓扑。
-          </p>
         </div>
       </section>
 
       <!-- Knowledge Point 8 -->
-      <section id="kp-8" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-8" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 08</span>
-            <h2 class="text-2xl font-bold text-white mt-2">设计系统工程化：Design Tokens、Headless 原语与复合组件</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 08</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">设计系统工程化：Design Tokens、Headless 原语与复合组件</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">组件抽象 · W3C Tokens</span>
+          <span class="text-xs font-mono text-zinc-500">组件抽象 · W3C Tokens</span>
         </div>
 
-        <div class="text-sm text-slate-300 space-y-3 leading-relaxed">
-          <p>
-            避免将样式与状态逻辑紧密耦合在单一组件库中。现代顶级设计系统采用<strong>分层解耦模型</strong>：
-          </p>
-          <ul class="list-disc list-inside space-y-2 text-xs text-slate-300">
-            <li><strong>Design Tokens 层：</strong>使用符合 W3C Design Tokens 规范的 JSON 定义间距、色彩、字体排印，通过 Style Dictionary 自动转译为 CSS 变量、iOS Swift、Android Compose 资源。</li>
-            <li><strong>Headless 原语层 (Radix / React Aria / Zag.js)：</strong>提供 100% 状态机逻辑、键盘导航循环 (Keyboard Trap)、ARIA 属性与焦点管理，<strong>完全不输出任何 CSS 样式</strong>。</li>
-            <li><strong>呈现层 (Tailwind / CSS-in-JS)：</strong>各业务线只需给 Headless 骨架披上符合品牌视觉的外衣，无障碍与交互边界条件由底层原语完全保障。</li>
-          </ul>
-        </div>
+        <ul class="list-disc list-inside space-y-2 text-xs text-zinc-400 font-mono">
+          <li><strong>Design Tokens 层：</strong>使用符合 W3C Design Tokens 规范的 JSON 定义间距、色彩，通过 Style Dictionary 自动转译。</li>
+          <li><strong>Headless 原语层 (Radix / Zag.js)：</strong>提供 100% 状态机逻辑、键盘导航循环 (Keyboard Trap) 与 ARIA 属性，不输出任何 CSS。</li>
+          <li><strong>呈现层：</strong>各业务线给 Headless 骨架披上符合品牌视觉的外衣，无障碍与交互边界由底层原语完全保障。</li>
+        </ul>
       </section>
 
       <!-- Knowledge Point 9 -->
-      <section id="kp-9" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-9" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 09</span>
-            <h2 class="text-2xl font-bold text-white mt-2">海量数据渲染与 DOM 占用消除 (Virtualization & Canvas / WebGL)</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 09</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">海量数据渲染与 DOM 占用消除 (Virtualization & Canvas / WebGL)</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">内存占用 · 虚拟滚动</span>
+          <span class="text-xs font-mono text-zinc-500">内存占用 · 虚拟滚动</span>
         </div>
 
-        <div class="text-sm text-slate-300 space-y-3 leading-relaxed">
-          <p>
-            DOM 节点是非常沉重的 C++ 对象（包含事件监听、样式计算、布局框树）。当页面节点数超过 5,000 个时，每次重排 (Reflow) 都会引发主线程明显卡顿。
-          </p>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
-            <div class="p-3 bg-slate-900 rounded border border-slate-800">
-              <span class="text-cyan-400 font-bold">虚拟列表 (Virtual List) 核心数学原理：</span>
-              <p class="text-slate-400 mt-1">仅渲染可视视口 (Viewport) 内的可见项 + 上下缓冲池 (Buffer)。通过 <code>transform: translateY(offsetTop)</code> 定位，保持实际 DOM 节点始终只有 20~30 个。</p>
-            </div>
-            <div class="p-3 bg-slate-900 rounded border border-slate-800">
-              <span class="text-indigo-400 font-bold">Canvas / WebGL 逃生通道：</span>
-              <p class="text-slate-400 mt-1">在股票 K 线图、复杂流程图拓扑、10万行级电子表格场景，彻底抛弃 DOM，改用 <code>OffscreenCanvas</code> 在 Web Worker 独立线程中进行 GPU 硬件加速渲染。</p>
-            </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
+          <div class="p-3 bg-zinc-900 rounded border border-zinc-800">
+            <span class="text-zinc-200 font-bold">虚拟列表核心数学原理：</span>
+            <p class="text-zinc-400 mt-1">仅渲染可视视口内的可见项 + 缓冲池。通过 <code>transform: translateY(offsetTop)</code> 定位，保持实际 DOM 节点始终只有 20~30 个。</p>
+          </div>
+          <div class="p-3 bg-zinc-900 rounded border border-zinc-800">
+            <span class="text-zinc-200 font-bold">Canvas / WebGL 逃生通道：</span>
+            <p class="text-zinc-400 mt-1">在复杂流程图或 10 万行电子表格场景，抛弃 DOM，改用 <code>OffscreenCanvas</code> 在 Web Worker 独立线程中硬件加速渲染。</p>
           </div>
         </div>
       </section>
 
       <!-- Knowledge Point 10 -->
-      <section id="kp-10" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-10" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 10</span>
-            <h2 class="text-2xl font-bold text-white mt-2">现代前端安全深度防御：Trusted Types、CSPv3 与隔离机制</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 10</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">现代前端安全深度防御：Trusted Types、CSPv3 与隔离机制</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">零信任安全 · DOM XSS 根治</span>
+          <span class="text-xs font-mono text-zinc-500">零信任安全 · DOM XSS 根治</span>
         </div>
 
-        <div class="text-sm text-slate-300 space-y-3 leading-relaxed">
-          <p>
-            传统的字符串清理函数（如 <code>sanitizeHtml(str)</code>）极易因漏洞发生绕过。现代规范通过<strong>浏览器内核级限制</strong>从源头杜绝 DOM XSS：
-          </p>
-          <div class="code-block p-4 rounded-xl text-xs space-y-1">
-            <div class="text-emerald-400 font-mono">// 启用 Trusted Types 策略后，浏览器禁止向 innerHTML 赋值裸字符串：</div>
-            <div class="text-slate-400">
-              // ❌ TypeError: Failed to set the 'innerHTML' property on 'Element': This document requires 'TrustedHTML' assignment.<br>
-              element.innerHTML = userInput;<br><br>
-              // &check; 必须通过注册的安全策略生成类型化对象：<br>
-              const policy = window.trustedTypes.createPolicy('mySanitizer', {<br>
-              &nbsp;&nbsp;createHTML: (string) => DOMPurify.sanitize(string)<br>
-              });<br>
-              element.innerHTML = policy.createHTML(userInput);
-            </div>
+        <div class="code-block p-4 rounded-xl text-xs space-y-1">
+          <div class="text-zinc-400 font-mono">// 启用 Trusted Types 策略后，浏览器禁止向 innerHTML 赋值裸字符串：</div>
+          <div class="text-zinc-300">
+            // 运行时直接报错拦截：<br>
+            // TypeError: Failed to set 'innerHTML': This document requires 'TrustedHTML' assignment.<br>
+            element.innerHTML = userInput;<br><br>
+            // 必须通过注册的安全策略生成类型化对象：<br>
+            const policy = window.trustedTypes.createPolicy('mySanitizer', {<br>
+            &nbsp;&nbsp;createHTML: (string) => DOMPurify.sanitize(string)<br>
+            });<br>
+            element.innerHTML = policy.createHTML(userInput);
           </div>
         </div>
       </section>
 
       <!-- Knowledge Point 11 -->
-      <section id="kp-11" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-11" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 11</span>
-            <h2 class="text-2xl font-bold text-white mt-2">INP 核心指标优化与主线程任务调度器 (INP Optimization & scheduler.yield)</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 11</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">INP 核心指标优化与主线程任务调度器 (INP Optimization & scheduler.yield)</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">交互到下一次绘制 · 任务切片</span>
+          <span class="text-xs font-mono text-zinc-500">交互到下一次绘制 · 任务切片</span>
         </div>
 
-        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-xs font-mono text-cyan-300 space-y-1">
-          <div class="text-slate-400 uppercase font-bold">// ASD-STE100 架构规约：</div>
+        <div class="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 space-y-1">
+          <div class="text-zinc-500 font-bold">// ASD-STE100 架构规约：</div>
           <p>1. Interaction to Next Paint (INP) measures the longest latency between user input (click, tap, keypress) and visual frame update.</p>
           <p>2. Long JavaScript tasks (&gt;50ms) freeze the main thread and degrade INP.</p>
           <p>3. Use <code>scheduler.yield()</code> to break large computation loops into chunks, allowing the browser to draw UI updates between chunks.</p>
         </div>
 
         <!-- Interactive Scheduler Sandbox -->
-        <div class="p-5 rounded-xl bg-slate-950 border border-cyan-500/30">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-mono text-cyan-400 font-bold uppercase">⚡ 交互仿真沙箱：长任务切片调度 (INP 优化前后对比)</span>
+        <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-zinc-800">
+            <span class="text-xs font-mono text-zinc-300 font-semibold uppercase">[PROTOTYPE] 长任务切片调度 (INP 优化前后对比)</span>
           </div>
 
-          <div class="flex flex-wrap gap-3 mb-4 text-xs font-mono">
-            <button onclick="runBlockingTask()" class="px-3 py-1.5 rounded bg-rose-600 hover:bg-rose-500 text-white font-semibold transition">
-              💥 运行同步阻塞任务 (卡死主线程 500ms)
+          <div class="flex flex-wrap gap-2 mb-4 text-xs font-mono">
+            <button onclick="runBlockingTask()" class="px-3 py-1.5 rounded bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 font-medium btn-tactile">
+              运行同步单块任务 (阻塞主线程 450ms)
             </button>
-            <button onclick="runYieldedTask()" class="px-3 py-1.5 rounded bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition">
-              🚀 运行 scheduler.yield 切片任务 (丝滑响应)
+            <button onclick="runYieldedTask()" class="px-3 py-1.5 rounded bg-zinc-100 hover:bg-white text-zinc-950 font-medium btn-tactile">
+              运行 scheduler.yield 切片任务 (保持 60fps)
             </button>
           </div>
 
-          <div class="p-4 bg-slate-900 rounded-lg border border-slate-800 text-xs font-mono space-y-2">
+          <div class="p-3 bg-zinc-900 rounded border border-zinc-800 text-xs font-mono space-y-2">
             <div class="flex justify-between items-center">
-              <span class="text-slate-400">实时帧率状态指示器：</span>
-              <span id="fps-badge" class="px-2 py-0.5 rounded bg-emerald-900 text-emerald-300">60 FPS (流畅)</span>
+              <span class="text-zinc-400">实时帧率状态指示器：</span>
+              <span id="fps-badge" class="px-2 py-0.5 rounded bg-zinc-800 text-zinc-200 border border-zinc-700">60 FPS (流畅)</span>
             </div>
-            <div class="text-slate-400">调度器执行日志：<span id="scheduler-log" class="text-cyan-300">待命就绪</span></div>
-            <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
-              <div id="scheduler-progress" class="bg-gradient-to-r from-cyan-400 to-indigo-500 h-full w-0 transition-all duration-75"></div>
+            <div class="text-zinc-400">调度器执行日志：<span id="scheduler-log" class="text-zinc-200">待命就绪</span></div>
+            <div class="w-full bg-zinc-800 h-1.5 rounded-full overflow-hidden">
+              <div id="scheduler-progress" class="bg-zinc-200 h-full w-0 transition-all duration-75"></div>
             </div>
           </div>
         </div>
       </section>
 
       <!-- Bottom Navigation Footer -->
-      <div class="flex justify-between items-center pt-8 border-t border-slate-800 text-sm font-mono">
-        <a href="index.html" class="text-slate-400 hover:text-white transition">&larr; 返回主门户</a>
-        <a href="backend-system-design.html" class="px-4 py-2 rounded bg-cyan-600 hover:bg-cyan-500 text-white font-semibold transition">
+      <div class="flex justify-between items-center pt-8 border-t border-zinc-800 text-xs font-mono">
+        <a href="index.html" class="text-zinc-400 hover:text-white btn-tactile">&larr; 返回主门户</a>
+        <a href="backend-system-design.html" class="px-3 py-1.5 rounded bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-100 font-medium btn-tactile">
           进入专题 02：系统设计 &rarr;
         </a>
       </div>
@@ -551,13 +541,13 @@
     function mountSubApp(app) {
       const stateBox = document.getElementById('sandbox-state');
       if (app === 'appA') {
-        stateBox.innerHTML = '宿主 window.currentCart: <span class="text-emerald-400">undefined (沙箱受保护)</span><br><span class="text-cyan-300">子应用A沙箱内部: "AppA_Cart_492" (隔离生效)</span>';
+        stateBox.innerHTML = '宿主 window.currentCart: <span class="text-zinc-200 font-semibold">undefined (沙箱隔离生效)</span><br><span class="text-zinc-400">子应用A沙箱内部: "AppA_Cart_492"</span>';
       } else {
-        stateBox.innerHTML = '宿主 window.currentCart: <span class="text-emerald-400">undefined (沙箱受保护)</span><br><span class="text-indigo-300">子应用B沙箱内部: "AppB_Profile_OK" (隔离生效)</span>';
+        stateBox.innerHTML = '宿主 window.currentCart: <span class="text-zinc-200 font-semibold">undefined (沙箱隔离生效)</span><br><span class="text-zinc-400">子应用B沙箱内部: "AppB_Profile_OK"</span>';
       }
     }
     function unmountSubApps() {
-      document.getElementById('sandbox-state').innerHTML = '宿主 window.currentCart: <span class="text-slate-500">已重置为干净状态</span>';
+      document.getElementById('sandbox-state').innerHTML = '宿主 window.currentCart: <span class="text-zinc-500">已重置为干净状态</span>';
     }
 
     // Paradigm Simulator
@@ -567,26 +557,35 @@
       const bar = document.getElementById('para-waterfall-bar');
       const desc = document.getElementById('para-desc');
 
+      ['csr', 'ssr', 'rsc', 'islands'].forEach(t => {
+        const btn = document.getElementById(`btn-p-${t}`);
+        if (t === type) {
+          btn.className = 'px-2 py-1 rounded bg-zinc-800 border border-zinc-700 text-zinc-100 font-medium btn-tactile';
+        } else {
+          btn.className = 'px-2 py-1 rounded bg-zinc-900 border border-zinc-800 text-zinc-400 hover:text-zinc-200 btn-tactile';
+        }
+      });
+
       if (type === 'csr') {
         name.innerText = 'CSR (传统 SPA 客户端渲染)';
         stats.innerText = 'TTFB: 50ms | FCP: 850ms | TTI: 1400ms | JS 体积: 480KB';
-        bar.innerHTML = '<div class="bg-blue-600 h-full" style="width: 10%"></div><div class="bg-amber-600 h-full" style="width: 45%"></div><div class="bg-purple-600 h-full" style="width: 25%"></div><div class="bg-emerald-600 h-full" style="width: 20%"></div>';
-        desc.innerHTML = '<strong>痛点：</strong> 首屏白屏时间长。用户必须等待巨大的 Bundle 下载并执行完，才能看见首屏内容。';
+        bar.innerHTML = '<div class="bg-zinc-600 h-full" style="width: 10%"></div><div class="bg-zinc-500 h-full" style="width: 45%"></div><div class="bg-zinc-400 h-full" style="width: 25%"></div><div class="bg-zinc-200 h-full" style="width: 20%"></div>';
+        desc.innerHTML = '<strong>痛点：</strong> 首屏白屏时间长。用户必须等待庞大的 Bundle 下载并执行完，才能看见首屏内容。';
       } else if (type === 'ssr') {
         name.innerText = 'SSR (传统服务端渲染 + 全量水合)';
         stats.innerText = 'TTFB: 220ms | FCP: 280ms | TTI: 950ms | JS 体积: 480KB';
-        bar.innerHTML = '<div class="bg-blue-600 h-full" style="width: 25%"></div><div class="bg-emerald-600 h-full" style="width: 15%"></div><div class="bg-amber-600 h-full" style="width: 35%"></div><div class="bg-purple-600 h-full" style="width: 25%"></div>';
+        bar.innerHTML = '<div class="bg-zinc-600 h-full" style="width: 25%"></div><div class="bg-zinc-400 h-full" style="width: 15%"></div><div class="bg-zinc-500 h-full" style="width: 35%"></div><div class="bg-zinc-200 h-full" style="width: 25%"></div>';
         desc.innerHTML = '<strong>痛点：</strong> 水合空窗期 (Uncanny Valley)。用户看见了完整按钮，但点击没有反应，因为客户端 JS 尚未完成水合挂载。';
       } else if (type === 'rsc') {
         name.innerText = 'RSC Streaming (React 服务端组件流式传输)';
         stats.innerText = 'TTFB: 180ms | FCP: 220ms | TTI: 320ms | 客户端 JS 体积: 95KB (减少 80%)';
-        bar.innerHTML = '<div class="bg-blue-600 h-full" style="width: 20%"></div><div class="bg-emerald-600 h-full" style="width: 40%"></div><div class="bg-amber-600 h-full" style="width: 20%"></div><div class="bg-purple-600 h-full" style="width: 20%"></div>';
+        bar.innerHTML = '<div class="bg-zinc-600 h-full" style="width: 20%"></div><div class="bg-zinc-400 h-full" style="width: 40%"></div><div class="bg-zinc-500 h-full" style="width: 20%"></div><div class="bg-zinc-200 h-full" style="width: 20%"></div>';
         desc.innerHTML = '<strong>优势：</strong> 服务端直接生成 RSC Payload 流式推给客户端，仅向客户端发送带有交互行为的组件代码，体积极其紧凑。';
       } else if (type === 'islands') {
         name.innerText = 'Astro Islands (孤岛架构)';
         stats.innerText = 'TTFB: 60ms | FCP: 90ms | TTI: 120ms | 客户端 JS: 仅 18KB';
-        bar.innerHTML = '<div class="bg-blue-600 h-full" style="width: 10%"></div><div class="bg-emerald-600 h-full" style="width: 70%"></div><div class="bg-amber-600 h-full" style="width: 10%"></div><div class="bg-purple-600 h-full" style="width: 10%"></div>';
-        desc.innerHTML = '<strong>优势：</strong> 页面默认是 100% 静态纯 HTML。仅对声明 <code>client:visible</code> 的交互小部件单独加载微量 JS 水合，极致快。';
+        bar.innerHTML = '<div class="bg-zinc-600 h-full" style="width: 10%"></div><div class="bg-zinc-400 h-full" style="width: 70%"></div><div class="bg-zinc-200 h-full" style="width: 10%"></div><div class="bg-white h-full" style="width: 10%"></div>';
+        desc.innerHTML = '<strong>优势：</strong> 页面默认是 100% 静态纯 HTML。仅对声明 client:visible 的交互小部件单独加载微量 JS 水合，极致快。';
       }
     }
 
@@ -604,9 +603,8 @@
       const a = document.getElementById('crdt-input-a').value;
       const b = document.getElementById('crdt-input-b').value;
       const res = document.getElementById('crdt-merge-result');
-      // Simple LWW/CRDT simulation
-      res.innerText = `[A, B 状态收敛一致] &rarr; "${a} | ${b}" (双方哈希完全吻合)`;
-      res.className = "text-emerald-400 font-bold ml-2";
+      res.innerText = `[状态收敛] "${a} | ${b}" (双方哈希吻合，零人工冲突)`;
+      res.className = "text-zinc-100 font-bold ml-2";
     }
 
     // Task Scheduler / INP
@@ -614,19 +612,17 @@
       const log = document.getElementById('scheduler-log');
       const fps = document.getElementById('fps-badge');
       const bar = document.getElementById('scheduler-progress');
-      fps.className = "px-2 py-0.5 rounded bg-rose-900 text-rose-300";
-      fps.innerText = "0 FPS (主线程冻结卡死)";
+      fps.className = "px-2 py-0.5 rounded bg-zinc-900 border border-zinc-700 text-zinc-400";
+      fps.innerText = "0 FPS (主线程卡死)";
       log.innerText = "正在执行同步耗时循环，界面无响应...";
       
       setTimeout(() => {
         const start = performance.now();
-        while (performance.now() - start < 450) {
-          // busy wait blocking
-        }
+        while (performance.now() - start < 450) {}
         bar.style.width = "100%";
-        fps.className = "px-2 py-0.5 rounded bg-emerald-900 text-emerald-300";
+        fps.className = "px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-200";
         fps.innerText = "60 FPS (恢复)";
-        log.innerText = "完成！检测到 Long Task: 450ms, INP 严重受损！";
+        log.innerText = "完成！检测到 Long Task: 450ms, INP 指标恶化。";
       }, 50);
     }
 
@@ -634,20 +630,19 @@
       const log = document.getElementById('scheduler-log');
       const fps = document.getElementById('fps-badge');
       const bar = document.getElementById('scheduler-progress');
-      fps.className = "px-2 py-0.5 rounded bg-emerald-900 text-emerald-300";
+      fps.className = "px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-200";
       fps.innerText = "60 FPS (切片调度中)";
       log.innerText = "使用 scheduler.yield 切片，任务被拆分为 10 个 15ms 块...";
       bar.style.width = "0%";
 
       for (let i = 1; i <= 10; i++) {
-        // simulate chunk work
         const start = performance.now();
         while (performance.now() - start < 15) {}
         bar.style.width = `${i * 10}%`;
         log.innerText = `完成切片 ${i}/10，主动让出主线程给浏览器排版与用户点击...`;
-        await new Promise(r => setTimeout(r, 16)); // mimic scheduler.yield
+        await new Promise(r => setTimeout(r, 16));
       }
-      log.innerText = "完成！单任务均 <20ms，零掉帧，INP 保持极佳评级！";
+      log.innerText = "完成！单任务均 <20ms，零掉帧，INP 保持极佳评级。";
     }
   </script>
 </body>

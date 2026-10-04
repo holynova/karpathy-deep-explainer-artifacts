@@ -11,57 +11,74 @@
       theme: {
         extend: {
           colors: {
-            brand: { 500: '#6366f1', 600: '#4f46e5' },
+            zinc: {
+              850: '#1f1f23',
+              900: '#18181b',
+              950: '#09090b',
+            }
           },
           fontFamily: {
-            mono: ['JetBrains Mono', 'Fira Code', 'monospace'],
-            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+            mono: ['JetBrains Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'monospace'],
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
           }
         }
       }
     }
   </script>
   <style>
-    body { background-color: #0b0f19; color: #e2e8f0; }
-    .glass-card {
-      background: rgba(15, 23, 42, 0.7);
+    :root {
+      --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+      --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+    }
+    body {
+      background-color: #09090b;
+      color: #f4f4f5;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+    .craft-card {
+      background: #111114;
       border: 1px solid rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(12px);
+      box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.04), 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+      border-radius: 14px;
     }
     .code-block {
-      background: #050811;
+      background: #08080a;
       border: 1px solid rgba(255, 255, 255, 0.08);
       font-family: 'JetBrains Mono', monospace;
     }
-    .badge-kp {
-      background: rgba(99, 102, 241, 0.15);
-      border: 1px solid rgba(99, 102, 241, 0.4);
-      color: #818cf8;
+    button, .btn-tactile {
+      transition: transform 160ms var(--ease-out), background-color 150ms ease-out, border-color 150ms ease-out, color 150ms ease-out;
+      will-change: transform;
+    }
+    button:active, .btn-tactile:active {
+      transform: scale(0.97);
     }
     .toc-link.active {
-      color: #818cf8;
-      border-left-color: #818cf8;
-      background: rgba(99, 102, 241, 0.08);
+      color: #ffffff;
+      border-left-color: #ffffff;
+      background: rgba(255, 255, 255, 0.06);
     }
   </style>
 </head>
-<body class="selection:bg-indigo-500 selection:text-white">
+<body class="selection:bg-zinc-800 selection:text-white pb-20">
 
   <!-- Header -->
-  <header class="sticky top-0 z-50 border-b border-slate-800 bg-[#0b0f19]/90 backdrop-blur-md">
-    <div class="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+  <header class="sticky top-0 z-40 border-b border-zinc-800/80 bg-[#09090b]/90 backdrop-blur-md">
+    <div class="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <a href="index.html" class="p-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white transition" title="返回首页">
+        <a href="index.html" class="px-2.5 py-1 rounded border border-zinc-700 bg-zinc-800/70 hover:bg-zinc-700 text-zinc-300 hover:text-white text-xs font-mono btn-tactile">
           &larr; 主页
         </a>
-        <div>
-          <span class="font-bold text-base sm:text-lg text-white">系统设计与分布式架构 (System Design)</span>
-          <span class="text-xs text-indigo-400 block -mt-1 font-mono">11 核心分布式基石与交互模拟工件</span>
+        <div class="flex items-center gap-2">
+          <span class="font-semibold text-sm text-zinc-100">系统设计与分布式架构 (System Design)</span>
+          <span class="text-xs text-zinc-500 font-mono hidden md:inline">/ 11 核心分布式基石与交互模拟工件</span>
         </div>
       </div>
       <div class="flex items-center space-x-3 text-xs font-mono">
-        <span class="hidden md:inline px-2.5 py-1 rounded bg-indigo-950 text-indigo-300 border border-indigo-800">面向高级分布式工程师 / 架构师</span>
-        <a href="prompt-engineering.html" class="text-slate-400 hover:text-white transition">下一个：提示词工程 &rarr;</a>
+        <span class="hidden md:inline px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">高可用分布式工程</span>
+        <a href="prompt-engineering.html" class="text-zinc-400 hover:text-zinc-100 btn-tactile">下一个：提示词工程 &rarr;</a>
       </div>
     </div>
   </header>
@@ -70,50 +87,50 @@
     
     <!-- Sidebar TOC -->
     <aside class="lg:w-72 flex-shrink-0">
-      <div class="sticky top-24 space-y-1 glass-card p-4 rounded-xl max-h-[85vh] overflow-y-auto text-xs font-mono">
-        <div class="text-slate-400 font-bold uppercase tracking-wider pb-2 border-b border-slate-800">分布式知识图谱</div>
-        <a href="#kp-1" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-indigo-400">01. Raft 共识与脑裂防御</a>
-        <a href="#kp-2" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-indigo-400">02. 一致性光谱与 PACELC 定理</a>
-        <a href="#kp-3" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-indigo-400">03. 分布式事务：Sagas & Outbox</a>
-        <a href="#kp-4" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-indigo-400">04. LSM-Tree vs B+ Tree 存储引擎</a>
-        <a href="#kp-5" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-indigo-400">05. 缓存一致性与延时双删</a>
-        <a href="#kp-6" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-indigo-400">06. 一致性哈希与虚拟节点</a>
-        <a href="#kp-7" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-indigo-400">07. 分布式限流：令牌桶与漏桶</a>
-        <a href="#kp-8" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-indigo-400">08. Kafka 分区并发与端到端 EOS</a>
-        <a href="#kp-9" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-indigo-400">09. 弹性重试与 Full Jitter 削峰</a>
-        <a href="#kp-10" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-indigo-400">10. Snowflake ID 与时钟回拨处理</a>
-        <a href="#kp-11" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-slate-300 hover:text-indigo-400">11. Quorum 仲裁与 CDC 管道</a>
+      <div class="sticky top-20 space-y-1 craft-card p-4 max-h-[85vh] overflow-y-auto text-xs font-mono">
+        <div class="text-zinc-400 font-semibold uppercase tracking-wider pb-2 border-b border-zinc-800">分布式知识图谱</div>
+        <a href="#kp-1" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">01. Raft 共识与脑裂防御</a>
+        <a href="#kp-2" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">02. 一致性光谱与 PACELC 定理</a>
+        <a href="#kp-3" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">03. 分布式事务：Sagas & Outbox</a>
+        <a href="#kp-4" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">04. LSM-Tree vs B+ Tree 存储引擎</a>
+        <a href="#kp-5" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">05. 缓存一致性与延时双删</a>
+        <a href="#kp-6" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">06. 一致性哈希与虚拟节点</a>
+        <a href="#kp-7" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">07. 分布式限流：令牌桶与漏桶</a>
+        <a href="#kp-8" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">08. Kafka 分区并发与端到端 EOS</a>
+        <a href="#kp-9" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">09. 弹性重试与 Full Jitter 削峰</a>
+        <a href="#kp-10" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">10. Snowflake ID 与时钟回拨处理</a>
+        <a href="#kp-11" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">11. Quorum 仲裁与 CDC 管道</a>
       </div>
     </aside>
 
     <!-- Main Content Stream -->
-    <main class="flex-1 space-y-12 min-w-0">
+    <main class="flex-1 space-y-10 min-w-0">
 
-      <!-- Intro Card -->
-      <section class="glass-card p-6 rounded-2xl border-indigo-500/20 relative">
-        <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-indigo-500/10 text-indigo-300 text-xs font-mono mb-3">
-          ASD-STE100 架构规约 + 工业级动态模拟器
+      <!-- Editorial Intro Card -->
+      <section class="craft-card p-6 rounded-2xl relative">
+        <div class="inline-flex items-center gap-2 px-2 py-0.5 rounded border border-zinc-700 bg-zinc-900 text-zinc-300 text-[11px] font-mono mb-3">
+          ASD-STE100 架构规约 · Emil Kowalski 交互标准
         </div>
-        <h1 class="text-3xl font-extrabold text-white tracking-tight mb-3">
+        <h1 class="text-2xl sm:text-3xl font-semibold text-zinc-100 tracking-tight mb-3">
           分布式系统的终极命题：网络不可靠、时钟不可靠与状态共识
         </h1>
-        <p class="text-sm text-slate-300 leading-relaxed font-light">
-          在分布式环境下，没有全局物理时钟，任何网络包都可能丢失、乱序或延迟数秒，硬件崩溃是系统常态。真正的架构师不追求“永不宕机”，而是通过严密的数学证明与工程契约，在非可靠底座上构建可靠的分布式状态机。
+        <p class="text-sm text-zinc-400 leading-relaxed font-normal">
+          在分布式环境下，没有全局物理时钟，任何网络包都可能丢失、乱序或延迟数秒，硬件故障是系统常态。真正的架构师不追求“永不宕机”，而是通过严密的数学证明与工程契约，在非可靠底座上构建可靠的分布式状态机。
         </p>
       </section>
 
       <!-- Knowledge Point 1 -->
-      <section id="kp-1" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-1" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 01</span>
-            <h2 class="text-2xl font-bold text-white mt-2">分布式共识协议与状态机复制 (Raft Consensus & Log Replication)</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 01</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">分布式共识协议与状态机复制 (Raft Consensus & Log Replication)</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">领导者选举 · 脑裂自愈</span>
+          <span class="text-xs font-mono text-zinc-500">领导者选举 · 脑裂自愈</span>
         </div>
 
-        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-xs font-mono text-indigo-300 space-y-1">
-          <div class="text-slate-400 uppercase font-bold">// ASD-STE100 架构规约：</div>
+        <div class="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 space-y-1">
+          <div class="text-zinc-500 font-bold">// ASD-STE100 架构规约：</div>
           <p>1. Nodes exist in three states: Follower, Candidate, or Leader.</p>
           <p>2. If Followers do not receive Leader heartbeats before the randomized election timeout, they become Candidates.</p>
           <p>3. A Candidate needs votes from a strict majority (N/2 + 1) to become Leader.</p>
@@ -122,13 +139,13 @@
         </div>
 
         <!-- Interactive Raft Simulator -->
-        <div class="p-5 rounded-xl bg-slate-950 border border-indigo-500/30">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-mono text-indigo-400 font-bold uppercase">⚡ 交互仿真沙箱：5 节点 Raft 选举与网络分区恢复</span>
-            <div class="flex gap-2 text-xs font-mono">
-              <button onclick="killLeader()" class="px-2.5 py-1 rounded bg-rose-600 hover:bg-rose-500 text-white transition">🔪 杀死 Leader (Node 1)</button>
-              <button onclick="partitionNetwork()" class="px-2.5 py-1 rounded bg-amber-600 hover:bg-amber-500 text-white transition">⚡ 触发网络分区 [1,2] vs [3,4,5]</button>
-              <button onclick="healPartition()" class="px-2.5 py-1 rounded bg-emerald-600 hover:bg-emerald-500 text-white transition">🌿 恢复分区连通</button>
+        <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-zinc-800">
+            <span class="text-xs font-mono text-zinc-300 font-semibold uppercase">[PROTOTYPE] 5 节点 Raft 选举与网络分区恢复试验台</span>
+            <div class="flex gap-1.5 text-xs font-mono">
+              <button onclick="killLeader()" class="px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 btn-tactile">终止 Leader (Node 1)</button>
+              <button onclick="partitionNetwork()" class="px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 btn-tactile">触发分区 [1,2] / [3,4,5]</button>
+              <button onclick="healPartition()" class="px-2.5 py-1 rounded bg-zinc-100 hover:bg-white text-zinc-950 font-medium btn-tactile">恢复网络连通</button>
             </div>
           </div>
 
@@ -136,247 +153,222 @@
             <!-- 5 nodes rendered by JS -->
           </div>
 
-          <div class="p-3 bg-slate-900 rounded border border-slate-800 text-xs font-mono text-slate-300" id="raft-status-box">
+          <div class="p-3 bg-zinc-900 rounded border border-zinc-800 text-xs font-mono text-zinc-300" id="raft-status-box">
             [状态] 正常运行。Node 1 为合法 Leader (Term 1)，持续向 Followers 发送心跳。
           </div>
         </div>
       </section>
 
       <!-- Knowledge Point 2 -->
-      <section id="kp-2" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-2" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 02</span>
-            <h2 class="text-2xl font-bold text-white mt-2">一致性模型深度辨析：线性一致性、因果一致性与 PACELC 定理</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 02</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">一致性模型深度辨析：线性一致性、因果一致性与 PACELC 定理</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">一致性光谱 · 延迟权衡</span>
+          <span class="text-xs font-mono text-zinc-500">一致性光谱 · 延迟权衡</span>
         </div>
 
-        <div class="text-sm text-slate-300 space-y-3 leading-relaxed">
-          <p>
-            许多人误将 CAP 当作设计圣经，但 CAP 存在致命缺陷：它只讨论“存在网络分区时”的极度对立情况，忽略了 99.9% 正常无分区时间的系统行为。
-          </p>
-          <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 text-xs font-mono text-slate-300 space-y-2">
-            <div class="text-indigo-400 font-bold">// PACELC 定理公式化表达：</div>
-            <div>如果存在分区 (<strong>P</strong>artition)：系统必须在可用性 (<strong>A</strong>vailability) 与一致性 (<strong>C</strong>onsistency) 之间抉择；</div>
-            <div>否则 (<strong>E</strong>lse, 正常状态)：系统必须在延迟 (<strong>L</strong>atency) 与一致性 (<strong>C</strong>onsistency) 之间抉择。</div>
-            <div class="text-slate-400 mt-2">
-              典型分类：
-              <span class="text-cyan-400">MongoDB / Cassandra (PA/EL)</span> 追求极低延迟；
-              <span class="text-emerald-400">Spanner / CockroachDB (PC/EC)</span> 不惜以跨机房往返延迟换取线性一致性。
-            </div>
+        <div class="p-4 rounded-xl bg-zinc-900 border border-zinc-800 text-xs font-mono text-zinc-300 space-y-2">
+          <div class="text-zinc-400 font-bold">// PACELC 定理公式化表达：</div>
+          <div>如果存在分区 (<strong>P</strong>artition)：系统必须在可用性 (<strong>A</strong>vailability) 与一致性 (<strong>C</strong>onsistency) 之间抉择；</div>
+          <div>否则 (<strong>E</strong>lse, 正常状态)：系统必须在延迟 (<strong>L</strong>atency) 与一致性 (<strong>C</strong>onsistency) 之间抉择。</div>
+          <div class="text-zinc-500 mt-2">
+            选型对照：
+            <span class="text-zinc-300 font-semibold">MongoDB / Cassandra (PA/EL)</span> 追求极低延迟；
+            <span class="text-zinc-100 font-semibold">Spanner / CockroachDB (PC/EC)</span> 以跨机房往返换取线性一致性。
           </div>
         </div>
       </section>
 
       <!-- Knowledge Point 3 -->
-      <section id="kp-3" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-3" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 03</span>
-            <h2 class="text-2xl font-bold text-white mt-2">分布式事务终局：Saga 编排器与 Transactional Outbox + CDC</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 03</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">分布式事务终局：Saga 编排器与 Transactional Outbox + CDC</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">最终一致性 · 可靠投递</span>
+          <span class="text-xs font-mono text-zinc-500">最终一致性 · 可靠投递</span>
         </div>
 
-        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-xs font-mono text-indigo-300 space-y-1">
-          <div class="text-slate-400 uppercase font-bold">// ASD-STE100 架构规约：</div>
+        <div class="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 space-y-1">
+          <div class="text-zinc-500 font-bold">// ASD-STE100 架构规约：</div>
           <p>1. Two-Phase Commit (2PC) blocks resources and causes severe latency under high scale.</p>
           <p>2. Sagas break transactions into local steps with corresponding compensating rollback actions.</p>
           <p>3. Transactional Outbox writes the domain change and the outbound message into the same local database transaction.</p>
-          <p>4. Debezium CDC reads database transaction logs (e.g. MySQL Binlog) and streams events to Kafka with zero dual-write inconsistency.</p>
+          <p>4. Debezium CDC reads database transaction logs and streams events to Kafka with zero dual-write inconsistency.</p>
         </div>
 
         <!-- Interactive Saga Simulator -->
-        <div class="p-5 rounded-xl bg-slate-950 border border-indigo-500/30">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-mono text-indigo-400 font-bold uppercase">⚡ 交互仿真沙箱：Saga 订单事务工作流与补偿回滚演练</span>
+        <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-zinc-800">
+            <span class="text-xs font-mono text-zinc-300 font-semibold uppercase">[PROTOTYPE] Saga 订单事务工作流与补偿回滚演练</span>
             <div class="flex gap-2 text-xs font-mono">
-              <button onclick="runSagaSuccess()" class="px-2.5 py-1 rounded bg-indigo-600 hover:bg-indigo-500 text-white transition">▶ 模拟成功下单链路</button>
-              <button onclick="runSagaPaymentFail()" class="px-2.5 py-1 rounded bg-rose-600 hover:bg-rose-500 text-white transition">💥 模拟扣款失败 (触发补偿回滚)</button>
+              <button onclick="runSagaSuccess()" class="px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 btn-tactile">模拟成功下单链路</button>
+              <button onclick="runSagaPaymentFail()" class="px-2.5 py-1 rounded bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-400 hover:text-zinc-200 btn-tactile">模拟扣款失败 (触发补偿)</button>
             </div>
           </div>
 
           <div class="grid grid-cols-3 gap-3 text-xs font-mono text-center mb-3">
-            <div class="p-3 bg-slate-900 rounded border border-slate-800" id="saga-step-1">
-              <div class="text-slate-400">步骤 1: 订单服务</div>
-              <div class="text-white font-bold mt-1 status-text">待命</div>
+            <div class="p-3 bg-zinc-900 rounded border border-zinc-800" id="saga-step-1">
+              <div class="text-zinc-500">步骤 1: 订单服务</div>
+              <div class="text-zinc-200 font-bold mt-1 status-text">待命</div>
             </div>
-            <div class="p-3 bg-slate-900 rounded border border-slate-800" id="saga-step-2">
-              <div class="text-slate-400">步骤 2: 库存扣减</div>
-              <div class="text-white font-bold mt-1 status-text">待命</div>
+            <div class="p-3 bg-zinc-900 rounded border border-zinc-800" id="saga-step-2">
+              <div class="text-zinc-500">步骤 2: 库存扣减</div>
+              <div class="text-zinc-200 font-bold mt-1 status-text">待命</div>
             </div>
-            <div class="p-3 bg-slate-900 rounded border border-slate-800" id="saga-step-3">
-              <div class="text-slate-400">步骤 3: 支付扣款</div>
-              <div class="text-white font-bold mt-1 status-text">待命</div>
+            <div class="p-3 bg-zinc-900 rounded border border-zinc-800" id="saga-step-3">
+              <div class="text-zinc-500">步骤 3: 支付扣款</div>
+              <div class="text-zinc-200 font-bold mt-1 status-text">待命</div>
             </div>
           </div>
 
-          <div class="p-3 bg-slate-900 rounded border border-slate-800 text-xs font-mono text-slate-300" id="saga-log">
+          <div class="p-3 bg-zinc-900 rounded border border-zinc-800 text-xs font-mono text-zinc-300" id="saga-log">
             等待发起分布式事务...
           </div>
         </div>
       </section>
 
       <!-- Knowledge Point 4 -->
-      <section id="kp-4" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-4" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 04</span>
-            <h2 class="text-2xl font-bold text-white mt-2">现代存储引擎剖析：LSM-Tree vs B+ Tree、读写放大与分层压缩</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 04</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">现代存储引擎剖析：LSM-Tree vs B+ Tree、读写放大与分层压缩</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">追加写 · 写放大控制</span>
+          <span class="text-xs font-mono text-zinc-500">追加写 · 写放大控制</span>
         </div>
 
-        <div class="text-sm text-slate-300 space-y-3 leading-relaxed">
-          <p>
-            关系型数据库与 NoSQL 的核心性能鸿沟来源于存储引擎结构：
-          </p>
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
-            <div class="p-4 bg-slate-900 rounded-xl border border-slate-800">
-              <div class="text-amber-400 font-bold mb-2">B+ Tree (InnoDB / PostgreSQL)</div>
-              <ul class="space-y-1 text-slate-400">
-                <li>• 读优化：随机点查性能极致，单次点查仅需 3~4 次磁盘寻道。</li>
-                <li>• 原地修改：每次写入需要修改磁盘物理页，引发严重的随机 I/O 与双写缓冲 (Doublewrite Buffer)。</li>
-                <li>• 写放大系数通常在 10 ~ 30 倍。</li>
-              </ul>
-            </div>
-            <div class="p-4 bg-slate-900 rounded-xl border border-indigo-500/40">
-              <div class="text-indigo-400 font-bold mb-2">LSM-Tree (RocksDB / TiDB / Cassandra)</div>
-              <ul class="space-y-1 text-slate-400">
-                <li>• 写优化：顺序追加写入 WAL 与内存跳表 (MemTable)，写入吞吐高出数量级。</li>
-                <li>• 后台分层压实 (Leveled Compaction)：内存满后刷盘为 SSTable，后台线程周期性合并有序文件。</li>
-                <li>• 布隆过滤器 (Bloom Filter)：快速跳过不包含目标 Key 的 SSTable，缓解读放大。</li>
-              </ul>
-            </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
+          <div class="p-4 bg-zinc-900 rounded-xl border border-zinc-800">
+            <div class="text-zinc-200 font-bold mb-2">B+ Tree (InnoDB / PostgreSQL)</div>
+            <ul class="space-y-1 text-zinc-400">
+              <li>• 读优化：随机点查性能极致，单次点查仅需 3~4 次磁盘寻道。</li>
+              <li>• 原地修改：每次写入需修改磁盘物理页，引发随机 I/O 与双写缓冲。</li>
+              <li>• 写放大系数通常在 10 ~ 30 倍。</li>
+            </ul>
+          </div>
+          <div class="p-4 bg-zinc-900 rounded-xl border border-zinc-700">
+            <div class="text-zinc-100 font-bold mb-2">LSM-Tree (RocksDB / TiDB)</div>
+            <ul class="space-y-1 text-zinc-400">
+              <li>• 写优化：顺序追加写入 WAL 与内存跳表 (MemTable)，吞吐极高。</li>
+              <li>• 后台分层压实 (Leveled Compaction)：内存满后刷盘为 SSTable，后台线程周期性合并。</li>
+              <li>• 布隆过滤器 (Bloom Filter)：快速跳过不包含目标 Key 的 SSTable，缓解读放大。</li>
+            </ul>
           </div>
         </div>
       </section>
 
       <!-- Knowledge Point 5 -->
-      <section id="kp-5" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-5" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 05</span>
-            <h2 class="text-2xl font-bold text-white mt-2">高性能缓存设计与双写一致性陷阱 (Cache-Aside & Delayed Double Delete)</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 05</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">高性能缓存设计与双写一致性陷阱 (Cache-Aside & Delayed Double Delete)</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">击穿/穿透/雪崩 · Binlog 订阅</span>
+          <span class="text-xs font-mono text-zinc-500">击穿/穿透/雪崩 · Binlog 订阅</span>
         </div>
 
-        <div class="text-sm text-slate-300 space-y-3 leading-relaxed">
-          <p>
-            <strong>“先更新数据库，再删除缓存”</strong> 在并发极端场景仍可能出现脏读：读线程在更新前读取了旧 DB 数据，因卡顿延迟在删缓存之后将旧数据写回 Redis。
+        <div class="p-4 rounded-xl bg-zinc-900 border border-zinc-800 text-xs font-mono text-zinc-300 space-y-2">
+          <div class="text-zinc-200 font-bold">推荐解法：基于 CDC Binlog 的异步淘汰 (Canal / Debezium)</div>
+          <p class="text-zinc-400 leading-relaxed">
+            应用层只修改数据库，不直接碰缓存；由独立消费组件监听 MySQL Binlog 增量，确认事务提交成功后，再向 Redis 发送删除指令，结合消息队列的重试保障，彻底切断应用层双写时序竞争。
           </p>
-          <div class="p-4 bg-slate-900 rounded-xl border border-slate-800 text-xs font-mono text-slate-300 space-y-2">
-            <div class="text-emerald-400 font-bold">终极解法：基于 CDC Binlog 的异步淘汰 (Canal / Debezium)</div>
-            <p class="text-slate-400">
-              应用层只负责修改数据库，不直接碰缓存；由独立消费组件监听 MySQL Binlog 增量，确认事务提交成功后，再向 Redis 发送删除指令，结合消息队列的重试保障，彻底切断应用层双写时序竞争。
-            </p>
-          </div>
         </div>
       </section>
 
       <!-- Knowledge Point 6 -->
-      <section id="kp-6" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-6" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 06</span>
-            <h2 class="text-2xl font-bold text-white mt-2">海量数据分片：一致性哈希与虚拟节点负载均衡 (Consistent Hashing & Virtual Nodes)</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 06</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">海量数据分片：一致性哈希与虚拟节点负载均衡 (Consistent Hashing & Virtual Nodes)</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">哈希环 · 数据再平衡</span>
+          <span class="text-xs font-mono text-zinc-500">哈希环 · 数据再平衡</span>
         </div>
 
         <!-- Interactive Consistent Hashing Ring Sandbox -->
-        <div class="p-5 rounded-xl bg-slate-950 border border-indigo-500/30">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-mono text-indigo-400 font-bold uppercase">⚡ 交互仿真沙箱：一致性哈希节点扩缩容与数据迁移率计算</span>
+        <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-zinc-800">
+            <span class="text-xs font-mono text-zinc-300 font-semibold uppercase">[PROTOTYPE] 一致性哈希节点扩缩容与数据迁移率计算</span>
             <div class="flex gap-2 text-xs font-mono">
-              <button onclick="addHashNode()" class="px-2.5 py-1 rounded bg-indigo-600 hover:bg-indigo-500 text-white transition">+ 动态扩容 Node</button>
-              <button onclick="resetHashNodes()" class="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition">重置为 3 节点</button>
+              <button onclick="addHashNode()" class="px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 btn-tactile">+ 动态扩容 Node</button>
+              <button onclick="resetHashNodes()" class="px-2.5 py-1 rounded bg-zinc-900 hover:bg-zinc-800 border border-zinc-800 text-zinc-400 btn-tactile">重置 3 节点</button>
             </div>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono mb-3">
-            <div class="p-3 bg-slate-900 rounded border border-slate-800">
-              <span class="text-slate-400">当前物理节点数：</span>
-              <span class="text-white font-bold ml-1" id="hash-node-count">3</span>
+            <div class="p-3 bg-zinc-900 rounded border border-zinc-800">
+              <span class="text-zinc-500">当前物理节点数：</span>
+              <span class="text-zinc-200 font-bold ml-1" id="hash-node-count">3</span>
             </div>
-            <div class="p-3 bg-slate-900 rounded border border-slate-800">
-              <span class="text-slate-400">虚拟节点倍率 (vnodes)：</span>
-              <span class="text-cyan-400 font-bold ml-1">150 vnodes/node</span>
+            <div class="p-3 bg-zinc-900 rounded border border-zinc-800">
+              <span class="text-zinc-500">虚拟节点倍率 (vnodes)：</span>
+              <span class="text-zinc-200 font-bold ml-1">150 vnodes/node</span>
             </div>
-            <div class="p-3 bg-slate-900 rounded border border-slate-800">
-              <span class="text-slate-400">单节点增减迁移数据比：</span>
-              <span class="text-emerald-400 font-bold ml-1" id="hash-migration-pct">~33.3% (理论最小值)</span>
+            <div class="p-3 bg-zinc-900 rounded border border-zinc-800">
+              <span class="text-zinc-500">单节点增减迁移数据比：</span>
+              <span class="text-zinc-200 font-bold ml-1" id="hash-migration-pct">~33.3% (理论最小值)</span>
             </div>
           </div>
 
-          <div class="p-3 bg-slate-900/80 rounded border border-slate-800 text-xs font-mono text-slate-300" id="hash-detail-log">
-            传统取模分片 (hash % N) 增加 1 个节点会导致 ~75% 数据失效！一致性哈希将失效数据严格压缩至 1/N。
+          <div class="p-3 bg-zinc-900 rounded border border-zinc-800 text-xs font-mono text-zinc-400" id="hash-detail-log">
+            传统取模分片 (hash % N) 增加 1 个节点会导致 ~75% 数据失效；一致性哈希将失效数据严格压缩至 1/N。
           </div>
         </div>
       </section>
 
       <!-- Knowledge Point 7 -->
-      <section id="kp-7" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-7" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 07</span>
-            <h2 class="text-2xl font-bold text-white mt-2">分布式限流与流量整型算法 (Token Bucket vs Leaky Bucket vs Sliding Window)</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 07</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">分布式限流与流量整型算法 (Token Bucket vs Leaky Bucket vs Sliding Window)</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">突发平滑 · Redis Lua 原子计数</span>
+          <span class="text-xs font-mono text-zinc-500">突发平滑 · Redis Lua 原子计数</span>
         </div>
 
-        <div class="text-sm text-slate-300 space-y-3 leading-relaxed">
-          <p>
-            在高并发网关层，常用算法的物理特性有着严格分工：
-          </p>
-          <ul class="list-disc list-inside space-y-1 text-xs text-slate-400">
-            <li><strong>固定窗口计数器：</strong>最粗糙，存在跨窗口临界爆发（前一秒后半段与后一秒前半段瞬间涌入 2 倍限额）。</li>
-            <li><strong>滑动窗口日志 / 计数器：</strong>通过平滑统计最近 60s 内的请求加权和，消灭临界突刺，但内存占用略高。</li>
-            <li><strong>漏桶算法 (Leaky Bucket)：</strong>以绝对恒定速率流出，常用于对下游写数据库限速，完全禁止突发。</li>
-            <li><strong>令牌桶算法 (Token Bucket)：</strong>允许突发流量消费预存令牌，适合面向用户的 API 网关。</li>
-          </ul>
-        </div>
+        <ul class="list-disc list-inside space-y-1 text-xs text-zinc-400 font-mono">
+          <li><strong>固定窗口计数器：</strong>粗糙，存在跨窗口临界爆发（前后两秒临界瞬间涌入 2 倍限额）。</li>
+          <li><strong>滑动窗口计数器：</strong>平滑统计最近 60s 内请求加权和，消灭临界突刺。</li>
+          <li><strong>漏桶算法 (Leaky Bucket)：</strong>恒定速率流出，常用于写数据库限速，完全禁止突发。</li>
+          <li><strong>令牌桶算法 (Token Bucket)：</strong>允许突发流量消费预存令牌，适合面向用户的 API 网关。</li>
+        </ul>
       </section>
 
       <!-- Knowledge Point 8 -->
-      <section id="kp-8" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-8" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 08</span>
-            <h2 class="text-2xl font-bold text-white mt-2">高吞吐消息引擎与流处理语义 (Kafka Partitions & Exactly-Once Semantics - EOS)</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 08</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">高吞吐消息引擎与流处理语义 (Kafka Partitions & Exactly-Once Semantics - EOS)</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">Zero-Copy · 事务日志</span>
+          <span class="text-xs font-mono text-zinc-500">Zero-Copy · 事务日志</span>
         </div>
 
-        <div class="text-sm text-slate-300 space-y-3 leading-relaxed">
-          <p>
-            Kafka 单机数十万 QPS 的底层架构密码在于<strong>绕过 JVM 垃圾回收与消灭内存拷贝</strong>：
-          </p>
-          <div class="code-block p-4 rounded-xl text-xs space-y-2">
-            <div class="text-cyan-400 font-mono">// Kafka 物理吞吐优化核心三板斧：</div>
-            <div class="text-slate-300">
-              1. <strong>顺序写磁盘 (Sequential Append):</strong> 机械硬盘顺序写性能接近内存随机写，避免磁头反复寻道。<br>
-              2. <strong>PageCache 与 Zero-Copy:</strong> 使用 Linux <code>sendfile(in_fd, out_fd)</code> 系统调用，网卡直接从 OS PageCache 读取数据包，零上下文切换。<br>
-              3. <strong>端到端 EOS:</strong> 生产者分配 PID + Sequence Number 解决幂等，结合 <code>beginTransaction() / commitTransaction()</code> 确保消费位移与下游产出原子提交。
-            </div>
+        <div class="code-block p-4 rounded-xl text-xs space-y-2">
+          <div class="text-zinc-400 font-mono">// Kafka 物理吞吐优化核心三板斧：</div>
+          <div class="text-zinc-300 leading-relaxed">
+            1. <strong>顺序写磁盘 (Sequential Append):</strong> 机械硬盘顺序写性能接近内存随机写，避免磁头反复寻道。<br>
+            2. <strong>PageCache 与 Zero-Copy:</strong> 使用 Linux <code>sendfile</code> 系统调用，网卡直接从 OS PageCache 抓取数据，零用户态拷贝。<br>
+            3. <strong>端到端 EOS:</strong> 生产者分配 PID + Sequence Number 保证幂等，结合 <code>beginTransaction()</code> 确保消费位移与下游产出原子提交。
           </div>
         </div>
       </section>
 
       <!-- Knowledge Point 9 -->
-      <section id="kp-9" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-9" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 09</span>
-            <h2 class="text-2xl font-bold text-white mt-2">服务高可用弹性与防雪崩模式：断路器、全抖动重试与过载脱离</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 09</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">服务高可用弹性与防雪崩模式：断路器、全抖动重试与过载脱离</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">Full Jitter · 自适应负载保护</span>
+          <span class="text-xs font-mono text-zinc-500">Full Jitter · 自适应负载保护</span>
         </div>
 
-        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-xs font-mono text-indigo-300 space-y-1">
-          <div class="text-slate-400 uppercase font-bold">// ASD-STE100 架构规约：</div>
+        <div class="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 space-y-1">
+          <div class="text-zinc-500 font-bold">// ASD-STE100 架构规约：</div>
           <p>1. Blind retries create a Retry Storm that crashes recovering backends.</p>
           <p>2. Exponential backoff increases delay between retries exponentially: \(t = b \times 2^i\).</p>
           <p>3. Full Jitter chooses a random sleep time uniformly between 0 and \(t\), breaking synchronization spikes.</p>
@@ -384,68 +376,60 @@
         </div>
 
         <!-- Interactive Jitter Simulator -->
-        <div class="p-5 rounded-xl bg-slate-950 border border-indigo-500/30">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-mono text-indigo-400 font-bold uppercase">⚡ 交互仿真沙箱：重试风暴与 Full Jitter 削峰填谷模拟</span>
-            <button onclick="simulateRetryStorm()" class="px-3 py-1 rounded bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-mono transition">
-              💥 模拟 100 个并发请求失败重试
+        <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-zinc-800">
+            <span class="text-xs font-mono text-zinc-300 font-semibold uppercase">[PROTOTYPE] 重试风暴与 Full Jitter 削峰填谷模拟</span>
+            <button onclick="simulateRetryStorm()" class="px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 text-xs font-mono btn-tactile">
+              模拟 100 个并发请求失败重试
             </button>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
-            <div class="p-3 bg-slate-900 rounded border border-slate-800">
-              <span class="text-rose-400 font-bold">无抖动重试 (指数退避固定同步)：</span>
-              <div class="text-slate-400 mt-1">在第 1s, 2s, 4s 产生巨大脉冲毛刺，后端再次被击穿。</div>
-              <div class="text-rose-500 font-bold text-base mt-2" id="storm-peak">峰值请求密度: 100 req/s</div>
+            <div class="p-3 bg-zinc-900 rounded border border-zinc-800">
+              <span class="text-zinc-400 font-bold">无抖动重试 (指数退避同步)：</span>
+              <div class="text-zinc-500 mt-1">在第 1s, 2s 产生巨大脉冲毛刺，后端再次被击穿。</div>
+              <div class="text-zinc-200 font-bold text-base mt-2" id="storm-peak">峰值请求密度: 100 req/s</div>
             </div>
-            <div class="p-3 bg-slate-900 rounded border border-emerald-500/30">
-              <span class="text-emerald-400 font-bold">Full Jitter 随机抖动打散：</span>
-              <div class="text-slate-400 mt-1">请求均匀分布在时间轴区间内，平稳消化。</div>
-              <div class="text-emerald-400 font-bold text-base mt-2" id="jitter-peak">峰值请求密度: 18 req/s (削峰 82%)</div>
+            <div class="p-3 bg-zinc-900 rounded border border-zinc-700">
+              <span class="text-zinc-100 font-bold">Full Jitter 随机抖动打散：</span>
+              <div class="text-zinc-500 mt-1">请求均匀分布在时间轴区间内，平稳消化。</div>
+              <div class="text-zinc-200 font-bold text-base mt-2" id="jitter-peak">峰值请求密度: 18 req/s (削峰 82%)</div>
             </div>
           </div>
         </div>
       </section>
 
       <!-- Knowledge Point 10 -->
-      <section id="kp-10" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-10" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 10</span>
-            <h2 class="text-2xl font-bold text-white mt-2">分布式全局唯一 ID 生成体系与时钟回拨处理 (Snowflake & NTP Skew)</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 10</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">分布式全局唯一 ID 生成体系与时钟回拨处理 (Snowflake & NTP Skew)</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">64 位位运算 · 美团 Leaf 思想</span>
+          <span class="text-xs font-mono text-zinc-500">64 位位运算 · 美团 Leaf 思想</span>
         </div>
 
-        <div class="text-sm text-slate-300 space-y-3 leading-relaxed">
-          <p>
-            Twitter Snowflake 64 位整型 ID 保证趋势递增（对 B+ Tree 聚簇索引极其友好），但<strong>强依赖物理时钟单调递增</strong>：
-          </p>
-          <div class="code-block p-4 rounded-xl text-xs space-y-1">
-            <div class="text-indigo-400 font-mono">// Snowflake 64-bit 结构剖析：</div>
-            <div>[0] 1位符号位 (恒为0)</div>
-            <div>[1..41] 41位时间戳 (支持 69 年)</div>
-            <div>[42..51] 10位工作机器 ID (支持 1024 个节点)</div>
-            <div>[52..63] 12位毫秒内自增序列 (支持单机 4096 QPS/ms)</div>
-          </div>
-          <p class="text-xs text-slate-400">
-            <strong>时钟回拨解决方案：</strong>微小回拨（&lt;5ms）采用自旋等待；中度回拨（5~2000ms）切换备用 WorkerID 逻辑槽位；重度回拨报警人工介入；美团 Leaf 双 Buffer 架构预先从 DB 取号段，彻底脱钩时钟。
-          </p>
+        <div class="code-block p-4 rounded-xl text-xs space-y-1">
+          <div class="text-zinc-400 font-mono">// Snowflake 64-bit 结构剖析：</div>
+          <div>[0] 1位符号位 (恒为0)</div>
+          <div>[1..41] 41位时间戳 (支持 69 年)</div>
+          <div>[42..51] 10位工作机器 ID (支持 1024 个节点)</div>
+          <div>[52..63] 12位毫秒内自增序列 (支持单机 4096 QPS/ms)</div>
         </div>
       </section>
 
       <!-- Knowledge Point 11 -->
-      <section id="kp-11" class="glass-card p-6 sm:p-8 rounded-2xl space-y-6">
-        <div class="flex items-center justify-between border-b border-slate-800 pb-4">
+      <section id="kp-11" class="craft-card p-6 sm:p-8 space-y-6">
+        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
           <div>
-            <span class="badge-kp px-2.5 py-0.5 rounded text-xs font-mono font-semibold">POINT 11</span>
-            <h2 class="text-2xl font-bold text-white mt-2">无主复制与 Quorum 读写仲裁机制 (Dynamo Quorum & Anti-Entropy)</h2>
+            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 11</span>
+            <h2 class="text-xl font-semibold text-zinc-100 mt-2">无主复制与 Quorum 读写仲裁机制 (Dynamo Quorum & Anti-Entropy)</h2>
           </div>
-          <span class="text-xs font-mono text-slate-400">R + W > N · 向量时钟</span>
+          <span class="text-xs font-mono text-zinc-500">R + W > N · 向量时钟</span>
         </div>
 
-        <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-800 text-xs font-mono text-indigo-300 space-y-1">
-          <div class="text-slate-400 uppercase font-bold">// ASD-STE100 架构规约：</div>
+        <div class="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 space-y-1">
+          <div class="text-zinc-500 font-bold">// ASD-STE100 架构规约：</div>
           <p>1. In leaderless replication, any node accepts writes and reads.</p>
           <p>2. Set total replicas \(N\), write quorum \(W\), and read quorum \(R\).</p>
           <p>3. If \(R + W > N\), the read set and write set must overlap by at least one node.</p>
@@ -453,37 +437,37 @@
         </div>
 
         <!-- Interactive Quorum Calculator -->
-        <div class="p-5 rounded-xl bg-slate-950 border border-indigo-500/30">
-          <div class="flex items-center justify-between mb-3">
-            <span class="text-xs font-mono text-indigo-400 font-bold uppercase">⚡ 交互仿真沙箱：Quorum 读写仲裁数学校验器</span>
+        <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-zinc-800">
+            <span class="text-xs font-mono text-zinc-300 font-semibold uppercase">[PROTOTYPE] Quorum 读写仲裁数学校验器</span>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono mb-3">
-            <div class="p-3 bg-slate-900 rounded border border-slate-800">
-              <span class="text-slate-400">副本总数 N:</span>
-              <input type="number" id="q-n" value="5" min="3" max="9" onchange="calcQuorum()" class="w-16 bg-black text-white px-2 py-0.5 rounded border border-slate-700 ml-2">
+            <div class="p-3 bg-zinc-900 rounded border border-zinc-800">
+              <span class="text-zinc-500">副本总数 N:</span>
+              <input type="number" id="q-n" value="5" min="3" max="9" onchange="calcQuorum()" class="w-16 bg-black text-white px-2 py-0.5 rounded border border-zinc-700 ml-2">
             </div>
-            <div class="p-3 bg-slate-900 rounded border border-slate-800">
-              <span class="text-slate-400">写仲裁数 W:</span>
-              <input type="number" id="q-w" value="3" min="1" max="9" onchange="calcQuorum()" class="w-16 bg-black text-white px-2 py-0.5 rounded border border-slate-700 ml-2">
+            <div class="p-3 bg-zinc-900 rounded border border-zinc-800">
+              <span class="text-zinc-500">写仲裁数 W:</span>
+              <input type="number" id="q-w" value="3" min="1" max="9" onchange="calcQuorum()" class="w-16 bg-black text-white px-2 py-0.5 rounded border border-zinc-700 ml-2">
             </div>
-            <div class="p-3 bg-slate-900 rounded border border-slate-800">
-              <span class="text-slate-400">读仲裁数 R:</span>
-              <input type="number" id="q-r" value="3" min="1" max="9" onchange="calcQuorum()" class="w-16 bg-black text-white px-2 py-0.5 rounded border border-slate-700 ml-2">
+            <div class="p-3 bg-zinc-900 rounded border border-zinc-800">
+              <span class="text-zinc-500">读仲裁数 R:</span>
+              <input type="number" id="q-r" value="3" min="1" max="9" onchange="calcQuorum()" class="w-16 bg-black text-white px-2 py-0.5 rounded border border-zinc-700 ml-2">
             </div>
           </div>
 
-          <div class="p-3 bg-slate-900/90 rounded border border-slate-800 text-xs font-mono" id="q-result">
-            <span class="text-emerald-400 font-bold">&check; 满足强一致性条件 (R + W = 6 &gt; N = 5):</span>
-            <span class="text-slate-300 ml-2">读写必有交集节点，杜绝脏读。</span>
+          <div class="p-3 bg-zinc-900 rounded border border-zinc-800 text-xs font-mono" id="q-result">
+            <span class="text-zinc-200 font-bold">满足强一致性条件 (R + W = 6 &gt; N = 5):</span>
+            <span class="text-zinc-400 ml-2">读写必有交集节点，杜绝脏读。</span>
           </div>
         </div>
       </section>
 
       <!-- Bottom Navigation Footer -->
-      <div class="flex justify-between items-center pt-8 border-t border-slate-800 text-sm font-mono">
-        <a href="frontend-system-design.html" class="text-slate-400 hover:text-white transition">&larr; 上一个：前端系统设计</a>
-        <a href="prompt-engineering.html" class="px-4 py-2 rounded bg-indigo-600 hover:bg-indigo-500 text-white font-semibold transition">
+      <div class="flex justify-between items-center pt-8 border-t border-zinc-800 text-xs font-mono">
+        <a href="frontend-system-design.html" class="text-zinc-400 hover:text-white btn-tactile">&larr; 上一个：前端系统设计</a>
+        <a href="prompt-engineering.html" class="px-3 py-1.5 rounded bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-100 font-medium btn-tactile">
           进入专题 03：提示词工程 &rarr;
         </a>
       </div>
@@ -494,11 +478,11 @@
   <script>
     // Raft Nodes Simulator
     let raftNodes = [
-      { id: 1, state: 'Leader', term: 1, alive: true, partition: 'A' },
-      { id: 2, state: 'Follower', term: 1, alive: true, partition: 'A' },
-      { id: 3, state: 'Follower', term: 1, alive: true, partition: 'B' },
-      { id: 4, state: 'Follower', term: 1, alive: true, partition: 'B' },
-      { id: 5, state: 'Follower', term: 1, alive: true, partition: 'B' },
+      { id: 1, state: 'Leader', term: 1, alive: true },
+      { id: 2, state: 'Follower', term: 1, alive: true },
+      { id: 3, state: 'Follower', term: 1, alive: true },
+      { id: 4, state: 'Follower', term: 1, alive: true },
+      { id: 5, state: 'Follower', term: 1, alive: true },
     ];
 
     function renderRaftUI() {
@@ -506,13 +490,13 @@
       c.innerHTML = '';
       raftNodes.forEach(n => {
         const div = document.createElement('div');
-        let color = 'bg-slate-900 border-slate-800 text-slate-400';
-        if (!n.alive) color = 'bg-rose-950 border-rose-800 text-rose-400 line-through';
-        else if (n.state === 'Leader') color = 'bg-indigo-950 border-indigo-500 text-indigo-300 ring-1 ring-indigo-500';
-        else if (n.state === 'Candidate') color = 'bg-amber-950 border-amber-500 text-amber-300';
+        let color = 'bg-zinc-900 border-zinc-800 text-zinc-400';
+        if (!n.alive) color = 'bg-zinc-950 border-zinc-800 text-zinc-600 line-through';
+        else if (n.state === 'Leader') color = 'bg-zinc-800 border-zinc-600 text-zinc-100 font-bold';
+        else if (n.state === 'Candidate') color = 'bg-zinc-850 border-zinc-700 text-zinc-200';
         
         div.className = `p-3 rounded-lg border ${color}`;
-        div.innerHTML = `<div class="font-bold">Node ${n.id}</div><div class="text-[11px] mt-1">${n.state}</div><div class="text-[10px] text-slate-500">Term ${n.term}</div>`;
+        div.innerHTML = `<div>Node ${n.id}</div><div class="text-[11px] mt-1">${n.state}</div><div class="text-[10px] text-zinc-500">Term ${n.term}</div>`;
         c.appendChild(div);
       });
     }
@@ -521,13 +505,12 @@
     function killLeader() {
       raftNodes[0].alive = false;
       raftNodes[0].state = 'Dead';
-      // node 2 becomes candidate, but lacks majority without 3,4,5
       raftNodes[2].state = 'Leader';
       raftNodes[2].term = 2;
       raftNodes[1].term = 2;
       raftNodes[3].term = 2;
       raftNodes[4].term = 2;
-      document.getElementById('raft-status-box').innerHTML = '<span class="text-amber-400">[选举发生]</span> Node 1 宕机。Node 3 发起选举并获得多数派 (3,4,5 三票赞成)，成为 Term 2 新 Leader！';
+      document.getElementById('raft-status-box').innerHTML = '[选举发生] Node 1 宕机。Node 3 发起选举并获得多数派 (3,4,5 三票赞成)，成为 Term 2 新 Leader。';
       renderRaftUI();
     }
 
@@ -539,7 +522,7 @@
       raftNodes[2].term = 2;
       raftNodes[3].state = 'Follower';
       raftNodes[4].state = 'Follower';
-      document.getElementById('raft-status-box').innerHTML = '<span class="text-rose-400">[网络分区]</span> [1,2] 仅有 2 票无法提交写操作；[3,4,5] 占据 3 票多数派，正常接收并提交写操作。脑裂被共识协议完全防御！';
+      document.getElementById('raft-status-box').innerHTML = '[网络分区] [1,2] 仅 2 票无法提交写；[3,4,5] 占据 3 票多数派，正常接收并提交写操作。脑裂被共识协议防御。';
       renderRaftUI();
     }
 
@@ -550,7 +533,7 @@
       raftNodes[2].state = 'Leader';
       raftNodes[3].state = 'Follower';
       raftNodes[4].state = 'Follower';
-      document.getElementById('raft-status-box').innerHTML = '<span class="text-emerald-400">[网络愈合]</span> 分区恢复。Node 1 发现更高任期 Term 3，主动降级为 Follower，拉取最新日志同步。';
+      document.getElementById('raft-status-box').innerHTML = '[网络愈合] 分区恢复。Node 1 发现更高任期 Term 3，主动降级为 Follower，拉取最新日志同步。';
       renderRaftUI();
     }
 
@@ -561,21 +544,21 @@
       const s3 = document.getElementById('saga-step-3');
       const log = document.getElementById('saga-log');
 
-      s1.querySelector('.status-text').innerHTML = '<span class="text-cyan-400">正在创建本地待支付订单...</span>';
-      log.innerText = '阶段 1: 订单服务写入订单表与本地 Outbox 表 (Local Transaction Commit)';
-      await new Promise(r => setTimeout(r, 600));
-      s1.querySelector('.status-text').innerHTML = '<span class="text-emerald-400">&check; 订单已持久化</span>';
+      s1.querySelector('.status-text').innerHTML = '<span class="text-zinc-400">正在创建待支付订单...</span>';
+      log.innerText = '阶段 1: 订单服务写入订单表与本地 Outbox 表 (Local Transaction)';
+      await new Promise(r => setTimeout(r, 450));
+      s1.querySelector('.status-text').innerHTML = '<span class="text-zinc-200">✓ 订单已持久化</span>';
 
-      s2.querySelector('.status-text').innerHTML = '<span class="text-cyan-400">正在预占扣减库存...</span>';
+      s2.querySelector('.status-text').innerHTML = '<span class="text-zinc-400">正在预占库存...</span>';
       log.innerText = '阶段 2: 消费 CDC 事件，库存服务扣减库存成功';
-      await new Promise(r => setTimeout(r, 600));
-      s2.querySelector('.status-text').innerHTML = '<span class="text-emerald-400">&check; 库存扣减成功</span>';
+      await new Promise(r => setTimeout(r, 450));
+      s2.querySelector('.status-text').innerHTML = '<span class="text-zinc-200">✓ 库存扣减成功</span>';
 
-      s3.querySelector('.status-text').innerHTML = '<span class="text-cyan-400">正在发起支付...</span>';
+      s3.querySelector('.status-text').innerHTML = '<span class="text-zinc-400">正在发起支付...</span>';
       log.innerText = '阶段 3: 支付网关扣款中...';
-      await new Promise(r => setTimeout(r, 600));
-      s3.querySelector('.status-text').innerHTML = '<span class="text-emerald-400">&check; 支付成功</span>';
-      log.innerHTML = '<span class="text-emerald-400 font-bold">&check; Saga 事务全流程成功收敛！订单状态流转为 PAID。</span>';
+      await new Promise(r => setTimeout(r, 450));
+      s3.querySelector('.status-text').innerHTML = '<span class="text-zinc-200">✓ 支付成功</span>';
+      log.innerHTML = '<span class="text-zinc-100 font-bold">✓ Saga 事务全流程成功收敛！订单状态流转为 PAID。</span>';
     }
 
     async function runSagaPaymentFail() {
@@ -584,15 +567,15 @@
       const s3 = document.getElementById('saga-step-3');
       const log = document.getElementById('saga-log');
 
-      s1.querySelector('.status-text').innerHTML = '<span class="text-emerald-400">&check; 订单已持久化</span>';
-      s2.querySelector('.status-text').innerHTML = '<span class="text-emerald-400">&check; 库存扣减成功</span>';
-      s3.querySelector('.status-text').innerHTML = '<span class="text-rose-400">❌ 余额不足扣款失败</span>';
-      log.innerText = '阶段 3 异常: 支付失败！Saga 编排器触发逆向补偿事务 (Compensating Transactions)...';
-      await new Promise(r => setTimeout(r, 800));
+      s1.querySelector('.status-text').innerHTML = '<span class="text-zinc-200">✓ 订单已持久化</span>';
+      s2.querySelector('.status-text').innerHTML = '<span class="text-zinc-200">✓ 库存扣减成功</span>';
+      s3.querySelector('.status-text').innerHTML = '<span class="text-zinc-400">✗ 扣款失败 (余额不足)</span>';
+      log.innerText = '阶段 3 异常: 支付失败，Saga 编排器触发逆向补偿事务...';
+      await new Promise(r => setTimeout(r, 600));
 
-      s2.querySelector('.status-text').innerHTML = '<span class="text-amber-400">🔄 补偿：库存已回滚释放</span>';
-      s1.querySelector('.status-text').innerHTML = '<span class="text-amber-400">🔄 补偿：订单更新为 CANCELLED</span>';
-      log.innerHTML = '<span class="text-amber-400 font-bold">&check; 逆向补偿完成，数据保持最终一致性，零脏数据。</span>';
+      s2.querySelector('.status-text').innerHTML = '<span class="text-zinc-400">[Compensate] 库存已回滚</span>';
+      s1.querySelector('.status-text').innerHTML = '<span class="text-zinc-400">[Compensate] 订单设为 CANCELLED</span>';
+      log.innerHTML = '<span class="text-zinc-300 font-semibold">✓ 逆向补偿完成，数据保持最终一致性，零脏数据。</span>';
     }
 
     // Consistent Hash Nodes
@@ -601,19 +584,19 @@
       hashNodeCount++;
       document.getElementById('hash-node-count').innerText = hashNodeCount;
       const pct = (100 / hashNodeCount).toFixed(1);
-      document.getElementById('hash-migration-pct').innerText = `~${pct}% (仅影响新增节点顺时针区间)`;
-      document.getElementById('hash-detail-log').innerHTML = `<span class="text-cyan-300">成功加入 Node ${hashNodeCount}！</span> 仅需从下一个相邻物理节点迁移 ${pct}% 的键，其余 ${100 - pct}% 的键保持原位不迁移！`;
+      document.getElementById('hash-migration-pct').innerText = `~${pct}% (仅顺时针区间)`;
+      document.getElementById('hash-detail-log').innerHTML = `成功加入 Node ${hashNodeCount}！仅需从相邻物理节点迁移 ${pct}% 的键，其余键保持原位不迁移。`;
     }
     function resetHashNodes() {
       hashNodeCount = 3;
       document.getElementById('hash-node-count').innerText = 3;
       document.getElementById('hash-migration-pct').innerText = '~33.3% (理论最小值)';
-      document.getElementById('hash-detail-log').innerText = '传统取模分片 (hash % N) 增加 1 个节点会导致 ~75% 数据失效！一致性哈希将失效数据严格压缩至 1/N。';
+      document.getElementById('hash-detail-log').innerText = '传统取模分片 (hash % N) 增加 1 个节点会导致 ~75% 数据失效；一致性哈希将失效数据严格压缩至 1/N。';
     }
 
     // Retry storm
     function simulateRetryStorm() {
-      document.getElementById('storm-peak').innerText = '峰值请求密度: 100 req/s (毛刺崩溃)';
+      document.getElementById('storm-peak').innerText = '峰值请求密度: 100 req/s (毛刺拥塞)';
       document.getElementById('jitter-peak').innerText = '峰值请求密度: 16 req/s (削峰 84%)';
     }
 
@@ -625,9 +608,9 @@
       const res = document.getElementById('q-result');
 
       if (r + w > n) {
-        res.innerHTML = `<span class="text-emerald-400 font-bold">&check; 强一致性成立 (R + W = ${r + w} &gt; N = ${n}):</span><span class="text-slate-300 ml-2">读写必重叠，保证读到最新写入值。</span>`;
+        res.innerHTML = `<span class="text-zinc-100 font-bold">强一致性成立 (R + W = ${r + w} &gt; N = ${n}):</span><span class="text-zinc-400 ml-2">读写必重叠，保证读到最新写入值。</span>`;
       } else {
-        res.innerHTML = `<span class="text-rose-400 font-bold">❌ 弱一致性风险 (R + W = ${r + w} &le; N = ${n}):</span><span class="text-slate-300 ml-2">读集合与写集合可能完全不重叠，存在脏读陈旧数据隐患！</span>`;
+        res.innerHTML = `<span class="text-zinc-400 font-bold">弱一致性风险 (R + W = ${r + w} &le; N = ${n}):</span><span class="text-zinc-500 ml-2">读写集合可能不重叠，存在脏读陈旧数据隐患。</span>`;
       }
     }
   </script>
