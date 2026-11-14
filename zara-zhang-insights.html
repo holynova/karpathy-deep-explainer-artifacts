@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Zara Zhang 的思想与认知模型 (Zara Zhang Insights) - 深度工坊</title>
+  <title>Zara Zhang 的思想与认知模型 — 深度工坊</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -11,10 +11,8 @@
       theme: {
         extend: {
           colors: {
-            zinc: {
-              850: '#1f1f23',
-              900: '#18181b',
-              950: '#09090b',
+            stone: {
+              850: '#23201d',
             }
           },
           fontFamily: {
@@ -29,16 +27,23 @@
     :root {
       --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
       --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+      --fs-s: 12px;
+      --fs-m: 14px;
+      --fs-l: 20px;
+      --fs-xl: clamp(28px, 6vw, 36px);
+    }
+    .fs-display {
+      font-size: var(--fs-xl);
     }
     body {
-      background-color: #09090b;
-      color: #f4f4f5;
+      background-color: #0c0a09;
+      color: #fafaf9;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
     }
     .craft-card {
-      background: #111114;
+      background: #1c1917;
       border: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.04), 0 4px 20px -2px rgba(0, 0, 0, 0.5);
       border-radius: 14px;
@@ -57,23 +62,23 @@
     }
   </style>
 </head>
-<body class="selection:bg-zinc-800 selection:text-white pb-20">
+<body class="selection:bg-stone-800 selection:text-white pb-20">
 
   <!-- Header -->
-  <header class="sticky top-0 z-40 border-b border-zinc-800/80 bg-[#09090b]/90 backdrop-blur-md">
+  <header class="sticky top-0 z-40 border-b border-stone-800/80 bg-[#0c0a09]/90 backdrop-blur-md">
     <div class="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <a href="index.html" class="px-2.5 py-1 rounded border border-zinc-700 bg-zinc-800/70 hover:bg-zinc-700 text-zinc-300 hover:text-white text-xs font-mono btn-tactile">
+        <a href="index.html" class="px-2.5 py-1 rounded border border-stone-700 bg-stone-800/70 hover:bg-stone-700 text-stone-300 hover:text-white text-xs btn-tactile">
           &larr; 主页
         </a>
         <div class="flex items-center gap-2">
-          <span class="font-semibold text-sm text-zinc-100">Zara Zhang 的思想与认知模型</span>
-          <span class="text-xs text-zinc-500 font-mono hidden md:inline">/ 10 大核心心智模型与人文主义技术思考</span>
+          <span class="font-semibold text-sm text-stone-100">Zara Zhang 的思想与认知模型</span>
+          <span class="text-xs text-stone-500 hidden md:inline">/ 10 个核心心智模型，含 2 个交互实验</span>
         </div>
       </div>
-      <div class="flex items-center space-x-3 text-xs font-mono">
-        <span class="hidden md:inline px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">科技人文主义</span>
-        <a href="matt-pocock-insights.html" class="text-zinc-400 hover:text-zinc-100 btn-tactile">下一个：Matt Pocock &rarr;</a>
+      <div class="flex items-center space-x-3 text-xs">
+        <span class="hidden md:inline px-2 py-0.5 rounded bg-stone-800 text-stone-300 border border-stone-700">科技人文主义</span>
+        <a href="matt-pocock-insights.html" class="text-stone-400 hover:text-stone-100 btn-tactile">下一个：Matt Pocock &rarr;</a>
       </div>
     </div>
   </header>
@@ -82,18 +87,18 @@
     
     <!-- Sidebar TOC -->
     <aside class="lg:w-72 flex-shrink-0">
-      <div class="sticky top-20 space-y-1 craft-card p-4 max-h-[85vh] overflow-y-auto text-xs font-mono">
-        <div class="text-zinc-400 font-semibold uppercase tracking-wider pb-2 border-b border-zinc-800">思想演进图谱</div>
-        <a href="#kp-1" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">01. "Build for One" 极度杠杆</a>
-        <a href="#kp-2" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">02. 盆栽心态与反规划哲学</a>
-        <a href="#kp-3" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">03. 软件即自我表达与叙事新媒介</a>
-        <a href="#kp-4" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">04. 反向学习：脱离好学生心态</a>
-        <a href="#kp-5" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">05. "不实用就不是真精神追求"</a>
-        <a href="#kp-6" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">06. 写作即思考与内部清晰度</a>
-        <a href="#kp-7" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">07. 谦逊 AI 与高信噪比护城河</a>
-        <a href="#kp-8" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">08. 无阶梯的非线性职业生涯</a>
-        <a href="#kp-9" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">09. 跨文化视角的认知折射</a>
-        <a href="#kp-10" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-zinc-400 hover:text-zinc-100">10. 偶然性接触面积与能动性</a>
+      <div class="sticky top-20 space-y-1 craft-card p-4 max-h-[85vh] overflow-y-auto text-xs">
+        <div class="text-stone-400 font-semibold uppercase tracking-wider pb-2 border-b border-stone-800">思想演进图谱</div>
+        <a href="#kp-1" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-stone-400 hover:text-stone-100">01. "Build for One" 极度杠杆</a>
+        <a href="#kp-2" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-stone-400 hover:text-stone-100">02. 盆栽心态与反规划哲学</a>
+        <a href="#kp-3" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-stone-400 hover:text-stone-100">03. 软件即自我表达与叙事新媒介</a>
+        <a href="#kp-4" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-stone-400 hover:text-stone-100">04. 反向学习：脱离好学生心态</a>
+        <a href="#kp-5" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-stone-400 hover:text-stone-100">05. "不实用就不是真精神追求"</a>
+        <a href="#kp-6" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-stone-400 hover:text-stone-100">06. 写作即思考与内部清晰度</a>
+        <a href="#kp-7" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-stone-400 hover:text-stone-100">07. 谦逊 AI 与高信噪比护城河</a>
+        <a href="#kp-8" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-stone-400 hover:text-stone-100">08. 无阶梯的非线性职业生涯</a>
+        <a href="#kp-9" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-stone-400 hover:text-stone-100">09. 跨文化视角的认知折射</a>
+        <a href="#kp-10" class="toc-link block py-1.5 px-2 rounded border-l-2 border-transparent text-stone-400 hover:text-stone-100">10. 偶然性接触面积与能动性</a>
       </div>
     </aside>
 
@@ -102,77 +107,78 @@
 
       <!-- Editorial Intro Card -->
       <section class="craft-card p-6 rounded-2xl relative">
-        <div class="inline-flex items-center gap-2 px-2 py-0.5 rounded border border-zinc-700 bg-zinc-900 text-zinc-300 text-[11px] font-mono mb-3">
-          Humanist in Tech · 认知重塑
+        <div class="inline-flex items-center gap-2 px-2 py-0.5 rounded border border-stone-700 bg-stone-900 text-stone-300 text-xs mb-3">
+          科技人文主义与认知重塑
         </div>
-        <h1 class="text-2xl sm:text-3xl font-semibold text-zinc-100 tracking-tight mb-3">
+        <h1 class="fs-display font-semibold text-stone-100 tracking-tight mb-3">
           Zara Zhang 的思考世界：在技术崇拜的洪流中守卫人类主权与真实生活
         </h1>
-        <p class="text-sm text-zinc-400 leading-relaxed font-normal">
+        <p class="text-sm text-stone-400 leading-relaxed font-normal">
           当硅谷沉醉于十亿级用户的规模神话与狂热的算法指标时，前 GGV 投资人、作家与建造者 Zara Zhang 带来了罕见的清醒：反思盲目扩张、重塑教育驯化、用人文视角重构软件开发。以下深入解析其最具穿透力的 10 个认知模型。
         </p>
       </section>
 
       <!-- Knowledge Point 1 -->
       <section id="kp-1" class="craft-card p-6 sm:p-8 space-y-6">
-        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
+        <div class="flex items-center justify-between border-b border-stone-800 pb-4">
           <div>
-            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 01</span>
-            <h2 class="text-xl font-semibold text-zinc-100 mt-2">"Build for One" (个人杠杆与极度针对性)</h2>
+            <span class="px-2 py-0.5 rounded bg-stone-800 border border-stone-700 text-stone-300 text-xs font-semibold">知识点 01</span>
+            <h2 class="text-xl font-semibold text-stone-100 mt-2">"Build for One" (个人杠杆与极度针对性)</h2>
           </div>
-          <span class="text-xs font-mono text-zinc-500">反规模化崇拜 · 击穿真实痛点</span>
+          <span class="text-xs text-stone-500">反规模化崇拜、击穿真实痛点</span>
         </div>
 
-        <div class="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 space-y-1">
-          <div class="text-zinc-500 font-bold">// ASD-STE100 精炼思想规约：</div>
+        <div class="p-4 rounded-xl bg-stone-900/90 border border-stone-800 text-xs font-mono text-stone-300 space-y-1">
+          <div class="text-stone-500 font-bold">// ASD-STE100 精炼思想规约：</div>
           <p>1. The tech industry obsesses over massive scale and viral reach.</p>
           <p>2. Building for everyone produces bland, generic tools that nobody truly loves.</p>
           <p>3. "Build for One" designs content or software for one specific person (or yourself).</p>
           <p>4. When you solve a deep personal problem completely, you tap into universal human truths with immense leverage.</p>
         </div>
 
-        <p class="text-xs text-zinc-400 leading-relaxed font-normal">
+        <p class="text-xs text-stone-400 leading-relaxed font-normal">
           大多数创作者和创业者死于“为了迎合想象中的大众而磨平所有棱角”。Zara Zhang 强调：<strong>Software for One 与 Content for One 才是杠杆的源头</strong>。当你为一个真正具体的人写下一篇文章或做出一款工具，它的真实感和精准度会百倍于那些迎合算法推荐机制的平庸产物。
         </p>
 
         <!-- Interactive Funnel Sandbox -->
-        <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800">
-          <div class="flex items-center justify-between mb-3 pb-2 border-b border-zinc-800">
-            <span class="text-xs font-mono text-zinc-300 font-semibold uppercase">[PROTOTYPE] 规模陷阱 vs 深度 Build for One 价值对比</span>
+        <div class="p-4 rounded-xl bg-stone-950 border border-stone-800">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-stone-800">
+            <span class="text-xs text-stone-300 font-semibold uppercase">对比：规模陷阱 vs 深度 Build for One 价值对比</span>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono">
-            <div class="p-3 bg-zinc-900 rounded border border-zinc-800">
-              <span class="text-zinc-400 font-bold">盲目追求规模 (The Scale Trap):</span>
-              <div class="text-zinc-500 mt-2 space-y-1">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+            <div class="p-3 bg-stone-900 rounded border border-stone-800">
+              <span class="text-stone-400 font-bold">盲目追求规模 (The Scale Trap):</span>
+              <div class="text-stone-500 mt-2 space-y-1">
                 <div>• 目标受众: "全球所有互联网用户" (过于宽泛)</div>
                 <div>• 真实共鸣度: 0.1% (平庸乏味，随时被替代)</div>
                 <div>• 心理状态: 为算法指标打工，焦虑衰竭</div>
               </div>
             </div>
-            <div class="p-3 bg-zinc-900 rounded border border-zinc-700">
-              <span class="text-zinc-100 font-bold">Build for One (极度针对性):</span>
-              <div class="text-zinc-300 mt-2 space-y-1">
+            <div class="p-3 bg-stone-900 rounded border border-stone-700">
+              <span class="text-stone-100 font-bold">Build for One (极度针对性):</span>
+              <div class="text-stone-300 mt-2 space-y-1">
                 <div>• 目标受众: 某一个具体朋友或自己真实的痛点</div>
-                <div>• 真实共鸣度: <span class="text-zinc-100 font-bold">100% 狂热认可</span></div>
+                <div>• 真实共鸣度: <span class="text-stone-100 font-bold">100% 狂热认可</span></div>
                 <div>• 衍生效应: 吸引同频的 1,000 个核心用户，产生长久复利</div>
               </div>
             </div>
           </div>
+          <p class="text-xs text-stone-500 mt-3">以上数字为示意，用于对比两种路径的差异，不是实测数据。</p>
         </div>
       </section>
 
       <!-- Knowledge Point 2 -->
       <section id="kp-2" class="craft-card p-6 sm:p-8 space-y-6">
-        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
+        <div class="flex items-center justify-between border-b border-stone-800 pb-4">
           <div>
-            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 02</span>
-            <h2 class="text-xl font-semibold text-zinc-100 mt-2">盆栽心态与反规划哲学 (The "Potted Plant" Mindset & Anti-Planning in VUCA)</h2>
+            <span class="px-2 py-0.5 rounded bg-stone-800 border border-stone-700 text-stone-300 text-xs font-semibold">知识点 02</span>
+            <h2 class="text-xl font-semibold text-stone-100 mt-2">盆栽心态与反规划哲学 (Potted Plant)</h2>
           </div>
-          <span class="text-xs font-mono text-zinc-500">抗脆弱 · 拥抱不确定性</span>
+          <span class="text-xs text-stone-500">抗脆弱、拥抱不确定性</span>
         </div>
 
-        <ul class="list-disc list-inside space-y-1 text-zinc-400 text-xs font-mono">
+        <ul class="list-disc list-inside space-y-1 text-stone-400 text-xs">
           <li><strong>不制定僵死蓝图：</strong>盆栽不会在种下一刻就决定必须在第 142 天长出第 8 片叶子。</li>
           <li><strong>扎根深厚：</strong>将全部精力投入到底层的蓄能（阅读、写作、硬核技能沉淀、敏锐审美）。</li>
           <li><strong>自适应朝向阳光：</strong>环境出现意想不到的窗口期时，即兴伸展枝桠。</li>
@@ -181,16 +187,16 @@
 
       <!-- Knowledge Point 3 -->
       <section id="kp-3" class="craft-card p-6 sm:p-8 space-y-6">
-        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
+        <div class="flex items-center justify-between border-b border-stone-800 pb-4">
           <div>
-            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 03</span>
-            <h2 class="text-xl font-semibold text-zinc-100 mt-2">科技世界的人文主义者与 "Vibe Coding" (Software as Storytelling)</h2>
+            <span class="px-2 py-0.5 rounded bg-stone-800 border border-stone-700 text-stone-300 text-xs font-semibold">知识点 03</span>
+            <h2 class="text-xl font-semibold text-stone-100 mt-2">科技世界的人文主义者与 "Vibe Coding"</h2>
           </div>
-          <span class="text-xs font-mono text-zinc-500">代码即画笔 · 人文叙事</span>
+          <span class="text-xs text-stone-500">代码即画笔、人文叙事</span>
         </div>
 
-        <div class="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 space-y-1">
-          <div class="text-zinc-500 font-bold">// ASD-STE100 精炼思想规约：</div>
+        <div class="p-4 rounded-xl bg-stone-900/90 border border-stone-800 text-xs font-mono text-stone-300 space-y-1">
+          <div class="text-stone-500 font-bold">// ASD-STE100 精炼思想规约：</div>
           <p>1. Humanities majors often build mental barriers against coding.</p>
           <p>2. In the AI era, coding is no longer an isolated technical profession.</p>
           <p>3. Software is a new medium for storytelling and human self-expression.</p>
@@ -200,39 +206,39 @@
 
       <!-- Knowledge Point 4 -->
       <section id="kp-4" class="craft-card p-6 sm:p-8 space-y-6">
-        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
+        <div class="flex items-center justify-between border-b border-stone-800 pb-4">
           <div>
-            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 04</span>
-            <h2 class="text-xl font-semibold text-zinc-100 mt-2">反向学习：摆脱好学生心态 (Unlearning School: From Student to Builder)</h2>
+            <span class="px-2 py-0.5 rounded bg-stone-800 border border-stone-700 text-stone-300 text-xs font-semibold">知识点 04</span>
+            <h2 class="text-xl font-semibold text-stone-100 mt-2">反向学习：摆脱好学生心态 (Unlearning)</h2>
           </div>
-          <span class="text-xs font-mono text-zinc-500">打破外部考评依赖 · 自我主权</span>
+          <span class="text-xs text-stone-500">打破外部考评依赖、自我主权</span>
         </div>
 
         <!-- Interactive Mentality Checklist -->
-        <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800">
-          <div class="flex items-center justify-between mb-3 pb-2 border-b border-zinc-800">
-            <span class="text-xs font-mono text-zinc-300 font-semibold uppercase">[PROTOTYPE] 好学生心态评估沙箱</span>
-            <button onclick="calcStudentScore()" class="px-2.5 py-1 rounded bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-200 text-xs font-mono btn-tactile">
+        <div class="p-4 rounded-xl bg-stone-950 border border-stone-800">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-stone-800">
+            <span class="text-xs text-stone-300 font-semibold uppercase">交互实验：好学生心态评估沙箱</span>
+            <button onclick="calcStudentScore()" class="px-2.5 py-1 rounded bg-stone-800 hover:bg-stone-700 border border-stone-700 text-stone-200 text-xs btn-tactile">
               评估心智状态
             </button>
           </div>
 
-          <div class="space-y-2 text-xs font-mono">
-            <label class="flex items-center gap-2 p-2 bg-zinc-900 rounded border border-zinc-800 cursor-pointer">
-              <input type="checkbox" class="student-check accent-zinc-200">
-              <span class="text-zinc-300">只有在权威给出明确的任务清单时，我才能安心开始工作。</span>
+          <div class="space-y-2 text-xs">
+            <label class="flex items-center gap-2 p-2 bg-stone-900 rounded border border-stone-800 cursor-pointer">
+              <input type="checkbox" class="student-check accent-stone-200">
+              <span class="text-stone-300">只有在权威给出明确的任务清单时，我才能安心开始工作。</span>
             </label>
-            <label class="flex items-center gap-2 p-2 bg-zinc-900 rounded border border-zinc-800 cursor-pointer">
-              <input type="checkbox" class="student-check accent-zinc-200">
-              <span class="text-zinc-300">我习惯在行动前寻找“唯一标准答案”或完美的最佳实践教程。</span>
+            <label class="flex items-center gap-2 p-2 bg-stone-900 rounded border border-stone-800 cursor-pointer">
+              <input type="checkbox" class="student-check accent-stone-200">
+              <span class="text-stone-300">我习惯在行动前寻找“唯一标准答案”或完美的最佳实践教程。</span>
             </label>
-            <label class="flex items-center gap-2 p-2 bg-zinc-900 rounded border border-zinc-800 cursor-pointer">
-              <input type="checkbox" class="student-check accent-zinc-200">
-              <span class="text-zinc-300">如果没有外部明确的打分/职级晋升，我会感到努力缺乏意义。</span>
+            <label class="flex items-center gap-2 p-2 bg-stone-900 rounded border border-stone-800 cursor-pointer">
+              <input type="checkbox" class="student-check accent-stone-200">
+              <span class="text-stone-300">如果没有外部明确的打分/职级晋升，我会感到努力缺乏意义。</span>
             </label>
           </div>
 
-          <div class="p-3 mt-3 bg-zinc-900 rounded border border-zinc-800 text-xs font-mono text-zinc-400" id="student-score-box">
+          <div class="p-3 mt-3 bg-stone-900 rounded border border-stone-800 text-xs font-mono text-stone-400" id="student-score-box">
             勾选符合自身状态的选项并点击评估...
           </div>
         </div>
@@ -240,31 +246,31 @@
 
       <!-- Knowledge Point 5 -->
       <section id="kp-5" class="craft-card p-6 sm:p-8 space-y-6">
-        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
+        <div class="flex items-center justify-between border-b border-stone-800 pb-4">
           <div>
-            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 05</span>
-            <h2 class="text-xl font-semibold text-zinc-100 mt-2">“如果不实用，那就不是真正的精神追求” ("If It's Not Practical, It's Not Spiritual")</h2>
+            <span class="px-2 py-0.5 rounded bg-stone-800 border border-stone-700 text-stone-300 text-xs font-semibold">知识点 05</span>
+            <h2 class="text-xl font-semibold text-stone-100 mt-2">“如果不实用，那就不是真正的精神追求” ("If It's Not Practical, It's Not Spiritual")</h2>
           </div>
-          <span class="text-xs font-mono text-zinc-500">知行合一 · 拒绝悬浮哲学</span>
+          <span class="text-xs text-stone-500">知行合一、拒绝悬浮哲学</span>
         </div>
 
-        <p class="text-xs text-zinc-400 leading-relaxed font-normal">
+        <p class="text-xs text-stone-400 leading-relaxed font-normal">
           Zara 犀利指出：脱离生活的纯理论清谈和虚无灵修毫无价值。<strong>真正的精神觉醒必然在现实生活中留下脚印</strong>——你每天把最宝贵的注意力投向了谁？你的工作方式是否诚实？你是否敢于在现实摩擦中实践你的原则？
         </p>
       </section>
 
       <!-- Knowledge Point 6 -->
       <section id="kp-6" class="craft-card p-6 sm:p-8 space-y-6">
-        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
+        <div class="flex items-center justify-between border-b border-stone-800 pb-4">
           <div>
-            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 06</span>
-            <h2 class="text-xl font-semibold text-zinc-100 mt-2">写作即思考与内部清晰度 (Writing as Thinking: Internal Clarity)</h2>
+            <span class="px-2 py-0.5 rounded bg-stone-800 border border-stone-700 text-stone-300 text-xs font-semibold">知识点 06</span>
+            <h2 class="text-xl font-semibold text-stone-100 mt-2">写作即思考与内部清晰度</h2>
           </div>
-          <span class="text-xs font-mono text-zinc-500">认知结晶 · 抵抗虚荣指标</span>
+          <span class="text-xs text-stone-500">认知结晶、抵抗虚荣指标</span>
         </div>
 
-        <div class="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 space-y-1">
-          <div class="text-zinc-500 font-bold">// ASD-STE100 精炼思想规约：</div>
+        <div class="p-4 rounded-xl bg-stone-900/90 border border-stone-800 text-xs font-mono text-stone-300 space-y-1">
+          <div class="text-stone-500 font-bold">// ASD-STE100 精炼思想规约：</div>
           <p>1. People mistakenly believe they must finish thinking before writing.</p>
           <p>2. Writing is the active thinking process itself.</p>
           <p>3. Do not measure essay success by likes, views, or subscriber counts.</p>
@@ -274,61 +280,61 @@
 
       <!-- Knowledge Point 7 -->
       <section id="kp-7" class="craft-card p-6 sm:p-8 space-y-6">
-        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
+        <div class="flex items-center justify-between border-b border-stone-800 pb-4">
           <div>
-            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 07</span>
-            <h2 class="text-xl font-semibold text-zinc-100 mt-2">谦逊的人工智能与去噪音 (Humble AI & High Signal-to-Noise Ratio)</h2>
+            <span class="px-2 py-0.5 rounded bg-stone-800 border border-stone-700 text-stone-300 text-xs font-semibold">知识点 07</span>
+            <h2 class="text-xl font-semibold text-stone-100 mt-2">谦逊的人工智能与去噪音</h2>
           </div>
-          <span class="text-xs font-mono text-zinc-500">抗泡沫 · 建立信息饮食护城河</span>
+          <span class="text-xs text-stone-500">抗泡沫、建立信息饮食护城河</span>
         </div>
 
-        <p class="text-xs text-zinc-400 leading-relaxed font-normal">
+        <p class="text-xs text-stone-400 leading-relaxed font-normal">
           在 AI 炒作达到峰值的淘金热中，Zara 提倡 <strong>"Humble AI" (谦逊 AI)</strong>：认识到大模型的局限性，不盲从把 AI 当作全知导师，而是把它作为放大个人好奇心和创作效率的温和杠杆；严控个人的信息饮食 (Information Diet)，向信息源头与原典靠拢。
         </p>
       </section>
 
       <!-- Knowledge Point 8 -->
       <section id="kp-8" class="craft-card p-6 sm:p-8 space-y-6">
-        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
+        <div class="flex items-center justify-between border-b border-stone-800 pb-4">
           <div>
-            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 08</span>
-            <h2 class="text-xl font-semibold text-zinc-100 mt-2">无阶梯的职业生涯 (Careers Without Ladders: The Non-Linear Path)</h2>
+            <span class="px-2 py-0.5 rounded bg-stone-800 border border-stone-700 text-stone-300 text-xs font-semibold">知识点 08</span>
+            <h2 class="text-xl font-semibold text-stone-100 mt-2">无阶梯的职业生涯</h2>
           </div>
-          <span class="text-xs font-mono text-zinc-500">技能组合 · 碎裂的攀爬体系</span>
+          <span class="text-xs text-stone-500">技能组合、碎裂的攀爬体系</span>
         </div>
 
-        <p class="text-xs text-zinc-400 leading-relaxed font-normal">
+        <p class="text-xs text-stone-400 leading-relaxed font-normal">
           工业时代的梯子（管培生 &rarr; 经理 &rarr; 总监 &rarr; VP）正在被大模型与精简组织撕碎。现代顶级创造者的职业轨迹是<strong>网状非线性的</strong>：由独立项目、跨学科交集、个人 IP 和解决复杂问题的公信力构成。
         </p>
       </section>
 
       <!-- Knowledge Point 9 -->
       <section id="kp-9" class="craft-card p-6 sm:p-8 space-y-6">
-        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
+        <div class="flex items-center justify-between border-b border-stone-800 pb-4">
           <div>
-            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 09</span>
-            <h2 class="text-xl font-semibold text-zinc-100 mt-2">跨文化视角的认知折射：中美科技与产品哲学的二元镜像</h2>
+            <span class="px-2 py-0.5 rounded bg-stone-800 border border-stone-700 text-stone-300 text-xs font-semibold">知识点 09</span>
+            <h2 class="text-xl font-semibold text-stone-100 mt-2">跨文化视角的认知折射：中美科技与产品哲学的二元镜像</h2>
           </div>
-          <span class="text-xs font-mono text-zinc-500">超级应用 vs 单点极致 · 执行力 vs 原创力</span>
+          <span class="text-xs text-stone-500">超级应用 vs 单点极致、执行力 vs 原创力</span>
         </div>
 
-        <p class="text-xs text-zinc-400 leading-relaxed font-normal">
+        <p class="text-xs text-stone-400 leading-relaxed font-normal">
           横跨字节跳动与硅谷风险投资的经历，让 Zara 拥有敏锐的跨文化认知：中国移动互联网在“高语境、极致运营、高密度超级应用”上登峰造极；而硅谷在“低语境、工具原生、协议层抽象”上具有深厚传统。双重视角赋予了识破文化单一盲区的高维透视能力。
         </p>
       </section>
 
       <!-- Knowledge Point 10 -->
       <section id="kp-10" class="craft-card p-6 sm:p-8 space-y-6">
-        <div class="flex items-center justify-between border-b border-zinc-800 pb-4">
+        <div class="flex items-center justify-between border-b border-stone-800 pb-4">
           <div>
-            <span class="px-2 py-0.5 rounded bg-zinc-800 border border-zinc-700 text-zinc-300 text-xs font-mono font-semibold">POINT 10</span>
-            <h2 class="text-xl font-semibold text-zinc-100 mt-2">偶然性接触面积与能动性肌肉 (Serendipity Surface Area & Agency as a Muscle)</h2>
+            <span class="px-2 py-0.5 rounded bg-stone-800 border border-stone-700 text-stone-300 text-xs font-semibold">知识点 10</span>
+            <h2 class="text-xl font-semibold text-stone-100 mt-2">偶然性接触面积与能动性肌肉 (Serendipity Surface Area)</h2>
           </div>
-          <span class="text-xs font-mono text-zinc-500">运气制造机 · 主动性锻炼</span>
+          <span class="text-xs text-stone-500">运气制造机、主动性锻炼</span>
         </div>
 
-        <div class="p-4 rounded-xl bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-300 space-y-1">
-          <div class="text-zinc-500 font-bold">// ASD-STE100 精炼思想规约：</div>
+        <div class="p-4 rounded-xl bg-stone-900/90 border border-stone-800 text-xs font-mono text-stone-300 space-y-1">
+          <div class="text-stone-500 font-bold">// ASD-STE100 精炼思想规约：</div>
           <p>1. Luck is not a passive random number.</p>
           <p>2. Serendipity Surface Area equals Passion multiplied by Public Transmission.</p>
           <p>3. Personal Agency operates like a physical muscle: it grows only when used against resistance.</p>
@@ -336,33 +342,33 @@
         </div>
 
         <!-- Interactive Serendipity Sandbox -->
-        <div class="p-4 rounded-xl bg-zinc-950 border border-zinc-800">
-          <div class="flex items-center justify-between mb-3 pb-2 border-b border-zinc-800">
-            <span class="text-xs font-mono text-zinc-300 font-semibold uppercase">[PROTOTYPE] 偶然性好运接触面积计算器</span>
+        <div class="p-4 rounded-xl bg-stone-950 border border-stone-800">
+          <div class="flex items-center justify-between mb-3 pb-2 border-b border-stone-800">
+            <span class="text-xs text-stone-300 font-semibold uppercase">交互实验：偶然性好运接触面积计算器</span>
           </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono mb-3">
-            <div class="p-3 bg-zinc-900 rounded border border-zinc-800">
-              <span class="text-zinc-400">公开分享与作品发表频次 (1~10):</span>
-              <input type="range" min="1" max="10" value="7" id="serendipity-pub" oninput="calcSerendipity()" class="w-full mt-2 accent-zinc-200">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs mb-3">
+            <div class="p-3 bg-stone-900 rounded border border-stone-800">
+              <span class="text-stone-400">公开分享与作品发表频次 (1~10):</span>
+              <input type="range" min="1" max="10" value="7" id="serendipity-pub" oninput="calcSerendipity()" class="w-full mt-2 accent-stone-200">
             </div>
-            <div class="p-3 bg-zinc-900 rounded border border-zinc-800">
-              <span class="text-zinc-400">主动向榜样发问能动性 (1~10):</span>
-              <input type="range" min="1" max="10" value="8" id="serendipity-agency" oninput="calcSerendipity()" class="w-full mt-2 accent-zinc-200">
+            <div class="p-3 bg-stone-900 rounded border border-stone-800">
+              <span class="text-stone-400">主动向榜样发问能动性 (1~10):</span>
+              <input type="range" min="1" max="10" value="8" id="serendipity-agency" oninput="calcSerendipity()" class="w-full mt-2 accent-stone-200">
             </div>
           </div>
 
-          <div class="p-3 bg-zinc-900 rounded border border-zinc-800 text-xs font-mono flex items-center justify-between">
-            <span class="text-zinc-400">预期人生转折级好运吸引概率指数：</span>
-            <span class="text-zinc-100 font-bold text-base" id="serendipity-index">56 / 100 (极高接触面)</span>
+          <div class="p-3 bg-stone-900 rounded border border-stone-800 text-xs font-mono flex items-center justify-between">
+            <span class="text-stone-400">预期人生转折级好运吸引概率指数：</span>
+            <span class="text-stone-100 font-bold text-sm" id="serendipity-index">56 / 100 (中等接触面)</span>
           </div>
         </div>
       </section>
 
       <!-- Bottom Navigation Footer -->
-      <div class="flex justify-between items-center pt-8 border-t border-zinc-800 text-xs font-mono">
-        <a href="prompt-engineering.html" class="text-zinc-400 hover:text-white btn-tactile">&larr; 上一个：提示词工程</a>
-        <a href="matt-pocock-insights.html" class="px-3 py-1.5 rounded bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-100 font-medium btn-tactile">
+      <div class="flex justify-between items-center pt-8 border-t border-stone-800 text-xs">
+        <a href="prompt-engineering.html" class="text-stone-400 hover:text-white btn-tactile">&larr; 上一个：提示词工程</a>
+        <a href="matt-pocock-insights.html" class="px-3 py-1.5 rounded bg-stone-800 hover:bg-stone-700 border border-stone-700 text-stone-100 font-medium btn-tactile">
           进入专题 05：Matt Pocock 的思想 &rarr;
         </a>
       </div>
@@ -375,11 +381,11 @@
       const checks = document.querySelectorAll('.student-check:checked');
       const box = document.getElementById('student-score-box');
       if (checks.length === 3) {
-        box.innerHTML = '<span class="text-zinc-200 font-bold">[评估结果: 外部评价依赖度高]</span> 仍将评价天平置于外部体系中。可通过自主发起一个无教材、无及格线的小工件项目进行反向学习。';
+        box.innerHTML = '<span class="text-stone-200 font-bold">[评估结果: 外部评价依赖度高]</span> 仍将评价天平置于外部体系中。可通过自主发起一个无教材、无及格线的小工件项目进行反向学习。';
       } else if (checks.length >= 1) {
-        box.innerHTML = '<span class="text-zinc-300 font-bold">[评估结果: 觉醒过渡期]</span> 已有主权建造者意识，但在面对高不确定性时仍会下意识寻找既定导轨。';
+        box.innerHTML = '<span class="text-stone-300 font-bold">[评估结果: 觉醒过渡期]</span> 已有主权建造者意识，但在面对高不确定性时仍会下意识寻找既定导轨。';
       } else {
-        box.innerHTML = '<span class="text-zinc-100 font-bold">[评估结果: 独立主权建造者]</span> 成功打破考评驯化，以现实创造为唯一试金石。';
+        box.innerHTML = '<span class="text-stone-100 font-bold">[评估结果: 独立主权建造者]</span> 成功打破考评驯化，以现实创造为唯一试金石。';
       }
     }
 
@@ -390,6 +396,25 @@
       const el = document.getElementById('serendipity-index');
       el.innerText = `${idx} / 100 (${idx > 60 ? '极高接触面' : idx > 30 ? '中等接触面' : '低接触面'})`;
     }
+  </script>
+  <script>
+    // Scroll-spy: highlight the current section in the sidebar TOC.
+    (function () {
+      if (typeof IntersectionObserver === 'undefined') return;
+      var links = Array.prototype.slice.call(document.querySelectorAll('.toc-link'));
+      var sections = links.map(function (a) {
+        return document.querySelector(a.getAttribute('href'));
+      }).filter(Boolean);
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          links.forEach(function (a) {
+            a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
+          });
+        });
+      }, { rootMargin: '-20% 0px -70% 0px' });
+      sections.forEach(function (sec) { observer.observe(sec); });
+    })();
   </script>
 </body>
 </html>

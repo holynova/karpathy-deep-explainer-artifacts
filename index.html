@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Karpathy AI Artifacts - 认知跃迁与深度工件实验室</title>
+  <title>认知工件实验室 — Karpathy AI Artifacts</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -11,10 +11,8 @@
       theme: {
         extend: {
           colors: {
-            zinc: {
-              850: '#1f1f23',
-              900: '#18181b',
-              950: '#09090b',
+            stone: {
+              850: '#23201d',
             }
           },
           fontFamily: {
@@ -29,11 +27,18 @@
     :root {
       --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
       --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+      --fs-s: 12px;
+      --fs-m: 14px;
+      --fs-l: 20px;
+      --fs-xl: clamp(28px, 6vw, 36px);
+    }
+    .fs-display {
+      font-size: var(--fs-xl);
     }
 
     body {
-      background-color: #09090b;
-      color: #f4f4f5;
+      background-color: #0c0a09;
+      color: #fafaf9;
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       text-rendering: optimizeLegibility;
       -webkit-font-smoothing: antialiased;
@@ -41,7 +46,7 @@
 
     /* Craft-level Card Surfaces (No cheap neon blur, subtle 1px border with crisp inset) */
     .craft-card {
-      background: #111114;
+      background: #1c1917;
       border: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.04), 0 4px 20px -2px rgba(0, 0, 0, 0.5);
       border-radius: 14px;
@@ -49,7 +54,7 @@
     }
     .craft-card:hover {
       border-color: rgba(255, 255, 255, 0.18);
-      background: #141418;
+      background: #292524;
     }
 
     /* Buttons feel tactile and responsive (Emil Kowalski craft rule: scale(0.97) on :active) */
@@ -81,12 +86,17 @@
         0 12px 32px rgba(0, 0, 0, 0.4),
         0 2px 6px rgba(0, 0, 0, 0.2);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      font-size: 13px;
+      font-size: var(--fs-s);
+      max-width: calc(100vw - 16px);
+      overflow-x: auto;
+      scrollbar-width: none;
       line-height: 1;
       -webkit-font-smoothing: antialiased;
       user-select: none;
       -webkit-user-select: none;
     }
+
+    .proto-picker::-webkit-scrollbar { display: none; }
 
     .proto-picker-highlight {
       position: absolute;
@@ -173,26 +183,26 @@
     }
   </style>
 </head>
-<body class="min-h-screen flex flex-col selection:bg-zinc-800 selection:text-white pb-24">
+<body class="min-h-screen flex flex-col selection:bg-stone-800 selection:text-white pb-24">
 
   <!-- Minimalist Top Navigation -->
-  <header class="sticky top-0 z-40 border-b border-zinc-800/80 bg-[#09090b]/90 backdrop-blur-md">
+  <header class="sticky top-0 z-40 border-b border-stone-800/80 bg-[#0c0a09]/90 backdrop-blur-md">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between">
       <div class="flex items-center space-x-3">
-        <div class="w-6 h-6 rounded border border-zinc-700 bg-zinc-800 flex items-center justify-center font-mono text-xs font-bold text-zinc-200">
+        <div class="w-6 h-6 rounded border border-stone-700 bg-stone-800 flex items-center justify-center text-xs font-bold text-stone-200">
           K
         </div>
         <div class="flex items-center gap-2">
-          <span class="font-semibold text-sm tracking-tight text-zinc-100">Karpathy Artifacts</span>
-          <span class="text-[11px] text-zinc-500 font-mono hidden sm:inline">/ Cognitive Prototypes</span>
+          <span class="font-semibold text-sm tracking-tight text-stone-100">Karpathy Artifacts</span>
+          <span class="text-xs text-stone-500 hidden sm:inline">/ 认知工件实验室</span>
         </div>
       </div>
 
-      <nav class="flex items-center space-x-1 text-xs text-zinc-400">
-        <a href="#thesis" class="px-2.5 py-1.5 rounded-md hover:text-zinc-100 hover:bg-zinc-800/60 btn-tactile">理念体系</a>
-        <a href="#interactive-stage" class="px-2.5 py-1.5 rounded-md hover:text-zinc-100 hover:bg-zinc-800/60 btn-tactile">模态演进沙箱</a>
-        <a href="#domains" class="px-2.5 py-1.5 rounded-md hover:text-zinc-100 hover:bg-zinc-800/60 btn-tactile">5 大专题</a>
-        <a href="https://github.com/holynova/karpathy-deep-explainer-artifacts" target="_blank" class="ml-2 px-3 py-1.5 rounded-md border border-zinc-700 bg-zinc-800/80 hover:bg-zinc-700 text-zinc-200 font-medium btn-tactile flex items-center gap-1.5">
+      <nav class="flex items-center space-x-1 text-xs text-stone-400">
+        <a href="#thesis" class="px-2.5 py-1.5 rounded-md hover:text-stone-100 hover:bg-stone-800/60 btn-tactile">理念体系</a>
+        <a href="#interactive-stage" class="px-2.5 py-1.5 rounded-md hover:text-stone-100 hover:bg-stone-800/60 btn-tactile">四种表达方式</a>
+        <a href="#domains" class="px-2.5 py-1.5 rounded-md hover:text-stone-100 hover:bg-stone-800/60 btn-tactile">5 大专题</a>
+        <a href="https://github.com/holynova/karpathy-deep-explainer-artifacts" target="_blank" class="ml-2 px-3 py-1.5 rounded-md border border-stone-700 bg-stone-800/80 hover:bg-stone-700 text-stone-200 font-medium btn-tactile flex items-center gap-1.5">
           <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
           GitHub
         </a>
@@ -201,55 +211,57 @@
   </header>
 
   <!-- Editorial Hero Section -->
-  <section class="pt-14 pb-12 border-b border-zinc-800/60" id="thesis">
+  <section class="pt-14 pb-12 border-b border-stone-800/60" id="thesis">
     <div class="max-w-4xl mx-auto px-4 sm:px-6">
       
       <div class="flex items-center gap-2 mb-4">
-        <span class="inline-flex items-center px-2 py-0.5 rounded text-[11px] font-mono border border-zinc-700 bg-zinc-900 text-zinc-300">
+        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs border border-stone-700 bg-stone-900 text-stone-300">
           Andrej Karpathy 认知推演
         </span>
-        <span class="text-zinc-600 text-xs font-mono">•</span>
-        <span class="text-zinc-500 text-xs font-mono">Emil Kowalski 设计工程标准</span>
+        <span class="text-stone-500 text-xs">Emil Kowalski 设计工程标准</span>
       </div>
 
-      <h1 class="text-3xl sm:text-4xl font-semibold tracking-tight text-zinc-100 leading-snug mb-5">
-        从被动阅读文本，到操纵高密度软件工件
+      <h1 class="fs-display font-semibold tracking-tight text-stone-100 leading-snug mb-5">
+        从被动读文章，到动手玩交互讲解
       </h1>
       
-      <p class="text-base text-zinc-400 leading-relaxed font-normal mb-8 max-w-3xl">
-        当代码生成与智能供给趋向无限丰裕，人类工作的重心正从编写基础语法全面升维至架构监督 (Oversight) 与系统理解。
-        我们不再需要泛泛的回答，而需要<strong>定制化、随用随弃、具备真实物理与参数交互的专属软件工件</strong>。
+      <p class="text-sm text-stone-400 leading-relaxed font-normal mb-8 max-w-3xl">
+        大模型越变越好，写代码的脏活累活越来越多由它包办，我们的工作则上升到<strong>监督与理解</strong>。
+        这里收录的不是泛泛的回答，而是<strong>能动手试的交互讲解</strong>：每个专题都是一页可以点的网页，参数、模拟、对比都能直接操作。
       </p>
 
       <!-- Karpathy Quotation (Grounded & Typographic) -->
-      <div class="p-5 rounded-xl border border-zinc-800 bg-[#101014] text-zinc-300 text-sm leading-relaxed mb-8">
-        <div class="flex items-center justify-between pb-3 mb-3 border-b border-zinc-800/80 text-xs text-zinc-400 font-mono">
+      <div class="p-5 rounded-xl border border-stone-800 bg-[#1c1917] text-stone-300 text-sm leading-relaxed mb-8">
+        <div class="flex items-center justify-between pb-3 mb-3 border-b border-stone-800/80 text-xs text-stone-400">
           <span>Andrej Karpathy (@karpathy)</span>
-          <span>OpenAI / Tesla AI</span>
+          <span>2026 年 10 月 2 日发表于 X</span>
         </div>
-        <p class="font-mono text-xs leading-5 text-zinc-300">
+        <p class="text-xs leading-5 text-stone-300">
           "As LLMs get better, they will do more and more of the legwork autonomously, and a lot more of our work will rise up the abstractions into oversight and understanding.
           Luckily, LLMs can help here too because as intelligence and code are increasingly abundant, you can ask for large, custom, discardable software artifacts (e.g. web apps, video explainers) that would have never made sense to create before. Push the boundaries here and you'll be surprised."
+        </p>
+        <p class="text-xs leading-5 text-stone-400 mt-3 pt-3 border-t border-stone-800/80">
+          译文：大模型越变越好，就会自主包揽越来越多的脏活累活，而我们的工作会更多地上升到监督与理解这些更高层次的抽象。幸运的是，大模型在这里也能帮上忙：因为智能与代码越来越丰裕，你可以向它要大型的、定制的、用完即弃的软件工件（比如网页应用、视频讲解），这些东西以前根本不值得做。在这方面大胆尝试，你会大吃一惊。
         </p>
       </div>
 
       <!-- Quick Metrics Strip -->
-      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs font-mono">
-        <div class="p-3 rounded-lg border border-zinc-800 bg-zinc-900/60">
-          <div class="text-zinc-500">专题领域</div>
-          <div class="text-sm font-semibold text-zinc-200 mt-0.5">5 大核心前沿</div>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+        <div class="p-3 rounded-lg border border-stone-800 bg-stone-900/60">
+          <div class="text-stone-500">专题领域</div>
+          <div class="text-sm font-semibold text-stone-200 mt-0.5">5 个专题</div>
         </div>
-        <div class="p-3 rounded-lg border border-zinc-800 bg-zinc-900/60">
-          <div class="text-zinc-500">知识深度</div>
-          <div class="text-sm font-semibold text-zinc-200 mt-0.5">52+ 核心知识点</div>
+        <div class="p-3 rounded-lg border border-stone-800 bg-stone-900/60">
+          <div class="text-stone-500">知识深度</div>
+          <div class="text-sm font-semibold text-stone-200 mt-0.5">53 个核心知识点</div>
         </div>
-        <div class="p-3 rounded-lg border border-zinc-800 bg-zinc-900/60">
-          <div class="text-zinc-500">仿真试验台</div>
-          <div class="text-sm font-semibold text-zinc-200 mt-0.5">20+ 交互沙箱</div>
+        <div class="p-3 rounded-lg border border-stone-800 bg-stone-900/60">
+          <div class="text-stone-500">交互实验</div>
+          <div class="text-sm font-semibold text-stone-200 mt-0.5">18 个交互实验</div>
         </div>
-        <div class="p-3 rounded-lg border border-zinc-800 bg-zinc-900/60">
-          <div class="text-zinc-500">工程规范</div>
-          <div class="text-sm font-semibold text-zinc-200 mt-0.5">ASD-STE100 标定</div>
+        <div class="p-3 rounded-lg border border-stone-800 bg-stone-900/60">
+          <div class="text-stone-500">使用方式</div>
+          <div class="text-sm font-semibold text-stone-200 mt-0.5">打开即用，无需安装</div>
         </div>
       </div>
 
@@ -257,15 +269,15 @@
   </section>
 
   <!-- Prototype Explorer Surface (Controlled by the Emil Kowalski Picker) -->
-  <section class="py-12 border-b border-zinc-800/60" id="interactive-stage">
+  <section class="py-12 border-b border-stone-800/60" id="interactive-stage">
     <div class="max-w-4xl mx-auto px-4 sm:px-6">
       
       <div class="flex items-center justify-between mb-4">
         <div>
-          <span class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider block">Modal Evolution Stage</span>
-          <h2 class="text-lg font-medium text-zinc-100">信息输出形态的 4 阶演进探索</h2>
+          <span class="text-xs text-stone-500 uppercase tracking-wider block">表达形态对比</span>
+          <h2 class="text-xl font-medium text-stone-100">同一内容，四种表达方式</h2>
         </div>
-        <span class="text-xs text-zinc-500 font-mono hidden sm:inline">按键盘 1-4 键或下方悬浮栏切换</span>
+        <span class="text-xs text-stone-500 hidden sm:inline">按键盘 1-4 键或下方悬浮栏切换</span>
       </div>
 
       <!-- The Stage Container where variants mount -->
@@ -273,9 +285,8 @@
         <!-- Rendered dynamically by variants array -->
       </div>
 
-      <div class="mt-3 flex items-center justify-between text-[11px] text-zinc-500 font-mono">
-        <span>展示案例：分布式系统「令牌桶限流算法 (Token Bucket)」在不同抽象层级的表达</span>
-        <span>交互动效经 Emil Kowalski 缓动规范校验 (&lt;250ms)</span>
+      <div class="mt-3 flex items-center justify-between text-xs text-stone-500">
+        <span>展示案例：用「令牌桶限流算法」，演示同一种内容的四种表达方式</span>
       </div>
 
     </div>
@@ -287,10 +298,10 @@
       
       <div class="flex items-baseline justify-between mb-8">
         <div>
-          <span class="text-[11px] font-mono text-zinc-500 uppercase tracking-wider block">Curated Knowledge Hubs</span>
-          <h2 class="text-xl font-medium text-zinc-100">5 个经过深度提纯的独立网页工件</h2>
+          <span class="text-xs text-stone-500 uppercase tracking-wider block">专题列表</span>
+          <h2 class="text-xl font-medium text-stone-100">5 个专题，各是一页能动手试的交互讲解</h2>
         </div>
-        <span class="text-xs text-zinc-500 font-mono">均为完整可用静态应用</span>
+        <span class="text-xs text-stone-500">打开就能用，不用安装</span>
       </div>
 
       <div class="space-y-4">
@@ -299,19 +310,20 @@
         <a href="frontend-system-design.html" class="craft-card p-5 block group btn-tactile">
           <div class="flex items-center justify-between mb-2">
             <div class="flex items-center gap-2">
-              <span class="text-xs font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">01 / ARCHITECTURE</span>
-              <h3 class="text-base font-medium text-zinc-100 group-hover:text-white transition-colors">前端系统设计 (Frontend System Design)</h3>
+              <span class="text-xs px-2 py-0.5 rounded bg-stone-800 text-stone-300 border border-stone-700">01 / 架构</span>
+              <h3 class="text-sm font-medium text-stone-100 group-hover:text-white transition-colors">前端系统设计</h3>
             </div>
-            <span class="text-xs font-mono text-zinc-500 group-hover:text-zinc-300 transition-colors">11 核心知识点 &rarr;</span>
+            <span class="text-xs text-stone-500 group-hover:text-stone-300 transition-colors">11 个核心知识点 &rarr;</span>
           </div>
-          <p class="text-xs text-zinc-400 leading-relaxed mb-3">
+          <p class="text-xs text-stone-400 leading-relaxed mb-3">
             跨团队协同、主线程治理与终端不可信环境下的系统架构：微前端沙箱与 Module Federation 依赖去重、现代渲染时序对比 (RSC/Islands)、Signals 细粒度拓扑、Local-First CRDT 协同以及 INP 长任务切片调度。
           </p>
-          <div class="flex flex-wrap gap-2 text-[11px] font-mono text-zinc-500">
-            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">沙箱模拟器</span>
-            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">渲染瀑布流</span>
-            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">CRDT协同合并</span>
-            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">INP调度沙箱</span>
+          <div class="flex flex-wrap gap-2 text-xs text-stone-500">
+            <span class="px-2 py-0.5 rounded bg-stone-900 border border-stone-800">沙箱模拟器</span>
+            <span class="px-2 py-0.5 rounded bg-stone-900 border border-stone-800">渲染瀑布流</span>
+            <span class="px-2 py-0.5 rounded bg-stone-900 border border-stone-800">Signals 性能探针</span>
+            <span class="px-2 py-0.5 rounded bg-stone-900 border border-stone-800">CRDT协同合并</span>
+            <span class="px-2 py-0.5 rounded bg-stone-900 border border-stone-800">INP调度沙箱</span>
           </div>
         </a>
 
@@ -319,19 +331,20 @@
         <a href="backend-system-design.html" class="craft-card p-5 block group btn-tactile">
           <div class="flex items-center justify-between mb-2">
             <div class="flex items-center gap-2">
-              <span class="text-xs font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">02 / DISTRIBUTED</span>
-              <h3 class="text-base font-medium text-zinc-100 group-hover:text-white transition-colors">系统设计与分布式架构 (System Design)</h3>
+              <span class="text-xs px-2 py-0.5 rounded bg-stone-800 text-stone-300 border border-stone-700">02 / 分布式</span>
+              <h3 class="text-sm font-medium text-stone-100 group-hover:text-white transition-colors">系统设计与分布式架构</h3>
             </div>
-            <span class="text-xs font-mono text-zinc-500 group-hover:text-zinc-300 transition-colors">11 核心知识点 &rarr;</span>
+            <span class="text-xs text-stone-500 group-hover:text-stone-300 transition-colors">11 个核心知识点 &rarr;</span>
           </div>
-          <p class="text-xs text-zinc-400 leading-relaxed mb-3">
+          <p class="text-xs text-stone-400 leading-relaxed mb-3">
             在不可信网络与硬件故障常态下的状态复制：Raft 共识多数派选举与脑裂防御、PACELC 定理与延迟折衷、Saga 分布式事务回滚与 Outbox CDC、LSM-Tree 追加写与分层压缩、以及一致性哈希虚拟节点均衡。
           </p>
-          <div class="flex flex-wrap gap-2 text-[11px] font-mono text-zinc-500">
-            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">Raft选举试验台</span>
-            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">Saga事务补偿器</span>
-            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">哈希环迁移计算</span>
-            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">Full Jitter削峰</span>
+          <div class="flex flex-wrap gap-2 text-xs text-stone-500">
+            <span class="px-2 py-0.5 rounded bg-stone-900 border border-stone-800">Raft选举试验台</span>
+            <span class="px-2 py-0.5 rounded bg-stone-900 border border-stone-800">Saga事务补偿器</span>
+            <span class="px-2 py-0.5 rounded bg-stone-900 border border-stone-800">哈希环迁移计算</span>
+            <span class="px-2 py-0.5 rounded bg-stone-900 border border-stone-800">Full Jitter削峰</span>
+            <span class="px-2 py-0.5 rounded bg-stone-900 border border-stone-800">Quorum 仲裁校验器</span>
           </div>
         </a>
 
@@ -339,19 +352,18 @@
         <a href="prompt-engineering.html" class="craft-card p-5 block group btn-tactile">
           <div class="flex items-center justify-between mb-2">
             <div class="flex items-center gap-2">
-              <span class="text-xs font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">03 / COGNITIVE</span>
-              <h3 class="text-base font-medium text-zinc-100 group-hover:text-white transition-colors">提示词工程与认知架构 (Prompt Engineering)</h3>
+              <span class="text-xs px-2 py-0.5 rounded bg-stone-800 text-stone-300 border border-stone-700">03 / 认知</span>
+              <h3 class="text-sm font-medium text-stone-100 group-hover:text-white transition-colors">提示词工程与认知架构</h3>
             </div>
-            <span class="text-xs font-mono text-zinc-500 group-hover:text-zinc-300 transition-colors">11 核心知识点 &rarr;</span>
+            <span class="text-xs text-stone-500 group-hover:text-stone-300 transition-colors">11 个核心知识点 &rarr;</span>
           </div>
-          <p class="text-xs text-zinc-400 leading-relaxed mb-3">
+          <p class="text-xs text-stone-400 leading-relaxed mb-3">
             从 Transformer 概率采样空间理解大模型控制系统：动态 KNN 示例召回、Tree of Thoughts (ToT) 搜索剪枝、FSM 语法掩码确定性约束解码、ReAct 异常自愈闭环、以及 Karpathy 推荐的 ASD-STE100 受控工程落地。
           </p>
-          <div class="flex flex-wrap gap-2 text-[11px] font-mono text-zinc-500">
-            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">KNN示例匹配器</span>
-            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">ToT思维树回溯</span>
-            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">STE100转换器</span>
-            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">注入攻击隔离沙箱</span>
+          <div class="flex flex-wrap gap-2 text-xs text-stone-500">
+            <span class="px-2 py-0.5 rounded bg-stone-900 border border-stone-800">KNN示例匹配器</span>
+            <span class="px-2 py-0.5 rounded bg-stone-900 border border-stone-800">ToT思维树回溯</span>
+            <span class="px-2 py-0.5 rounded bg-stone-900 border border-stone-800">ReAct 自愈演示</span>
           </div>
         </a>
 
@@ -359,19 +371,18 @@
         <a href="zara-zhang-insights.html" class="craft-card p-5 block group btn-tactile">
           <div class="flex items-center justify-between mb-2">
             <div class="flex items-center gap-2">
-              <span class="text-xs font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">04 / HUMANITIES</span>
-              <h3 class="text-base font-medium text-zinc-100 group-hover:text-white transition-colors">Zara Zhang 的思想与认知模型 (Zara Zhang Insights)</h3>
+              <span class="text-xs px-2 py-0.5 rounded bg-stone-800 text-stone-300 border border-stone-700">04 / 人文</span>
+              <h3 class="text-sm font-medium text-stone-100 group-hover:text-white transition-colors">Zara Zhang 的思想与认知模型</h3>
             </div>
-            <span class="text-xs font-mono text-zinc-500 group-hover:text-zinc-300 transition-colors">10 核心心智模型 &rarr;</span>
+            <span class="text-xs text-stone-500 group-hover:text-stone-300 transition-colors">10 个核心心智模型 &rarr;</span>
           </div>
-          <p class="text-xs text-zinc-400 leading-relaxed mb-3">
+          <p class="text-xs text-stone-400 leading-relaxed mb-3">
             在技术盲目扩张中守卫人类主权与真实生活：反规模化崇拜的 "Build for One" 极度杠杆、VUCA 时代的盆栽心态 (Potted Plant)、软件作为人文叙事新媒介、摆脱学校考评驯化的反向学习 (Unlearning)、以及能动性肌肉锻炼。
           </p>
-          <div class="flex flex-wrap gap-2 text-[11px] font-mono text-zinc-500">
-            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">Build for One漏斗</span>
-            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">盆栽演化树</span>
-            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">好学生心智测验</span>
-            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">能动性接触面计算</span>
+          <div class="flex flex-wrap gap-2 text-xs text-stone-500">
+            <span class="px-2 py-0.5 rounded bg-stone-900 border border-stone-800">Build for One 对比</span>
+            <span class="px-2 py-0.5 rounded bg-stone-900 border border-stone-800">好学生心智测验</span>
+            <span class="px-2 py-0.5 rounded bg-stone-900 border border-stone-800">能动性接触面计算</span>
           </div>
         </a>
 
@@ -379,19 +390,18 @@
         <a href="matt-pocock-insights.html" class="craft-card p-5 block group btn-tactile">
           <div class="flex items-center justify-between mb-2">
             <div class="flex items-center gap-2">
-              <span class="text-xs font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-300 border border-zinc-700">05 / CRAFT</span>
-              <h3 class="text-base font-medium text-zinc-100 group-hover:text-white transition-colors">Matt Pocock: Engineering, Not Vibe Coding</h3>
+              <span class="text-xs px-2 py-0.5 rounded bg-stone-800 text-stone-300 border border-stone-700">05 / 工程</span>
+              <h3 class="text-sm font-medium text-stone-100 group-hover:text-white transition-colors">Matt Pocock：讲工程，不靠感觉写代码</h3>
             </div>
-            <span class="text-xs font-mono text-zinc-500 group-hover:text-zinc-300 transition-colors">10 核心工程体系 &rarr;</span>
+            <span class="text-xs text-stone-500 group-hover:text-stone-300 transition-colors">10 个核心工程体系 &rarr;</span>
           </div>
-          <p class="text-xs text-zinc-400 leading-relaxed mb-3">
+          <p class="text-xs text-stone-400 leading-relaxed mb-3">
             代码生成越快，严密工程化判断力越稀缺：拒绝泥球技术债务、经典 "Grill Me" 需求反向质询技术、垂直切片与严格 TDD 导轨、白班人类规划与夜班 AI 交付协同、以及类型系统作为不可违背的物理护栏。
           </p>
-          <div class="flex flex-wrap gap-2 text-[11px] font-mono text-zinc-500">
-            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">债务雪崩模拟器</span>
-            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">Grill Me审问体验</span>
-            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">白班/夜班看板</span>
-            <span class="px-2 py-0.5 rounded bg-zinc-900 border border-zinc-800">能力跃迁雷达</span>
+          <div class="flex flex-wrap gap-2 text-xs text-stone-500">
+            <span class="px-2 py-0.5 rounded bg-stone-900 border border-stone-800">债务雪崩模拟器</span>
+            <span class="px-2 py-0.5 rounded bg-stone-900 border border-stone-800">Grill Me审问体验</span>
+            <span class="px-2 py-0.5 rounded bg-stone-900 border border-stone-800">能力权重对比</span>
           </div>
         </a>
 
@@ -401,28 +411,28 @@
   </section>
 
   <!-- Minimalist Footer -->
-  <footer class="mt-auto border-t border-zinc-800/60 bg-[#09090b] py-8 text-zinc-500 text-xs font-mono">
+  <footer class="mt-auto border-t border-stone-800/60 bg-[#0c0a09] py-8 text-stone-500 text-xs">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
       <div>
-        <span>Karpathy AI Artifacts · 构建于 Emil Kowalski 设计工程原则之上</span>
+        <span>Karpathy AI Artifacts，构建于 Emil Kowalski 设计工程原则之上</span>
       </div>
       <div class="flex items-center space-x-4">
-        <a href="https://github.com/holynova" target="_blank" class="hover:text-zinc-300 transition">@holynova</a>
-        <a href="https://github.com/emilkowalski" target="_blank" class="hover:text-zinc-300 transition">Emil's Craft</a>
-        <a href="https://twitter.com/karpathy" target="_blank" class="hover:text-zinc-300 transition">Karpathy's Thesis</a>
+        <a href="https://github.com/holynova" target="_blank" class="hover:text-stone-300 transition">@holynova</a>
+        <a href="https://github.com/emilkowalski" target="_blank" class="hover:text-stone-300 transition">Emil 的设计原则</a>
+        <a href="https://twitter.com/karpathy" target="_blank" class="hover:text-stone-300 transition">Karpathy 的 X 主页</a>
       </div>
     </div>
   </footer>
 
   <!-- Emil Kowalski Prototype Floating Picker (Verbatim Markup from PICKER.md) -->
-  <nav class="proto-picker" aria-label="Prototype variants">
+  <nav class="proto-picker" aria-label="切换表达方式">
     <span class="proto-picker-highlight" aria-hidden="true"></span>
-    <button class="proto-picker-item" data-active aria-current="true">1. 原始文本</button>
-    <button class="proto-picker-item">2. STE100 规约</button>
-    <button class="proto-picker-item">3. 架构拓扑</button>
-    <button class="proto-picker-item">4. 动态工件</button>
+    <button class="proto-picker-item" data-active aria-current="true">1. 普通文字</button>
+    <button class="proto-picker-item">2. 受控规范</button>
+    <button class="proto-picker-item">3. 结构图解</button>
+    <button class="proto-picker-item">4. 动手试试</button>
     <span class="proto-picker-divider" aria-hidden="true"></span>
-    <button class="proto-picker-item proto-picker-replay" aria-label="Replay animation (R)">↻</button>
+    <button class="proto-picker-item proto-picker-replay" aria-label="重播 (R)">↻</button>
   </nav>
 
   <script>
@@ -436,14 +446,14 @@
       // Variant 1: Raw Unconstrained Natural Language
       () => `
         <div class="stage-variant space-y-4">
-          <div class="flex items-center justify-between border-b border-zinc-800 pb-3">
-            <span class="text-xs font-mono text-zinc-400">模态 01 · 传统自然语言输出 (Raw Text)</span>
-            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-400">认知负荷：高</span>
+          <div class="flex items-center justify-between border-b border-stone-800 pb-3">
+            <span class="text-xs text-stone-400">方式 1：普通文字</span>
+            <span class="text-xs px-2 py-0.5 rounded bg-stone-800 text-stone-400">认知负荷：高</span>
           </div>
-          <div class="p-4 rounded-lg bg-zinc-900/60 border border-zinc-800 text-xs text-zinc-300 leading-relaxed font-sans">
+          <div class="p-4 rounded-lg bg-stone-900/60 border border-stone-800 text-xs text-stone-300 leading-relaxed font-sans">
             令牌桶算法是一个非常经典的流量控制算法。它的基本思想是系统会以一个恒定的速度往桶里面放令牌，当桶满了的时候多出来的令牌就会被丢弃掉。当有请求来的时候，请求必须要从桶里面拿走一个或者多个令牌才能继续被处理，如果桶里面没有足够的令牌了，那么这个请求可能就会被拒绝或者进入等待队列。这个算法的优点是可以允许一定程度的突发流量，因为如果一段时间没有请求，桶里的令牌会积攒到最大容量，后续瞬间来的一批请求可以一次性消费这些令牌快速通过，之后再按照恒定速率处理……
           </div>
-          <div class="text-[11px] font-mono text-zinc-500">
+          <div class="text-xs text-stone-500">
             局限：缺乏结构锚点。读者必须逐字精读并在脑内搭建状态转移图，容易遗漏边界条件与数学约束。
           </div>
         </div>
@@ -452,20 +462,20 @@
       // Variant 2: Controlled Technical English (ASD-STE100)
       () => `
         <div class="stage-variant space-y-4">
-          <div class="flex items-center justify-between border-b border-zinc-800 pb-3">
-            <span class="text-xs font-mono text-zinc-300">模态 02 · 航空受控语言规范 (ASD-STE100 Specification)</span>
-            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-300">认知负荷：极低</span>
+          <div class="flex items-center justify-between border-b border-stone-800 pb-3">
+            <span class="text-xs text-stone-300">方式 2：受控语言规范</span>
+            <span class="text-xs px-2 py-0.5 rounded bg-stone-800 text-stone-300">认知负荷：极低</span>
           </div>
-          <div class="p-4 rounded-lg bg-zinc-900/90 border border-zinc-800 text-xs font-mono text-zinc-200 space-y-1.5 leading-5">
-            <div class="text-zinc-500">// RULE: Approved verbs only. Strict causal ordering. Max 20 words per statement.</div>
-            <div>1. The system adds tokens to the bucket at constant rate <span class="text-zinc-100 font-semibold">r</span>.</div>
-            <div>2. The bucket holds a maximum of <span class="text-zinc-100 font-semibold">C</span> tokens. Discard excess tokens.</div>
+          <div class="p-4 rounded-lg bg-stone-900/90 border border-stone-800 text-xs font-mono text-stone-200 space-y-1.5 leading-5">
+            <div class="text-stone-500">// RULE: Approved verbs only. Strict causal ordering. Max 20 words per statement.</div>
+            <div>1. The system adds tokens to the bucket at constant rate <span class="text-stone-100 font-semibold">r</span>.</div>
+            <div>2. The bucket holds a maximum of <span class="text-stone-100 font-semibold">C</span> tokens. Discard excess tokens.</div>
             <div>3. Each incoming request consumes 1 token.</div>
             <div>4. If tokens &gt; 0: Accept request and decrement count.</div>
             <div>5. If tokens = 0: Reject request immediately with HTTP 429.</div>
-            <div>6. Result: Allows bursts up to capacity <span class="text-zinc-100 font-semibold">C</span>. Limits sustained throughput to rate <span class="text-zinc-100 font-semibold">r</span>.</div>
+            <div>6. Result: Allows bursts up to capacity <span class="text-stone-100 font-semibold">C</span>. Limits sustained throughput to rate <span class="text-stone-100 font-semibold">r</span>.</div>
           </div>
-          <div class="text-[11px] font-mono text-zinc-400">
+          <div class="text-xs text-stone-400">
             优势：消除所有形容词与模糊从句，状态转移与判定分支呈现数学级确定性。
           </div>
         </div>
@@ -474,31 +484,31 @@
       // Variant 3: Architectural Diagram & Flow
       () => `
         <div class="stage-variant space-y-4">
-          <div class="flex items-center justify-between border-b border-zinc-800 pb-3">
-            <span class="text-xs font-mono text-zinc-300">模态 03 · 结构拓扑图 (Topology & Flow)</span>
-            <span class="text-[11px] font-mono px-2 py-0.5 rounded bg-zinc-800 text-zinc-300">空间识别：即时</span>
+          <div class="flex items-center justify-between border-b border-stone-800 pb-3">
+            <span class="text-xs text-stone-300">方式 3：结构图解</span>
+            <span class="text-xs px-2 py-0.5 rounded bg-stone-800 text-stone-300">空间识别：即时</span>
           </div>
-          <div class="p-4 rounded-lg bg-zinc-950 border border-zinc-800 font-mono text-xs flex justify-center">
-            <div class="w-full max-w-md p-3 rounded border border-zinc-800 bg-[#0d0d10] text-zinc-300 leading-6 text-center">
-              <div class="text-zinc-500">[ Token Refill Generator: r tokens/sec ]</div>
-              <div class="text-zinc-600">↓</div>
-              <div class="border border-zinc-700 bg-zinc-900/80 p-2.5 rounded my-1">
+          <div class="p-4 rounded-lg bg-stone-950 border border-stone-800 font-mono text-xs flex justify-center">
+            <div class="w-full max-w-md p-3 rounded border border-stone-800 bg-[#0c0a09] text-stone-300 leading-6 text-center">
+              <div class="text-stone-500">[ Token Refill Generator: r tokens/sec ]</div>
+              <div class="text-stone-600">↓</div>
+              <div class="border border-stone-700 bg-stone-900/80 p-2.5 rounded my-1">
                 <div>Bucket Storage (Capacity: C)</div>
-                <div class="text-zinc-400 mt-1">[ ● ● ● ○ ○ ] (Tokens Available: 3/5)</div>
+                <div class="text-stone-400 mt-1">[ ● ● ● ○ ○ ] (Tokens Available: 3/5)</div>
               </div>
-              <div class="grid grid-cols-2 gap-2 mt-2 pt-2 border-t border-zinc-800 text-[11px]">
-                <div class="text-left text-zinc-400">
+              <div class="grid grid-cols-2 gap-2 mt-2 pt-2 border-t border-stone-800 text-xs">
+                <div class="text-left text-stone-400">
                   Tokens &ge; 1:<br>
-                  <span class="text-zinc-200 font-semibold">✓ 200 OK (Pass)</span>
+                  <span class="text-stone-200 font-semibold">✓ 200 OK (Pass)</span>
                 </div>
-                <div class="text-right text-zinc-400">
+                <div class="text-right text-stone-400">
                   Tokens = 0:<br>
-                  <span class="text-zinc-400 font-semibold">✗ 429 Reject</span>
+                  <span class="text-stone-400 font-semibold">✗ 429 Reject</span>
                 </div>
               </div>
             </div>
           </div>
-          <div class="text-[11px] font-mono text-zinc-400">
+          <div class="text-xs text-stone-400">
             优势：利用视觉空间并行感知，直接映射调用栈与资源流向。
           </div>
         </div>
@@ -507,40 +517,40 @@
       // Variant 4: Interactive Dynamic Artifact (Tactile Simulator)
       () => `
         <div class="stage-variant space-y-4">
-          <div class="flex items-center justify-between border-b border-zinc-800 pb-3">
-            <span class="text-xs font-mono text-zinc-200">模态 04 · 可交互软件工件 (Interactive Artifact)</span>
-            <button onclick="burstTraffic()" class="btn-tactile px-3 py-1 rounded bg-zinc-100 hover:bg-white text-zinc-950 font-medium text-xs font-mono shadow-sm">
+          <div class="flex items-center justify-between border-b border-stone-800 pb-3">
+            <span class="text-xs text-stone-200">方式 4：动手试试</span>
+            <button onclick="burstTraffic()" class="btn-tactile px-3 py-1 rounded bg-stone-100 hover:bg-white text-stone-950 font-medium text-xs shadow-sm">
               打入 10 个突发请求
             </button>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs font-mono">
-            <div class="p-2.5 rounded border border-zinc-800 bg-zinc-900/60">
-              <div class="text-zinc-400">桶容量 (C): <span id="bucket-cap-val" class="text-white font-bold">${capacity}</span></div>
-              <input type="range" min="5" max="20" value="${capacity}" oninput="updateCap(this.value)" class="w-full mt-2 accent-zinc-200">
+            <div class="p-2.5 rounded border border-stone-800 bg-stone-900/60">
+              <div class="text-stone-400">桶容量 (C): <span id="bucket-cap-val" class="text-white font-bold">${capacity}</span></div>
+              <input type="range" min="5" max="20" value="${capacity}" oninput="updateCap(this.value)" class="w-full mt-2 accent-stone-200">
             </div>
-            <div class="p-2.5 rounded border border-zinc-800 bg-zinc-900/60">
-              <div class="text-zinc-400">填充速率 (r/s): <span id="bucket-rate-val" class="text-white font-bold">${rate}</span></div>
-              <input type="range" min="1" max="10" value="${rate}" oninput="updateRate(this.value)" class="w-full mt-2 accent-zinc-200">
+            <div class="p-2.5 rounded border border-stone-800 bg-stone-900/60">
+              <div class="text-stone-400">填充速率 (r/s): <span id="bucket-rate-val" class="text-white font-bold">${rate}</span></div>
+              <input type="range" min="1" max="10" value="${rate}" oninput="updateRate(this.value)" class="w-full mt-2 accent-stone-200">
             </div>
-            <div class="p-2.5 rounded border border-zinc-800 bg-zinc-900/60 flex flex-col justify-center">
-              <div class="text-zinc-400">当前可用令牌:</div>
-              <div class="text-xl font-bold text-zinc-100 mt-0.5" id="current-tokens-count">${Math.floor(currentTokens)}</div>
+            <div class="p-2.5 rounded border border-stone-800 bg-stone-900/60 flex flex-col justify-center">
+              <div class="text-stone-400">当前可用令牌:</div>
+              <div class="text-xl font-bold text-stone-100 mt-0.5" id="current-tokens-count">${Math.floor(currentTokens)}</div>
             </div>
           </div>
 
           <div>
-            <div class="flex justify-between text-xs font-mono text-zinc-400 mb-1">
+            <div class="flex justify-between text-xs font-mono text-stone-400 mb-1">
               <span>实时水位：</span>
               <span id="bucket-percentage">${Math.min(100, Math.round((currentTokens / capacity) * 100))}%</span>
             </div>
-            <div class="w-full h-2.5 bg-zinc-900 rounded-full overflow-hidden border border-zinc-800">
-              <div id="bucket-fill-bar" class="h-full bg-zinc-300 rounded-full transition-all duration-200" style="width: ${Math.min(100, Math.round((currentTokens / capacity) * 100))}%"></div>
+            <div class="w-full h-2.5 bg-stone-900 rounded-full overflow-hidden border border-stone-800">
+              <div id="bucket-fill-bar" class="h-full bg-stone-300 rounded-full transition-all duration-200" style="width: ${Math.min(100, Math.round((currentTokens / capacity) * 100))}%"></div>
             </div>
           </div>
 
-          <div class="bg-black/90 rounded border border-zinc-800 p-2.5 font-mono text-[11px] h-20 overflow-y-auto text-zinc-400" id="sim-log-box">
-            <div class="text-zinc-500">[系统就绪] 令牌桶以 ${rate} 令牌/秒速率自动平稳补充...</div>
+          <div class="bg-black/90 rounded border border-stone-800 p-2.5 font-mono text-xs h-20 overflow-y-auto text-stone-400" id="sim-log-box">
+            <div class="text-stone-500">[系统就绪] 令牌桶以 ${rate} 令牌/秒速率自动平稳补充...</div>
           </div>
         </div>
       `
@@ -599,7 +609,8 @@
     });
 
     // Initial load handling
-    const initialIndex = (parseInt(new URLSearchParams(location.search).get('v'), 10) || 1) - 1;
+    const rawIndex = (parseInt(new URLSearchParams(location.search).get('v'), 10) || 1) - 1;
+    const initialIndex = Math.min(Math.max(rawIndex, 0), variants.length - 1);
     setActive(initialIndex);
     // Enable the slide only after first paint, so load doesn't animate.
     requestAnimationFrame(() => requestAnimationFrame(() => picker.setAttribute('data-ready', '')));
@@ -630,19 +641,19 @@
       barEl.style.width = pct + '%';
     }
 
-    function logSim(msg, colorClass = "text-zinc-300") {
+    function logSim(msg, colorClass = "text-stone-300") {
       const box = document.getElementById('sim-log-box');
       if (!box) return;
       const time = new Date().toLocaleTimeString();
       const div = document.createElement('div');
       div.className = `${colorClass} leading-5`;
-      div.innerHTML = `<span class="text-zinc-600">[${time}]</span> ${msg}`;
+      div.innerHTML = `<span class="text-stone-600">[${time}]</span> ${msg}`;
       box.appendChild(div);
       box.scrollTop = box.scrollHeight;
     }
 
     function burstTraffic() {
-      logSim("打入 10 个突发并发请求...", "text-zinc-400");
+      logSim("打入 10 个突发并发请求...", "text-stone-400");
       let passed = 0;
       let rejected = 0;
       for (let i = 0; i < 10; i++) {
@@ -654,8 +665,8 @@
         }
       }
       updateSimulatorUI();
-      if (passed > 0) logSim(`✓ 放行 ${passed} 个请求 (消耗 ${passed} 令牌)`, "text-zinc-200 font-semibold");
-      if (rejected > 0) logSim(`✗ 拒绝 ${rejected} 个请求 (HTTP 429 令牌耗尽)`, "text-zinc-500");
+      if (passed > 0) logSim(`✓ 放行 ${passed} 个请求 (消耗 ${passed} 令牌)`, "text-stone-200 font-semibold");
+      if (rejected > 0) logSim(`✗ 拒绝 ${rejected} 个请求 (HTTP 429 令牌耗尽)`, "text-stone-500");
     }
 
     // Token Refill Loop
